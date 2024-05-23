@@ -20,7 +20,8 @@
     "@tanstack/react-query": "^5.37.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.1"
+    "react-router-dom": "^6.23.1",
+    "spotify-web-api-js": "^1.5.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
@@ -35,11 +36,15 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "lint-staged": "^15.2.2",
     "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^1.6.0"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
