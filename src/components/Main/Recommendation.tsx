@@ -1,4 +1,6 @@
-export default function Recommendations({
+import { Recommendations } from '@/models/recommendation';
+
+export default function Recommendation({
   recommendations,
 }: {
   recommendations: Recommendations | null;

@@ -1,3 +1,5 @@
+import { SearchResult } from '@/models/searchResult';
+
 export default function Tabs({
   searchResult,
 }: {

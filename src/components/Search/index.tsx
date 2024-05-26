@@ -1,4 +1,5 @@
 import { searchKeyword } from '@/api/spotify';
+import { SearchResult } from '@/models/searchResult';
 import { useCallback, useState } from 'react';
 import SearchBar from './SearchBar';
 import Tabs from './Tabs';

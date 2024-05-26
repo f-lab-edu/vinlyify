@@ -1,4 +1,5 @@
 import { getPlayingTrack } from '@/api/spotify';
+import { CurrentlyPlaying } from '@/models/currentlyPlaying';
 import { useEffect, useState } from 'react';
 
 export default function MusicInfo() {

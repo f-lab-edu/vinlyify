@@ -5,6 +5,12 @@ import {
   VINYLIFY_TOKEN,
 } from '@/constants';
 
+import { CurrentlyPlaying } from '@/models/currentlyPlaying';
+import { Artist } from '@/models/profile';
+import { Recommendations } from '@/models/recommendation';
+import { SearchResult } from '@/models/searchResult';
+import { Tracks } from '@/models/track';
+
 import ky, { HTTPError } from 'ky';
 
 const api = ky.extend({
