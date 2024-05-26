@@ -9,5 +9,6 @@ export default function MusicInfo() {
   useEffect(() => {
     getPlayingTrack().then(v => setCurrentPlaying(v));
   }, []);
+  if (!currentPlaying) return <>nothing playing</>;
   return <>{JSON.stringify(currentPlaying)}</>;
 }
