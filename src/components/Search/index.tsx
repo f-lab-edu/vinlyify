@@ -7,6 +7,7 @@ import Tabs from './Tabs';
 export default function Search() {
   const [searchWord, setSearchWord] = useState<string>('');
   const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
+  const [defaultSearchWord, setDefaultSearchWord] = useState<string>('');
 
   const handleSearchKeyword = useCallback(() => {
     searchKeyword(searchWord).then(v => setSearchResult(v));
@@ -17,9 +18,16 @@ export default function Search() {
       <SearchBar
         handleSearchKeyword={handleSearchKeyword}
         searchWord={searchWord}
+        defaultSearchWord={defaultSearchWord}
         setSearchWord={setSearchWord}
       />
-      <Tabs searchResult={searchResult} />
+      <Tabs
+        searchResult={searchResult}
+        searchWord={searchWord}
+        setSearchResult={setSearchResult}
+        defaultSearchWord={defaultSearchWord}
+        setDefaultSearchWord={setDefaultSearchWord}
+      />
     </>
   );
 }
