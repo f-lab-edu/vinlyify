@@ -1,0 +1,24 @@
+$black: rgb(46, 44, 44);
+
+@mixin button-color($color) {
+  background: $color;
+}
+
+.Input {
+  vertical-align: middle;
+  padding-left: 0.3rem;
+  &.large {
+    height: 2rem;
+    font-size: 1.25rem;
+  }
+
+  &.medium {
+    height: 1.75rem;
+    font-size: 1rem;
+  }
+
+  &.small {
+    height: 0.75rem;
+    font-size: 0.875rem;
+  }
+}
