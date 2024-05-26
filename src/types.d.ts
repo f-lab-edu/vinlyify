@@ -14,6 +14,7 @@ interface UserProfile {
   product: string;
   type: string;
   uri: string;
+  type?: string;
 }
 
 interface Image {
@@ -26,7 +27,7 @@ interface Album {
   album_type: string;
   artists: Artist[];
   external_urls: External_Urls;
-  images: AlbumImage[];
+  images: Image[];
   is_playable: boolean;
   name: string;
   release_date: string;
@@ -39,16 +40,10 @@ interface Album {
   id?: string;
 }
 
-interface AlbumImage {
-  height: number;
-  url: string;
-  width: number;
-}
-
 interface External_Urls {
   spotify: string;
-  href: string;
-  id: string;
+  href?: string;
+  id?: string;
 }
 
 interface Artist {
@@ -58,6 +53,10 @@ interface Artist {
   name: string;
   type: string;
   uri: string;
+  genres?: string[];
+  followers?: { href?: null | string; total: number };
+  images?: Image[];
+  popularity?: number;
 }
 
 interface Tracks {
@@ -124,4 +123,37 @@ interface CurrentlyPlaying {
   item: Track;
   progress_ms: number;
   timestamp: number;
+}
+
+interface Pagination {
+  href: string;
+  limit: number;
+  next?: string;
+  offset: number;
+  previous?: string;
+  total: number;
+}
+
+interface Playlist {
+  collaborative: boolean;
+  description: string;
+  external_urls: Pick<External_Urls, 'spotify'>;
+  href: string;
+  id: string;
+  images: Image[];
+  name: string;
+  owner: UserProfile;
+  primary_color?: null | string;
+  public?: null | string;
+  snapshot_id: string;
+  tracks: { href: string; total: number };
+  type: string;
+  uri: string;
+}
+
+interface SearchResult {
+  albums: Pagination & { items: Album[] };
+  artists: Pagination & { items: Artist[] };
+  playlists: Pagination & { items: Playlist[] };
+  tracks: Pagination & { items: Track[] };
 }
