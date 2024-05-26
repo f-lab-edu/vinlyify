@@ -1,18 +1,36 @@
+import { PAGE } from '@/constants';
 import { BaseLayout } from '@/layout/BaseLayout';
 import ErrorPage from '@/pages/ErrorPage';
 import MainPage from '@/pages/MainPage';
+import MusicInfoPage from '@/pages/MusicInfoPage';
 
 import NotFoundPage from '@/pages/NotFoundPage';
+import SearchPage from '@/pages/Search';
 import { createBrowserRouter } from 'react-router-dom';
-import { page } from './pages';
 
 const router = createBrowserRouter([
   {
     element: <BaseLayout />,
     children: [
       {
-        path: page.main,
+        path: PAGE.MAIN,
         element: <MainPage />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: PAGE.LOGGED_IN,
+        element: <MainPage />,
+        children: [{ path: PAGE.LOGGED_IN, element: <MainPage /> }],
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: PAGE.MUSIC_INFO,
+        element: <MusicInfoPage />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: PAGE.SEARCH,
+        element: <SearchPage />,
         errorElement: <ErrorPage />,
       },
 
