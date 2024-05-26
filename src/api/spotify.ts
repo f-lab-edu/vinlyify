@@ -1,4 +1,4 @@
-import { API, DEFAULT_PLAY_TRACK, PAGE, VINYLIFY_TOKEN } from '@/constants';
+import { API, DEFAULT_PLAY_TRACK, VINYLIFY_TOKEN } from '@/constants';
 import { spotifyWebApi } from '@/contexts';
 import ky, { HTTPError } from 'ky';
 
@@ -18,14 +18,13 @@ const api = ky.extend({
 spotifyWebApi.setAccessToken(localStorage.getItem(VINYLIFY_TOKEN));
 
 /**
- * 토큰 만료하면 제거하고 메인페이지로 이동
+ * 토큰 만료하면 제거
  */
 const notAuthorizedHandler = (status: number) => {
   if (status !== 401) return;
   console.log('invalid token');
   spotifyWebApi.setAccessToken('');
   localStorage.removeItem(VINYLIFY_TOKEN);
-  window.location.replace(PAGE.MYPAGE);
 };
 
 /**
