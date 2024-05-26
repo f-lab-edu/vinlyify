@@ -1,4 +1,4 @@
-import { External_Urls, MetaInfo, Pagination } from '@/models';
+import { MetaInfo, Pagination } from '@/models';
 import { Album } from './album';
 import { Artist } from './profile';
 
@@ -10,7 +10,6 @@ export interface Track extends MetaInfo {
   duration_ms: number;
   explicit: boolean;
   external_ids: { isrc: string };
-  external_urls: Pick<External_Urls, 'spotify'>;
   is_local?: boolean;
   popularity: number;
   preview_url: string;

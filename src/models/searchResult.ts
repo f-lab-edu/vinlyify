@@ -5,9 +5,6 @@ import { Artist, UserProfile } from './profile';
 export interface PlaylistItem extends MetaInfo {
   collaborative: boolean;
   description: string;
-  external_urls: {
-    spotify: string;
-  };
   owner: UserProfile;
   primary_color: null | string;
   public: null | string;

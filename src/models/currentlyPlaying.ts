@@ -1,4 +1,4 @@
-import { External_Urls } from '@/models';
+import { MetaInfo } from '@/models';
 import { Track } from './track';
 
 export interface CurrentlyPlaying {
@@ -10,12 +10,7 @@ export interface CurrentlyPlaying {
       toggling_shuffle: boolean;
     };
   };
-  context: {
-    external_urls: Pick<External_Urls, 'spotify'>;
-    href: string;
-    type: string;
-    uri: string;
-  };
+  context: MetaInfo;
   currently_playing_type?: string;
   is_playing: boolean;
   item: Track;

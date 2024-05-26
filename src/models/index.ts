@@ -15,7 +15,7 @@ export interface Pagination {
   limit: number;
   next?: string;
   offset: number;
-  previous?: string;
+  previous?: string | null;
   total: number;
 }
 
@@ -26,4 +26,5 @@ export interface MetaInfo {
   href?: string;
   name?: string;
   type?: string;
+  external_urls?: External_Urls;
 }
