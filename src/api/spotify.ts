@@ -95,8 +95,6 @@ export async function playTrack({
         },
       )
       .json();
-    console.log(postResponse);
-
     return postResponse;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
@@ -104,7 +102,9 @@ export async function playTrack({
   }
 }
 
-// 현제 제셍 노래 정보
+/**
+ * 현제 제셍 노래 정보
+ */
 export async function getPlayingTrack() {
   try {
     const response = await SPOTIFY_WEB_API.getMyCurrentPlayingTrack();
@@ -170,6 +170,24 @@ export async function searchKeyword(searchWord: string) {
       'track',
     ]);
     return response as unknown as SearchResult;
+  } catch (e: unknown) {
+    const { response } = e as HTTPError;
+    throw new Error(`${response.status}`);
+  }
+}
+
+/**
+ * top1 아티스트 기반 디폴트 검색
+ */
+export async function searchFromMyTopOne() {
+  try {
+    const topArtistName = (await getTopTracks(1)).items[0]?.artists[0]?.name;
+    if (!topArtistName) throw new Error('something went wrong...');
+    const response = await searchKeyword(`${topArtistName}`);
+    return { keyword: topArtistName, response } as unknown as {
+      keyword: string;
+      response: SearchResult;
+    };
   } catch (e: unknown) {
     const { response } = e as HTTPError;
     throw new Error(`${response.status}`);
