@@ -36,3 +36,17 @@ export interface CurrentlyPlayingTrack {
   progress_ms: number;
   timestamp: number;
 }
+
+export interface Seed {
+  afterFilteringSize: number;
+  afterRelinkingSize: number;
+  href: string;
+  id: string;
+  initialPoolSize: number;
+  type: string;
+}
+
+export interface RecommendedTracks {
+  tracks: Track[];
+  seeds: Seed[];
+}

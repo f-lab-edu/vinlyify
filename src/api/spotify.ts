@@ -6,9 +6,12 @@ import {
 } from '@/constants';
 
 import { Artist } from '@/models/profile';
-import { Recommendations } from '@/models/recommendation';
 import { SearchResult } from '@/models/searchResult';
-import { CurrentlyPlayingTrack, Tracks } from '@/models/track';
+import {
+  CurrentlyPlayingTrack,
+  RecommendedTracks,
+  Tracks,
+} from '@/models/track';
 
 import ky, { HTTPError } from 'ky';
 
@@ -120,7 +123,7 @@ export async function getRecommendations() {
     });
     const response = (await api
       .get(`recommendations?limit=5&seed_tracks=${myTopFive}`, {})
-      .json()) as Recommendations;
+      .json()) as RecommendedTracks;
     return response;
   } catch (e: unknown) {
     const { response } = e as HTTPError;

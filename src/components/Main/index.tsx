@@ -2,15 +2,14 @@ import { getArtists, getRecommendations, getTopTracks } from '@/api/spotify';
 import Artists from '@/components/common/Artist';
 import TopTrack from '@/components/Main/TopTrack';
 import { Artist } from '@/models/profile';
-import { Recommendations } from '@/models/recommendation';
-import { Tracks } from '@/models/track';
+import { RecommendedTracks, Tracks } from '@/models/track';
 import { useEffect, useMemo, useState } from 'react';
-import Recommendation from './Recommendation';
+import Recommendation from './Recommendations';
 
 export default function Main() {
   const [topTracks, setTopTracks] = useState<Tracks | null>(null);
   const [recommendations, setRecommendations] =
-    useState<Recommendations | null>(null);
+    useState<RecommendedTracks | null>(null);
   const [artists, setArtists] = useState<Artist[] | null>(null);
 
   useEffect(() => {
