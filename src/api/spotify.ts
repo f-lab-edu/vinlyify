@@ -161,3 +161,23 @@ export async function getArtists(artists: string[]) {
   }
   return null;
 }
+
+/**
+ * 아티스트 정보 가져오기
+ */
+export async function searchKeyword(searchWord: string) {
+  try {
+    const response = await SPOTIFY_WEB_API.search(searchWord, [
+      'album',
+      'artist',
+      'playlist',
+      'track',
+    ]);
+    return response as unknown as SearchResult;
+  } catch (e: unknown) {
+    const { response } = e as HTTPError;
+    notAuthorizedHandler(response?.status);
+    excessiveRequestsHandler(response?.status);
+  }
+  return null;
+}
