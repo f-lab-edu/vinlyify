@@ -17,28 +17,23 @@ const api = ky.extend({
           `Bearer ${localStorage.getItem(VINYLIFY_TOKEN)}`,
         ),
     ],
+    afterResponse: [
+      (_, __, res) => {
+        console.log(res?.status);
+        if (res?.status === 401) {
+          console.log('invalid token');
+          SPOTIFY_WEB_API.setAccessToken('');
+          localStorage.removeItem(VINYLIFY_TOKEN);
+          window.location.replace(API.LOGIN);
+        } else if (res?.status === 429) {
+          console.log('too many requests..');
+        }
+      },
+    ],
   },
 });
 
 SPOTIFY_WEB_API.setAccessToken(localStorage.getItem(VINYLIFY_TOKEN));
-
-/**
- * 토큰 만료하면 제거
- */
-const notAuthorizedHandler = (status: number) => {
-  if (status !== 401) return;
-  console.log('invalid token');
-  SPOTIFY_WEB_API.setAccessToken('');
-  localStorage.removeItem(VINYLIFY_TOKEN);
-};
-
-/**
- * 과도한 요청을 시도했을 경우 에러 핸들링
- */
-const excessiveRequestsHandler = (status: number) => {
-  if (status !== 429) return;
-  console.log('too many requests..');
-};
 
 /**
  *  활성화된 기기 ID 찾기
@@ -63,9 +58,8 @@ export async function getTopTracks(limit = 5) {
     return getResponse;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
-    notAuthorizedHandler(response?.status);
+    throw new Error(`${response.status}`);
   }
-  return null;
 }
 
 /**
@@ -100,7 +94,7 @@ export async function playTrack({
     })();
   } catch (e: unknown) {
     const { response } = e as HTTPError;
-    notAuthorizedHandler(response?.status);
+    throw new Error(`${response.status}`);
   }
 }
 
@@ -111,9 +105,8 @@ export async function getPlayingTrack() {
     return response?.item as unknown as CurrentlyPlaying;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
-    notAuthorizedHandler(response?.status);
+    throw new Error(`${response.status}`);
   }
-  return null;
 }
 
 // Top5 기반으로 추천리스트
@@ -128,9 +121,8 @@ export async function getRecommendations() {
     return response;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
-    notAuthorizedHandler(response?.status);
+    throw new Error(`${response?.status}`);
   }
-  return null;
 }
 
 /**
@@ -142,7 +134,7 @@ export async function getNextPage(endpoint: string) {
     return getResponse;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
-    notAuthorizedHandler(response?.status);
+    throw new Error(`${response.status}`);
   }
 }
 
@@ -156,10 +148,8 @@ export async function getArtists(artists: string[]) {
     return response as unknown as Artist[];
   } catch (e: unknown) {
     const { response } = e as HTTPError;
-    notAuthorizedHandler(response?.status);
-    excessiveRequestsHandler(response?.status);
+    throw new Error(`${response.status}`);
   }
-  return null;
 }
 
 /**
@@ -176,8 +166,6 @@ export async function searchKeyword(searchWord: string) {
     return response as unknown as SearchResult;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
-    notAuthorizedHandler(response?.status);
-    excessiveRequestsHandler(response?.status);
+    throw new Error(`${response.status}`);
   }
-  return null;
 }
