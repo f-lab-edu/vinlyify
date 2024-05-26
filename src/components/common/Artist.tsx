@@ -1,3 +1,4 @@
+// 멀티아티스트 프로필
 // import { Artist } from '@/models/profile';
 // import { useState } from 'react';
 
