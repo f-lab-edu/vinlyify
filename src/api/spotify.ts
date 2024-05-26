@@ -1,5 +1,10 @@
-import { API, DEFAULT_PLAY_TRACK, VINYLIFY_TOKEN } from '@/constants';
-import { spotifyWebApi } from '@/contexts';
+import {
+  API,
+  DEFAULT_PLAY_TRACK,
+  SPOTIFY_WEB_API,
+  VINYLIFY_TOKEN,
+} from '@/constants';
+
 import ky, { HTTPError } from 'ky';
 
 const api = ky.extend({
@@ -15,7 +20,7 @@ const api = ky.extend({
   },
 });
 
-spotifyWebApi.setAccessToken(localStorage.getItem(VINYLIFY_TOKEN));
+SPOTIFY_WEB_API.setAccessToken(localStorage.getItem(VINYLIFY_TOKEN));
 
 /**
  * 토큰 만료하면 제거
@@ -23,7 +28,7 @@ spotifyWebApi.setAccessToken(localStorage.getItem(VINYLIFY_TOKEN));
 const notAuthorizedHandler = (status: number) => {
   if (status !== 401) return;
   console.log('invalid token');
-  spotifyWebApi.setAccessToken('');
+  SPOTIFY_WEB_API.setAccessToken('');
   localStorage.removeItem(VINYLIFY_TOKEN);
 };
 
@@ -32,7 +37,7 @@ const notAuthorizedHandler = (status: number) => {
  */
 
 export async function getActiveDevice() {
-  return await spotifyWebApi.getMyDevices().then(v => {
+  return await SPOTIFY_WEB_API.getMyDevices().then(v => {
     return v.devices.filter(device => {
       return device.is_active;
     })[0]?.id;
@@ -94,7 +99,7 @@ export async function playTrack({
 // 현제 제셍 노래 정보
 export async function getPlayingTrack() {
   try {
-    const response = await spotifyWebApi.getMyCurrentPlayingTrack();
+    const response = await SPOTIFY_WEB_API.getMyCurrentPlayingTrack();
     return response?.item as unknown as CurrentlyPlaying;
   } catch (e: unknown) {
     const { response } = e as HTTPError;

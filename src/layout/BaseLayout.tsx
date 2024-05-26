@@ -1,7 +1,12 @@
-import { API, PAGE, TOKEN_VALID_TIME, VINYLIFY_TOKEN } from '@/constants';
-import { SpotifyContext } from '@/contexts';
+import {
+  API,
+  PAGE,
+  SPOTIFY_WEB_API,
+  TOKEN_VALID_TIME,
+  VINYLIFY_TOKEN,
+} from '@/constants';
 
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Link,
   Outlet,
@@ -12,8 +17,6 @@ import {
 
 export const BaseLayout = () => {
   const [searchParams] = useSearchParams();
-  const { spotifyWebApi } = useContext(SpotifyContext);
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -36,8 +39,7 @@ export const BaseLayout = () => {
       searchParams.has('access_token')
     ) {
       const access_token = searchParams.get('access_token') as string;
-      spotifyWebApi.setAccessToken(access_token);
-
+      SPOTIFY_WEB_API.setAccessToken(access_token);
       localStorage.setItem(VINYLIFY_TOKEN, access_token);
       localStorage.setItem(
         TOKEN_VALID_TIME,
@@ -53,14 +55,7 @@ export const BaseLayout = () => {
       validTime?.length > 0 ? BigInt(validTime) : currentTime;
     setRemainingTime(validTimeToBigInt - currentTime);
     if (validTimeToBigInt - currentTime <= BigInt(0)) logout();
-  }, [
-    logout,
-    navigate,
-    location.pathname,
-    searchParams,
-    spotifyWebApi,
-    remainingTime,
-  ]);
+  }, [logout, navigate, location.pathname, searchParams, remainingTime]);
 
   return !searchParams.has('access_token') &&
     !localStorage.getItem('vinylify_token_valid_time') ? (
@@ -73,7 +68,7 @@ export const BaseLayout = () => {
       <footer>footer</footer>
     </>
   ) : (
-    <SpotifyContext.Provider value={{ spotifyWebApi }}>
+    <>
       <header>
         <Link to={PAGE.MAIN}>home</Link>
         <Link to={PAGE.SEARCH}>search</Link>
@@ -83,6 +78,6 @@ export const BaseLayout = () => {
       </header>
       <Outlet />
       <footer>footer</footer>
-    </SpotifyContext.Provider>
+    </>
   );
 };
