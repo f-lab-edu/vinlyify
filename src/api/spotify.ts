@@ -33,7 +33,7 @@ const notAuthorizedHandler = (status: number) => {
 };
 
 /**
- * 토큰 만료하면 제거
+ * 과도한 요청을 시도했을 경우 에러 핸들링
  */
 const excessiveRequestsHandler = (status: number) => {
   if (status !== 429) return;
