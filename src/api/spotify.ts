@@ -33,6 +33,14 @@ const notAuthorizedHandler = (status: number) => {
 };
 
 /**
+ * 토큰 만료하면 제거
+ */
+const excessiveRequestsHandler = (status: number) => {
+  if (status !== 429) return;
+  console.log('too many requests..');
+};
+
+/**
  *  활성화된 기기 ID 찾기
  */
 
@@ -136,4 +144,20 @@ export async function getNextPage(endpoint: string) {
     const { response } = e as HTTPError;
     notAuthorizedHandler(response?.status);
   }
+}
+
+/**
+ * 아티스트 정보 가져오기
+ */
+export async function getArtists(artists: string[]) {
+  try {
+    const removedDuplicateArists = [...new Set(artists)];
+    const response = await SPOTIFY_WEB_API.getArtists(removedDuplicateArists);
+    return response as unknown as Artist[];
+  } catch (e: unknown) {
+    const { response } = e as HTTPError;
+    notAuthorizedHandler(response?.status);
+    excessiveRequestsHandler(response?.status);
+  }
+  return null;
 }
