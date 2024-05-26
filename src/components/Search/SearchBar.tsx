@@ -1,13 +1,20 @@
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import { useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
-export default function SearchBar() {
-  const [searchWord, setSearchWord] = useState<string>('');
+export default function SearchBar({
+  searchWord,
+  setSearchWord,
+  handleSearchKeyword,
+}: {
+  searchWord: string;
+  setSearchWord: Dispatch<SetStateAction<string>>;
+  handleSearchKeyword: () => void;
+}) {
   return (
     <>
       <Input value={searchWord} onChange={e => setSearchWord(e.target.value)} />
-      <Button outline onClick={() => console.log('hehe')}>
+      <Button outline onClick={handleSearchKeyword}>
         검색
       </Button>
     </>
