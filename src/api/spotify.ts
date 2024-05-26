@@ -5,11 +5,10 @@ import {
   VINYLIFY_TOKEN,
 } from '@/constants';
 
-import { CurrentlyPlaying } from '@/models/currentlyPlaying';
 import { Artist } from '@/models/profile';
 import { Recommendations } from '@/models/recommendation';
 import { SearchResult } from '@/models/searchResult';
-import { Tracks } from '@/models/track';
+import { CurrentlyPlayingTrack, Tracks } from '@/models/track';
 
 import ky, { HTTPError } from 'ky';
 
@@ -106,7 +105,7 @@ export async function playTrack({
 export async function getPlayingTrack() {
   try {
     const response = await SPOTIFY_WEB_API.getMyCurrentPlayingTrack();
-    return response?.item as unknown as CurrentlyPlaying;
+    return response?.item as unknown as CurrentlyPlayingTrack;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
     throw new Error(`${response.status}`);

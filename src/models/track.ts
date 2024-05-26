@@ -19,3 +19,20 @@ export interface Track extends MetaInfo {
 export interface Tracks extends Pagination {
   items: Album[];
 }
+
+export interface CurrentlyPlayingTrack {
+  actions: {
+    disallows: {
+      resuming: boolean;
+      toggling_repeat_context: boolean;
+      toggling_repeat_track: boolean;
+      toggling_shuffle: boolean;
+    };
+  };
+  context: MetaInfo;
+  currently_playing_type?: string;
+  is_playing: boolean;
+  item: Track;
+  progress_ms: number;
+  timestamp: number;
+}
