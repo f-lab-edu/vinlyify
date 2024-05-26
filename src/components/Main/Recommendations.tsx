@@ -6,8 +6,11 @@ export default function Recommendations() {
   const [recommendations, setRecommendations] =
     useState<RecommendedTracks | null>(null);
   useEffect(() => {
-    getRecommendations()?.then(v => setRecommendations(v));
+    getRecommendations().then(v => {
+      console.log(v);
+      setRecommendations(v);
+    });
   }, []);
-
+  if (recommendations == null) return <>nothing to show</>;
   return <>{JSON.stringify(recommendations)}</>;
 }

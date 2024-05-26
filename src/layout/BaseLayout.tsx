@@ -47,7 +47,7 @@ export const BaseLayout = () => {
       );
       return;
     }
-    console.log(remainingTime);
+    // console.log(remainingTime);
     const currentTime = BigInt(new Date().getTime());
     const validTime = localStorage.getItem(TOKEN_VALID_TIME);
     if (!validTime) return navigate(PAGE.MAIN);
