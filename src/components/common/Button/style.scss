@@ -4,7 +4,7 @@ $black: #9c9c9c;
   background: $color;
   padding: 0.2rem 1rem;
   &:hover {
-    background: lighten($color, 10%);
+    background: darken($color, 30%);
   }
   &:active {
     background: darken($color, 10%);
@@ -17,6 +17,14 @@ $black: #9c9c9c;
       background: $color;
       color: white;
     }
+  }
+  &.disabled {
+    background: lighten($color, 20%);
+    cursor: not-allowed;
+  }
+
+  &:active {
+    background: darken($color, 20%);
   }
 }
 

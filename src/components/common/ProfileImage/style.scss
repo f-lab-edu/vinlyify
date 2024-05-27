@@ -1,0 +1,32 @@
+$size: 9rem;
+$rounded: 100%;
+$none: 0;
+
+@mixin round-profile($round) {
+  border-radius: $round;
+}
+
+.ProfileImage {
+  .round {
+    @include round-profile($rounded);
+  }
+  width: $size;
+  height: $size;
+  border-radius: $none;
+  aspect-ratio: 1/1;
+
+  &.large {
+    height: 9rem;
+    width: 9rem;
+  }
+
+  &.medium {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  &.small {
+    height: 1rem;
+    width: 1rem;
+  }
+}

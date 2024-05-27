@@ -9,6 +9,9 @@ interface ButtonProps {
   size?: 'medium' | 'large' | 'small';
   color?: 'black';
   outline?: boolean;
+  alt?: 'string';
+  disabled?: boolean;
+  active?: number;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,10 +20,16 @@ const Button: React.FC<ButtonProps> = ({
   size = 'medium',
   color = 'black',
   outline = false,
+  disabled = false,
+  active,
 }) => {
   return (
     <button
-      className={classNames('Button', size, color, { outline })}
+      disabled={disabled}
+      className={classNames('Button', size, color, active, {
+        outline,
+        disabled,
+      })}
       onClick={onClick}
     >
       {children}

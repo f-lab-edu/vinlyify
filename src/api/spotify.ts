@@ -132,12 +132,14 @@ export async function getRecommendations() {
 }
 
 /**
- * 게시물 다음 페이지 가져오기
+ * 게시물 페이지 가져오기
  */
-export async function getNextPage(endpoint: string) {
+export async function getPage(endpoint: string) {
   try {
-    const getResponse = await api.get(`${endpoint}`, {}).json();
-    return getResponse;
+    const getResponse = await api
+      .get(`${endpoint.replace(`${API.SPOTIFY}v1/`, '')}`, {})
+      .json();
+    return getResponse as unknown as SearchResult;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
     throw new Error(`${response.status}`);

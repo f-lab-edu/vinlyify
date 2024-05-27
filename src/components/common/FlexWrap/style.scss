@@ -2,9 +2,17 @@ $black: #9c9c9c;
 $white: #ffffff;
 
 .FlexWrap {
-  justify-content: center;
   width: 100%;
   display: inline-flex;
+  justify-content: flex-start;
   gap: 2rem;
   margin-top: 1rem;
+  align-items: center;
+
+  &.flex-start {
+    padding-left: 2rem;
+  }
+  &.center {
+    justify-content: center;
+  }
 }

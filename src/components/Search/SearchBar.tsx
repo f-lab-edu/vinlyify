@@ -17,7 +17,7 @@ export default function SearchBar({
     useSearch();
 
   return (
-    <FlexWrap>
+    <FlexWrap center="center">
       <Input
         useDefaultValue={useDefaultKeySearch}
         defaultSearchWord={defaultSearchWord}
