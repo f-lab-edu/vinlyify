@@ -18,6 +18,7 @@ export const PAGE = {
 
 export const URL_PARAMS = {
   KEYWORD: 'keyword',
+  SCOPE: 'scope',
 };
 
 export const DEFAULT_PLAY_TRACK = 'spotify:album:5ht7ItJgpBH7W6vJ5BqpPr';

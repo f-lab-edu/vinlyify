@@ -1,0 +1,58 @@
+$black: #9c9c9c;
+
+.TabBodyWrap {
+  display: inline-flex;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  border-radius: 4px;
+  border: none;
+  width: 100%;
+  align-items: center;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.TabHead {
+  background-color: #dcdcdc;
+  color: rgb(111, 111, 111);
+  font-weight: bold;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  width: 100%;
+
+  :hover {
+    cursor: pointer;
+    color: rgb(40, 40, 40);
+  }
+  .submenu {
+    display: inline-flex;
+    width: calc(100% / 3);
+    padding: 10px;
+    font-size: 15px;
+    transition: 0.5s;
+  }
+
+  .focused {
+    background-color: rgb(255, 255, 255);
+    color: rgb(21, 20, 20);
+  }
+
+  & div.desc {
+    text-align: center;
+  }
+}
+
+.TabContentWrap {
+  justify-content: center;
+  overflow-wrap: break-word;
+  width: 100%;
+}
+
+.TabListItem {
+  &.focused {
+    border-top-left-radius: 1rem;
+  }
+}

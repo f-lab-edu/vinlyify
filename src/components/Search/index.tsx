@@ -1,6 +1,6 @@
 import { useSearch } from '@/hooks/useSearch';
+import Tabs from '../Tabs';
 import SearchBar from './SearchBar';
-import Tabs from './Tabs';
 
 export default function Search() {
   const { handleSearchKeyword, setSearchWord, searchWord, searchResult } =
@@ -13,7 +13,11 @@ export default function Search() {
         searchWord={searchWord}
         setSearchWord={setSearchWord}
       />
-      <Tabs searchResult={searchResult} />
+      {searchResult ? (
+        <Tabs searchResult={searchResult} />
+      ) : (
+        <>nothing to show...</>
+      )}
     </>
   );
 }
