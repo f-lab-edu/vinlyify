@@ -12,5 +12,9 @@ export default function Recommendations() {
     });
   }, []);
   if (recommendations == null) return <>nothing to show</>;
-  return <>{JSON.stringify(recommendations)}</>;
+  return (
+    <>
+      <h1>recommendations</h1> {JSON.stringify(recommendations)}
+    </>
+  );
 }

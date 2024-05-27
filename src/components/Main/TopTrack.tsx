@@ -7,5 +7,10 @@ export default function TopTrack() {
   useEffect(() => {
     getTopTracks()?.then(v => setTopTracks(v));
   }, []);
-  return <>{JSON.stringify(topTracks)}</>;
+  return (
+    <>
+      <h1>top tracks</h1>
+      {JSON.stringify(topTracks)}
+    </>
+  );
 }
