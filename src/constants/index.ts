@@ -16,6 +16,10 @@ export const PAGE = {
   LOGGED_IN: '/me',
 };
 
+export const URL_PARAMS = {
+  KEYWORD: 'keyword',
+};
+
 export const DEFAULT_PLAY_TRACK = 'spotify:album:5ht7ItJgpBH7W6vJ5BqpPr';
 
 export const SPOTIFY_WEB_API = new SpotifyWebApi();

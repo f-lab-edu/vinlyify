@@ -1,4 +1,5 @@
 import { searchFromMyTopOne, searchKeyword } from '@/api/spotify';
+import { URL_PARAMS } from '@/constants';
 import { SearchResult } from '@/models/searchResult';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -6,7 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 export function useSearch() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchWord, setSearchWord] = useState<string>(
-    searchParams.get('keyword') ?? '',
+    searchParams.get(URL_PARAMS.KEYWORD) ?? '',
   );
   const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
   const [defaultSearchWord, setDefaultSearchWord] = useState<string>('');
@@ -32,7 +33,7 @@ export function useSearch() {
     if (
       searchWord === '' &&
       defaultSearchWord === '' &&
-      !searchParams.get('keyword')
+      !searchParams.get(URL_PARAMS.KEYWORD)
     ) {
       getDefaultSearch();
     }
@@ -51,8 +52,8 @@ export function useSearch() {
   const handleSearchKeyword = useCallback(() => {
     searchKeyword(searchWord).then(v => setSearchResult(v));
     setSearchParams([
-      ...[...searchParams].filter(v => v[0] !== 'keyword'),
-      ['keyword', searchWord],
+      ...[...searchParams].filter(v => v[0] !== URL_PARAMS.KEYWORD),
+      [URL_PARAMS.KEYWORD, searchWord],
     ]);
   }, [searchWord, searchParams, setSearchParams, setSearchResult]);
 
@@ -60,9 +61,9 @@ export function useSearch() {
    * 새로고침, 뒤로 가기, 검색창에 직접 입력 시에 url param에 검색어 정보를 가져오기
    */
   useMemo(() => {
-    if (searchParams.get('keyword')) {
-      setSearchWord(`${searchParams.get('keyword')}`);
-      searchKeyword(`${searchParams.get('keyword')}`).then(v =>
+    if (searchParams.get(URL_PARAMS.KEYWORD)) {
+      setSearchWord(`${searchParams.get(URL_PARAMS.KEYWORD)}`);
+      searchKeyword(`${searchParams.get(URL_PARAMS.KEYWORD)}`).then(v =>
         setSearchResult(v),
       );
     } else {

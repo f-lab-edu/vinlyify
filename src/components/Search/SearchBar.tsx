@@ -1,23 +1,19 @@
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { useSearch } from '@/hooks/useSearch';
+import { Dispatch, SetStateAction } from 'react';
 
 export default function SearchBar({
   searchWord,
-  defaultSearchWord,
   setSearchWord,
   handleSearchKeyword,
 }: {
   searchWord: string;
-  defaultSearchWord: string;
   setSearchWord: Dispatch<SetStateAction<string>>;
   handleSearchKeyword: () => void;
 }) {
-  const [useDefaultKeySearch, setUseDefaultKeySearch] = useState(true);
-
-  const handleUseDefaultKeySearch = useCallback(() => {
-    if (useDefaultKeySearch) setUseDefaultKeySearch(false);
-  }, [useDefaultKeySearch]);
+  const { defaultSearchWord, useDefaultKeySearch, handleUseDefaultKeySearch } =
+    useSearch();
 
   return (
     <>
