@@ -2,6 +2,7 @@ import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { useSearch } from '@/hooks/useSearch';
 import { Dispatch, SetStateAction } from 'react';
+import FlexWrap from '../common/FlexWrap';
 
 export default function SearchBar({
   searchWord,
@@ -16,7 +17,7 @@ export default function SearchBar({
     useSearch();
 
   return (
-    <>
+    <FlexWrap>
       <Input
         useDefaultValue={useDefaultKeySearch}
         defaultSearchWord={defaultSearchWord}
@@ -28,6 +29,6 @@ export default function SearchBar({
       <Button outline onClick={handleSearchKeyword}>
         검색
       </Button>
-    </>
+    </FlexWrap>
   );
 }
