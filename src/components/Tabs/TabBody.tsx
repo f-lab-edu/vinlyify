@@ -1,3 +1,4 @@
+import { DEFAULT_TAB } from '@/constants';
 import { SearchResult } from '@/models/searchResult';
 import { Dispatch, SetStateAction } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
@@ -6,7 +7,7 @@ import TabHeadList from './TabHeadList';
 
 export default function TabBody({
   searchResult,
-  currentTab = 'albums',
+  currentTab = DEFAULT_TAB,
   setCurrentTab,
   setSearchParams,
   searchParams,

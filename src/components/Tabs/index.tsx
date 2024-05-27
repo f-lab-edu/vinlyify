@@ -1,4 +1,4 @@
-import { URL_PARAMS } from '@/constants';
+import { DEFAULT_TAB, TABS, URL_PARAMS } from '@/constants';
 import { SearchResult } from '@/models/searchResult';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -12,20 +12,25 @@ export default function Tabs({
 }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentTab, setCurrentTab] = useState<keyof SearchResult>(
-    (searchParams.get(URL_PARAMS.SCOPE) as keyof SearchResult) ?? 'albums',
+    (searchParams.get(URL_PARAMS.SCOPE) as keyof SearchResult) ?? DEFAULT_TAB,
   );
 
   useEffect(() => {
     if (searchParams.get(URL_PARAMS.SCOPE)) {
       setCurrentTab(searchParams.get(URL_PARAMS.SCOPE) as keyof SearchResult);
+    } else {
+      setSearchParams([
+        ...[...searchParams].filter(v => v[0] !== URL_PARAMS.SCOPE),
+        [URL_PARAMS.SCOPE, DEFAULT_TAB],
+      ]);
     }
-  }, [searchParams]);
+  }, [searchParams, setSearchParams]);
 
   if (!searchResult) return <Loading />;
   return (
     <TabBody
       searchResult={searchResult}
-      currentTab={currentTab}
+      currentTab={TABS.includes(currentTab) ? currentTab : DEFAULT_TAB}
       setCurrentTab={setCurrentTab}
       setSearchParams={setSearchParams}
       searchParams={searchParams}

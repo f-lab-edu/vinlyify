@@ -1,4 +1,4 @@
-import { URL_PARAMS } from '@/constants';
+import { DEFAULT_TAB, URL_PARAMS } from '@/constants';
 import { SearchResult } from '@/models/searchResult';
 import { Dispatch, SetStateAction, useCallback } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
@@ -8,7 +8,7 @@ import TabListItem from '../common/Tab/TabListItem';
 
 export default function TabHeadList({
   searchResult,
-  currentTab = 'albums',
+  currentTab = DEFAULT_TAB,
   setCurrentTab,
   setSearchParams,
   searchParams,
@@ -26,7 +26,7 @@ export default function TabHeadList({
       setCurrentTab(tab as keyof SearchResult);
       setSearchParams([
         ...[...searchParams].filter(v => v[0] !== URL_PARAMS.SCOPE),
-        ['scope', tab],
+        [URL_PARAMS.SCOPE, tab],
       ]);
     },
     [setCurrentTab, setSearchParams, searchParams],

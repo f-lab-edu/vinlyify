@@ -24,3 +24,7 @@ export const URL_PARAMS = {
 export const DEFAULT_PLAY_TRACK = 'spotify:album:5ht7ItJgpBH7W6vJ5BqpPr';
 
 export const SPOTIFY_WEB_API = new SpotifyWebApi();
+
+export const TABS = ['albums', 'artists', 'tracks', 'playlists'] as const;
+
+export const DEFAULT_TAB = TABS[0];
