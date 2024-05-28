@@ -1,6 +1,7 @@
 import { DEFAULT_TAB } from '@/constants';
 import { SearchResult } from '@/models/searchResult';
 import TabContentWrap from '../common/Tab/TabContentWrap';
+import AlbumTab from './AlbumTab';
 import ArtistTab from './ArtistTab';
 
 export default function TabContent({
@@ -12,12 +13,7 @@ export default function TabContent({
 }) {
   switch (currentTab) {
     case 'albums':
-      return (
-        <TabContentWrap>
-          {JSON.stringify(searchResult[currentTab])}
-        </TabContentWrap>
-      );
-
+      return <AlbumTab tabItem={searchResult[currentTab]} />;
     case 'artists':
       return <ArtistTab tabItem={searchResult[currentTab]} />;
     case 'playlists':
@@ -33,6 +29,8 @@ export default function TabContent({
         </TabContentWrap>
       );
     default:
-      <ArtistTab tabItem={searchResult[currentTab]} />;
+      <TabContentWrap>
+        <AlbumTab tabItem={searchResult[DEFAULT_TAB]} />
+      </TabContentWrap>;
   }
 }

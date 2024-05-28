@@ -1,6 +1,6 @@
 import { getPage } from '@/api/spotify';
 import { SearchResult } from '@/models/searchResult';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FlexWrap from '../common/FlexWrap';
 import Paging from '../common/Pagination';
@@ -12,7 +12,7 @@ export default function ArtistTab({
   tabItem: SearchResult['artists'];
 }) {
   const [currentTabPageItem, setCurrentTabPageItem] = useState(tabItem);
-  const [pages, setPages] = useState(
+  const [pages] = useState(
     Array.from(
       {
         length:
@@ -29,8 +29,6 @@ export default function ArtistTab({
   ) => {
     if (url) {
       getPage(url).then(v => setCurrentTabPageItem(v['artists']));
-
-      //   console.log(url);
     }
   };
 
@@ -38,15 +36,10 @@ export default function ArtistTab({
     setCurrentTabPageItem(tabItem);
   }, [tabItem]);
 
-  useEffect(() => {
-    console.log(pages);
-  }, []);
-
   return (
     <>
       <Paging
         pages={pages}
-        // setPages={setPages}
         pageHandler={pageHandler}
         next={currentTabPageItem.next}
         href={currentTabPageItem.href}

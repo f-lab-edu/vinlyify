@@ -153,7 +153,8 @@ export async function getArtists(artists: string[]) {
   try {
     const removedDuplicateArists = [...new Set(artists)];
     const response = await SPOTIFY_WEB_API.getArtists(removedDuplicateArists);
-    return response as unknown as Artist[];
+    if ('artists' in response) return response.artists as unknown as Artist[];
+    else throw new Error('something went wrong...');
   } catch (e: unknown) {
     const { response } = e as HTTPError;
     throw new Error(`${response.status}`);
