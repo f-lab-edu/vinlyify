@@ -75,23 +75,21 @@ export async function playTrack({
   active_device?: string;
 }) {
   try {
-    (async () => {
-      const postResponse = await ky
-        .post(
-          `me/player/play?device_id=${active_device || (await getActiveDevice())}`,
-          {
-            json: {
-              context_uri: context_uris,
-              offset,
-              position_ms: 0,
-            },
+    const postResponse = await ky
+      .post(
+        `me/player/play?device_id=${active_device || (await getActiveDevice())}`,
+        {
+          json: {
+            context_uri: context_uris,
+            offset,
+            position_ms: 0,
           },
-        )
-        .json();
-      console.log(postResponse);
+        },
+      )
+      .json();
+    console.log(postResponse);
 
-      return postResponse;
-    })();
+    return postResponse;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
     throw new Error(`${response.status}`);
