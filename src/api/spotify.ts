@@ -6,7 +6,7 @@ import {
 } from '@/constants';
 
 import { Artist } from '@/models/profile';
-import { SearchResult, TrackSearchResult } from '@/models/searchResult';
+import { SearchResult, TrackSearchResult } from '@/models/spotify';
 
 import ky, { HTTPError } from 'ky';
 
