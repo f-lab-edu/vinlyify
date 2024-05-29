@@ -5,7 +5,8 @@ import {
   searchFromMyTopOne,
   searchKeyword,
 } from '@/api/spotify';
-import { QueryClient, useQuery } from '@tanstack/react-query';
+import { TrackSearchResult } from '@/models/spotify';
+import { useQuery } from '@tanstack/react-query';
 
 export const useTopTracks = () => {
   const res = useQuery({
@@ -18,14 +19,17 @@ export const useTopTracks = () => {
 
 useTopTracks.queryKey = ['topTracks'];
 
-export const useRecommendations = () => {
+export const useRecommendations = (data: TrackSearchResult) => {
   return useQuery({
     queryKey: useRecommendations.queryKey,
-    queryFn: () => getRecommendations(),
+    queryFn: async () => {
+      getRecommendations(data);
+    },
+    enabled: false,
   });
 };
 
-useRecommendations.queryKey = ['reccomendations'];
+useRecommendations.queryKey = ['recommendations'];
 
 // 현재 재생 중인 플레이리스트 3초 간격으로 refetch 해오기
 export const useCurrentPlayingTrack = () => {
@@ -38,18 +42,6 @@ export const useCurrentPlayingTrack = () => {
 };
 
 useCurrentPlayingTrack.queryKey = ['current', 'playing', 'track'];
-
-export const useInfiniteSearchList = () => {};
-
-export const usePrefetchSearchList = (keyword: string) => {
-  const queryClient = new QueryClient();
-  return queryClient.prefetchQuery({
-    queryKey: usePrefetchSearchList.queryKey,
-    queryFn: () => searchKeyword(keyword),
-  });
-};
-
-usePrefetchSearchList.queryKey = ['prefetch', 'search'];
 
 export const useSearchKeyword = (keyword: string | null) => {
   // 검색어를 입력하지 않은 경우 내 top1 아티스트 기준으로
