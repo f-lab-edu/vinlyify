@@ -1,9 +1,11 @@
 import { getTopTracks } from '@/api/spotify';
-import { Tracks } from '@/models/track';
+import { TrackSearchResult } from '@/models/searchResult';
 import { useEffect, useState } from 'react';
 
 export default function TopTrack() {
-  const [topTracks, setTopTracks] = useState<Tracks | null>(null);
+  const [topTracks, setTopTracks] = useState<TrackSearchResult['items'] | null>(
+    null,
+  );
   useEffect(() => {
     getTopTracks()?.then(v => setTopTracks(v));
   }, []);

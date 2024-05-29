@@ -6,12 +6,8 @@ import {
 } from '@/constants';
 
 import { Artist } from '@/models/profile';
-import { SearchResult } from '@/models/searchResult';
-import {
-  CurrentlyPlayingTrack,
-  RecommendedTracks,
-  Tracks,
-} from '@/models/track';
+import { SearchResult, TrackSearchResult } from '@/models/searchResult';
+import { CurrentlyPlayingTrack, RecommendedTracks } from '@/models/track';
 
 import ky, { HTTPError } from 'ky';
 
@@ -47,8 +43,8 @@ SPOTIFY_WEB_API.setAccessToken(localStorage.getItem(VINYLIFY_TOKEN));
  *  활성화된 기기 ID 찾기
  */
 
-export async function getActiveDevice() {
-  return await SPOTIFY_WEB_API.getMyDevices().then(v => {
+export function getActiveDevice() {
+  return SPOTIFY_WEB_API.getMyDevices().then(v => {
     return v.devices.filter(device => {
       return device.is_active;
     })[0]?.id;
@@ -62,8 +58,8 @@ export async function getTopTracks(limit = 5) {
   try {
     const getResponse = (await api
       .get(`me/top/tracks?time_range=long_term&limit=${limit}`, {})
-      .json()) as Tracks;
-    return getResponse;
+      .json()) as TrackSearchResult;
+    return getResponse.items as unknown as TrackSearchResult['items'];
   } catch (e: unknown) {
     const { response } = e as HTTPError;
     throw new Error(`${response.status}`);
@@ -118,11 +114,10 @@ export async function getPlayingTrack() {
 // Top5 기반으로 추천리스트
 export async function getRecommendations() {
   try {
-    const myTopFive = await getTopTracks().then(v => {
-      return v?.items.map(item => item.id).join(',');
-    });
+    const myTopFive = await getTopTracks();
+    const topFiveIds = myTopFive.map(item => item.id).join(',');
     const response = (await api
-      .get(`recommendations?limit=5&seed_tracks=${myTopFive}`, {})
+      .get(`recommendations?limit=5&seed_tracks=${topFiveIds}`, {})
       .json()) as RecommendedTracks;
     return response;
   } catch (e: unknown) {
@@ -184,7 +179,7 @@ export async function searchKeyword(searchWord: string) {
  */
 export async function searchFromMyTopOne() {
   try {
-    const topArtistName = (await getTopTracks(1)).items[0]?.artists[0]?.name;
+    const topArtistName = (await getTopTracks(1))[0]?.artists[0]?.name;
     if (!topArtistName) throw new Error('something went wrong...');
     const response = await searchKeyword(`${topArtistName}`);
     return { keyword: topArtistName, response } as unknown as {

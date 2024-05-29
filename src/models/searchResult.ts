@@ -49,7 +49,7 @@ export interface ArtistSearchResult extends Pagination {
   items: Artist[];
 }
 export interface TrackSearchResult extends Pagination {
-  items: TrackItem[];
+  items: Array<TrackItem>;
 }
 
 export interface PlaylistSearchResult extends Pagination {
