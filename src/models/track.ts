@@ -1,4 +1,4 @@
-import { MetaInfo, Pagination } from '@/models';
+import { MetaInfo, Pagination } from '@/models/shared_types';
 import { Album } from './album';
 import { Artist } from './profile';
 

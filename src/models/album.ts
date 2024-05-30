@@ -1,4 +1,4 @@
-import { MetaInfo } from '@/models';
+import { MetaInfo } from '@/models/shared_types';
 import { Artist } from './profile';
 
 export interface Album extends MetaInfo {

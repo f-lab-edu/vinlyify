@@ -1,4 +1,4 @@
-import { MetaInfo } from '@/models';
+import { MetaInfo } from '@/models/shared_types';
 
 export interface Profile extends MetaInfo {
   followers?: { href?: null | string; total: number };

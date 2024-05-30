@@ -1,4 +1,4 @@
-import { MetaInfo } from '@/models';
+import { MetaInfo } from '@/models/shared_types';
 import { UserProfile } from './profile';
 
 export interface Playlist extends MetaInfo {
