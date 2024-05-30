@@ -1,4 +1,4 @@
-import { useSearchKeyword } from '@/query';
+import { useSearchKeyword } from '@/query/useSearchKeyword';
 import { debounce } from '@/utils';
 import { useState } from 'react';
 

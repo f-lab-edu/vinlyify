@@ -1,4 +1,4 @@
-import { useRecommendations } from '@/query';
+import { useRecommendations } from '@/query/useRecommendations';
 
 export default function Recommendations() {
   const { data } = useRecommendations();

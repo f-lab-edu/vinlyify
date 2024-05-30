@@ -1,4 +1,4 @@
-import { useCurrentPlayingTrack } from '@/query';
+import { useCurrentPlayingTrack } from '@/query/useCurrentPlayingTrack';
 
 export default function MusicInfo() {
   const { data } = useCurrentPlayingTrack();
