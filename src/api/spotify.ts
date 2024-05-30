@@ -4,6 +4,7 @@ import {
   SPOTIFY_WEB_API,
   VINYLIFY_TOKEN,
 } from '@/constants';
+import { Artist } from '@/models/Profile';
 
 import { SearchResult, TrackSearchResult } from '@/models/Spotify';
 
