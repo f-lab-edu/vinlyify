@@ -1,6 +1,6 @@
 import { useSearchKeyword } from '@/query/useSearchKeyword';
 import { debounce } from '@/utils';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export default function SearchInput() {
   const [keyword, setKeyword] = useState('');
@@ -9,7 +9,7 @@ export default function SearchInput() {
 
   const debounceSearch = debounce(() => onHandleSearch(), 1_000);
 
-  const placeHolder = () => {
+  const placeHolder = useMemo(() => {
     const defaultSearchWord = data?.albums?.href.match(
       /(?<=(query=)).*(?=&type)/,
     );
@@ -18,13 +18,13 @@ export default function SearchInput() {
         ? `${defaultSearchWord[0].replace('+', ' ')}`
         : '';
     return dsw;
-  };
+  }, [data?.albums?.href]);
 
   return (
     <>
       <input
         value={keyword}
-        placeholder={placeHolder()}
+        placeholder={placeHolder}
         onChange={e => setKeyword(e.target.value)}
         onKeyUp={e => {
           if (e.key === 'Enter') debounceSearch();
