@@ -1,4 +1,4 @@
-import { useSearchKeyword } from '@/query/useSearchKeyword';
+import { useSearchKeyword } from '@/hooks/query/useSearchKeyword';
 
 export default function SearchResult() {
   const { data } = useSearchKeyword('');

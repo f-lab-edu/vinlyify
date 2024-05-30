@@ -1,5 +1,5 @@
+import { useSearchKeyword } from '@/hooks/query/useSearchKeyword';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useSearchKeyword } from '@/query/useSearchKeyword';
 import {
   ChangeEventHandler,
   KeyboardEventHandler,

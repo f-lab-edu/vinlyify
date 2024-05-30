@@ -1,4 +1,4 @@
-import { useCurrentPlayingTrack } from '@/query/useCurrentPlayingTrack';
+import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
 
 export default function MusicInfo() {
   const { data } = useCurrentPlayingTrack();

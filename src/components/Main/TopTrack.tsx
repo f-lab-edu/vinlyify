@@ -1,4 +1,4 @@
-import { useTopTracks } from '@/query/useTopTracks';
+import { useTopTracks } from '@/hooks/query/useTopTracks';
 
 export default function TopTrack() {
   const { data } = useTopTracks();
