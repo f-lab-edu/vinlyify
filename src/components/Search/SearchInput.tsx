@@ -1,13 +1,16 @@
+import { useDebounce } from '@/hooks/useDebounce';
 import { useSearchKeyword } from '@/query/useSearchKeyword';
-import { debounce } from '@/utils';
-import { useMemo, useState } from 'react';
+import {
+  ChangeEventHandler,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  useMemo,
+  useState,
+} from 'react';
 
 export default function SearchInput() {
   const [keyword, setKeyword] = useState('');
   const { refetch, data } = useSearchKeyword(keyword);
-  const onHandleSearch = () => refetch();
-
-  const debounceSearch = debounce(() => onHandleSearch(), 1_000);
 
   const placeHolder = useMemo(() => {
     const defaultSearchWord = data?.albums?.href.match(
@@ -15,22 +18,39 @@ export default function SearchInput() {
     );
     const dsw =
       defaultSearchWord != null
-        ? `${defaultSearchWord[0].replace('+', ' ')}`
+        ? `${defaultSearchWord[0].replaceAll('+', ' ')}`
         : '';
-    return dsw;
+    return decodeURI(dsw);
   }, [data?.albums?.href]);
+
+  const debouncedRequest = useDebounce(() => {
+    refetch();
+  });
+
+  const onChange: ChangeEventHandler<HTMLInputElement> = e => {
+    const value = e.target.value;
+    setKeyword(value);
+    debouncedRequest();
+  };
+
+  const onKeyUp: KeyboardEventHandler<HTMLInputElement> = e => {
+    if (e.key === 'Enter') debouncedRequest();
+  };
+
+  const onClick: MouseEventHandler<HTMLButtonElement> = e => {
+    e.preventDefault();
+    debouncedRequest();
+  };
 
   return (
     <>
       <input
         value={keyword}
         placeholder={placeHolder}
-        onChange={e => setKeyword(e.target.value)}
-        onKeyUp={e => {
-          if (e.key === 'Enter') debounceSearch();
-        }}
+        onChange={onChange}
+        onKeyUp={onKeyUp}
       />
-      <button onClick={debounceSearch}>검색</button>
+      <button onClick={onClick}>검색</button>
     </>
   );
 }
