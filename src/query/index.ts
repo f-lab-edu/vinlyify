@@ -50,7 +50,7 @@ export const useSearchKeyword = (keyword: string | null) => {
     queryKey: useSearchKeyword.queryKey,
     queryFn: () => searchKeyword(keyword),
     enabled: false,
-    initialData: { ...data },
+    initialData: data,
   });
   return res;
 };
