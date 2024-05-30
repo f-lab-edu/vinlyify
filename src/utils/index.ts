@@ -1,15 +1,13 @@
-export const debounce = (fn: () => void, wait: number) => {
-  let timeout = null as NodeJS.Timeout | string | number | undefined | null;
-
-  return (...args: unknown[]) => {
-    const later = () => {
-      timeout = -1;
-      fn(...(args as [])); // args로 넘길 타입은 뭐로 해야할까 🤔
-    };
-
-    if (timeout) {
-      clearTimeout(timeout);
-    }
-    timeout = window.setTimeout(later, wait);
+/**
+ * 참고 : https://gist.github.com/ca0v/73a31f57b397606c9813472f7493a940
+ * */
+export function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
+  func: F,
+  waitFor: number,
+): (...args: Parameters<F>) => void {
+  let timeout: ReturnType<typeof setTimeout>;
+  return (...args: Parameters<F>): void => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), waitFor);
   };
-};
+}
