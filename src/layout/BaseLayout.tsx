@@ -1,82 +1,53 @@
-import {
-  API,
-  PAGE,
-  SPOTIFY_WEB_API,
-  TOKEN_VALID_TIME,
-  VINYLIFY_TOKEN,
-} from '@/constants';
+import { API, PAGE, SPOTIFY_WEB_API, VINYLIFY_TOKEN } from '@/constants';
+import { useEffect } from 'react';
 
-import { useCallback, useEffect, useState } from 'react';
-import {
-  Link,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from 'react-router-dom';
+import { Link, Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 
 export const BaseLayout = () => {
   const [searchParams] = useSearchParams();
-  const location = useLocation();
   const navigate = useNavigate();
 
-  const [remainingTime, setRemainingTime] = useState(
-    BigInt(localStorage.getItem(TOKEN_VALID_TIME) ?? 0) -
-      BigInt(new Date().getTime()),
-  );
-
-  const logout = useCallback(() => {
-    if (!remainingTime) return;
-    localStorage.removeItem(TOKEN_VALID_TIME);
-    localStorage.removeItem(VINYLIFY_TOKEN);
-    navigate(PAGE.MAIN);
-  }, [remainingTime, navigate]);
-
   useEffect(() => {
-    // 로그인 시에 access token 로컬 스토리지에 저장
     if (
-      location.pathname === PAGE.LOGGED_IN &&
-      searchParams.has('access_token')
+      location.pathname == PAGE.LOGGED_IN &&
+      typeof searchParams.get('access_token') === 'string'
     ) {
-      const access_token = searchParams.get('access_token') as string;
-      SPOTIFY_WEB_API.setAccessToken(access_token);
-      localStorage.setItem(VINYLIFY_TOKEN, access_token);
       localStorage.setItem(
-        TOKEN_VALID_TIME,
-        `${new Date().getTime() + 60 * 60 * 1000}`,
+        VINYLIFY_TOKEN,
+        `${searchParams.get('access_token')}`,
       );
-      return;
+      SPOTIFY_WEB_API.setAccessToken(`${searchParams.get('access_token')}`);
+      navigate(PAGE.MAIN);
     }
-    console.log(remainingTime);
-    const currentTime = BigInt(new Date().getTime());
-    const validTime = localStorage.getItem(TOKEN_VALID_TIME);
-    if (!validTime) return navigate(PAGE.MAIN);
-    const validTimeToBigInt =
-      validTime?.length > 0 ? BigInt(validTime) : currentTime;
-    setRemainingTime(validTimeToBigInt - currentTime);
-    if (validTimeToBigInt - currentTime <= BigInt(0)) logout();
-  }, [logout, navigate, location.pathname, searchParams, remainingTime]);
+  }, [searchParams, navigate]);
 
-  return !searchParams.has('access_token') &&
-    !localStorage.getItem('vinylify_token_valid_time') ? (
-    <>
-      <header>
-        <Link to={PAGE.MAIN}>home</Link>
-        <Link to={API.LOGIN}>login to spotify</Link>
-      </header>
-      <Outlet />
-      <footer>footer</footer>
-    </>
-  ) : (
-    <>
-      <header>
-        <Link to={PAGE.MAIN}>home</Link>
-        <Link to={PAGE.SEARCH}>search</Link>
+  const onHandleLogin = () => {
+    window.location.replace(API.LOGIN);
+  };
 
-        <Link to={PAGE.MUSIC_INFO}>currently playing</Link>
-        <button onClick={logout}> logout</button>
-      </header>
+  const onHandleLogOut = () => {
+    localStorage.removeItem(VINYLIFY_TOKEN);
+    SPOTIFY_WEB_API.setAccessToken(null);
+    window.location.replace(API.LOGIN);
+  };
+
+  return (
+    <>
+      {!SPOTIFY_WEB_API.getAccessToken() ? (
+        <header>
+          <Link to={PAGE.MAIN}>home</Link>
+          <button onClick={onHandleLogin}>login</button>
+        </header>
+      ) : (
+        <header>
+          <Link to={PAGE.MAIN}>home</Link>
+          <Link to={PAGE.SEARCH}>search</Link>
+          <Link to={PAGE.MUSIC_INFO}>currently playing</Link>
+          <button onClick={onHandleLogOut}> logout</button>
+        </header>
+      )}
       <Outlet />
+
       <footer>footer</footer>
     </>
   );
