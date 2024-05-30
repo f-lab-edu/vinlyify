@@ -1,5 +1,5 @@
-import { MetaInfo } from '@/models/shared_types';
-import { UserProfile } from './profile';
+import { MetaInfo } from '@/models/MetaInfo';
+import { UserProfile } from '@/models/Profile';
 
 export interface Playlist extends MetaInfo {
   collaborative: boolean;

@@ -5,8 +5,7 @@ import {
   VINYLIFY_TOKEN,
 } from '@/constants';
 
-import { Artist } from '@/models/profile';
-import { SearchResult, TrackSearchResult } from '@/models/spotify';
+import { SearchResult, TrackSearchResult } from '@/models/Spotify';
 
 import ky, { HTTPError } from 'ky';
 

@@ -1,6 +1,7 @@
-import { MetaInfo, Pagination } from '@/models/shared_types';
-import { Album } from './album';
-import { Artist } from './profile';
+import { Album } from '@/models/Album';
+import { MetaInfo } from '@/models/MetaInfo';
+import { Pagination } from '@/models/Pagination';
+import { Artist } from '@/models/Profile';
 
 export interface Track extends MetaInfo {
   album: Album[];

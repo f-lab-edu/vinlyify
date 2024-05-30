@@ -1,6 +1,7 @@
-import { Album } from './album';
-import { Artist, UserProfile } from './profile';
-import { MetaInfo, Pagination } from './shared_types';
+import { Album } from '@/models/Album';
+import { MetaInfo } from '@/models/MetaInfo';
+import { Pagination } from '@/models/Pagination';
+import { Artist, UserProfile } from '@/models/Profile';
 
 export interface PlaylistItem extends MetaInfo {
   collaborative: boolean;
