@@ -1,4 +1,4 @@
-import { useTopTracks } from '@/query';
+import { useTopTracks } from '@/query/useTopTracks';
 
 export default function TopTrack() {
   const { data } = useTopTracks();
