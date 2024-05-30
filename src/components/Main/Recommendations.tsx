@@ -1,14 +1,7 @@
-import { TrackSearchResult } from '@/models/spotify';
-import { useRecommendations, useTopTracks } from '@/query';
-import { useEffect } from 'react';
+import { useRecommendations } from '@/query';
 
 export default function Recommendations() {
-  const { data, isFetched } = useTopTracks();
-  const { refetch } = useRecommendations(data as TrackSearchResult);
-
-  useEffect(() => {
-    if (isFetched) refetch();
-  }, [isFetched, refetch]);
+  const { data } = useRecommendations();
 
   return (
     <>

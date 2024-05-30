@@ -94,9 +94,11 @@ export function getPlayingTrack() {
 }
 
 // Top5 기반으로 추천리스트
-export async function getRecommendations(myTopFive: TrackSearchResult) {
+export async function getRecommendations() {
   try {
-    const topFiveIds = myTopFive?.items.map(item => item.id).join(',');
+    const topFiveIds = (await getTopTracks()).items
+      .map(item => item.id)
+      .join(',');
     const response = await api
       .get(`recommendations?limit=5&seed_tracks=${topFiveIds}`, {})
       .json();

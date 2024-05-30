@@ -7,7 +7,7 @@ export default function SearchInput() {
   const { refetch, data } = useSearchKeyword(keyword);
   const onHandleSearch = () => refetch();
 
-  const debounceSearch = debounce(() => onHandleSearch(), 1000);
+  const debounceSearch = debounce(() => onHandleSearch(), 1_000);
 
   const placeHolder = () => {
     const defaultSearchWord = data?.albums?.href.match(

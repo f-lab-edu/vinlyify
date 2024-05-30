@@ -5,7 +5,6 @@ import {
   searchFromMyTopOne,
   searchKeyword,
 } from '@/api/spotify';
-import { TrackSearchResult } from '@/models/spotify';
 import { useQuery } from '@tanstack/react-query';
 
 export const useTopTracks = () => {
@@ -19,13 +18,10 @@ export const useTopTracks = () => {
 
 useTopTracks.queryKey = ['topTracks'];
 
-export const useRecommendations = (data: TrackSearchResult) => {
+export const useRecommendations = () => {
   return useQuery({
     queryKey: useRecommendations.queryKey,
-    queryFn: async () => {
-      getRecommendations(data);
-    },
-    enabled: false,
+    queryFn: () => getRecommendations(),
   });
 };
 
@@ -36,7 +32,7 @@ export const useCurrentPlayingTrack = () => {
   return useQuery({
     queryKey: useCurrentPlayingTrack.queryKey,
     queryFn: () => getPlayingTrack(),
-    refetchInterval: 3000,
+    refetchInterval: 3_000,
     staleTime: 0,
   });
 };
