@@ -3,7 +3,7 @@
  * */
 export function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
   func: F,
-  waitFor: number,
+  waitFor: number = 1_000,
 ): (...args: Parameters<F>) => void {
   let timeout: ReturnType<typeof setTimeout>;
   return (...args: Parameters<F>): void => {
