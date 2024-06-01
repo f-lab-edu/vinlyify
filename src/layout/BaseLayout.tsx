@@ -1,4 +1,10 @@
-import { API, PAGE, SPOTIFY_WEB_API, VINYLIFY_TOKEN } from '@/constants';
+import {
+  ACCESS_TOKEN,
+  API,
+  PAGE,
+  SPOTIFY_WEB_API,
+  VINYLIFY_TOKEN,
+} from '@/constants';
 import { useEffect } from 'react';
 
 import { Link, Outlet, useNavigate, useSearchParams } from 'react-router-dom';
@@ -8,15 +14,9 @@ export const BaseLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      location.pathname == PAGE.LOGGED_IN &&
-      typeof searchParams.get('access_token') === 'string'
-    ) {
-      localStorage.setItem(
-        VINYLIFY_TOKEN,
-        `${searchParams.get('access_token')}`,
-      );
-      SPOTIFY_WEB_API.setAccessToken(`${searchParams.get('access_token')}`);
+    if (location.pathname == PAGE.LOGGED_IN && searchParams.has(ACCESS_TOKEN)) {
+      localStorage.setItem(VINYLIFY_TOKEN, `${searchParams.get(ACCESS_TOKEN)}`);
+      SPOTIFY_WEB_API.setAccessToken(`${searchParams.get(ACCESS_TOKEN)}`);
       navigate(PAGE.MAIN);
     }
   }, [searchParams, navigate]);
