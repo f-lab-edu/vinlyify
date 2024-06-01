@@ -33,3 +33,5 @@ export const PLAYLISTS = 'playlists';
 export const TABS = [ALBUMS, ARTISTS, TRACKS, PLAYLISTS] as const;
 
 export const DEFAULT_TAB = ALBUMS;
+
+export const ACCESS_TOKEN = 'access_token';
