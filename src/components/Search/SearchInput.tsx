@@ -43,7 +43,9 @@ export default function SearchInput() {
   };
 
   const onKeyUp: KeyboardEventHandler<HTMLInputElement> = e => {
-    if (e.key === 'Enter') debouncedRequest();
+    if (e.key === 'Enter') {
+      debouncedRequest();
+    }
   };
 
   return (
