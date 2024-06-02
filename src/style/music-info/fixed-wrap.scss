@@ -1,0 +1,14 @@
+.FixedWrap {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  & .wrap {
+    height: fit-content;
+    display: inline-flex;
+    padding: 1rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+}
