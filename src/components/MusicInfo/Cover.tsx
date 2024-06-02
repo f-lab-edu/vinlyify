@@ -7,6 +7,8 @@ export interface ImgUrlProps extends SVGProps<SVGImageElement> {
 }
 
 const Cover: FC<ImgUrlProps> = ({ imgUrl }) => {
-  return <img src={imgUrl} className={classNames('Cover', imgUrl)} />;
+  return (
+    <img src={imgUrl} alt={imgUrl} className={classNames('cover', imgUrl)} />
+  );
 };
 export default Cover;

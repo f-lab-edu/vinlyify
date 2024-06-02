@@ -5,7 +5,7 @@ import FixedWrap from './FixedWrap';
 import Print from './Print';
 import VinylBody from './VinylBody';
 
-export default function Vinyl({ imgUrl }: { imgUrl: Image['url'] }) {
+export default function Vinyl({ imgUrl }: Readonly<{ imgUrl: Image['url'] }>) {
   return (
     <FixedWrap>
       <Album>

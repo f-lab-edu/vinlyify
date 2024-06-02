@@ -11,7 +11,7 @@ const VinylBody: FC<ContainerProps> = ({ children, imgUrl }) => {
   return (
     <div
       style={{ backgroundImage: `url(${imgUrl})` }}
-      className={classNames('VinylBody')}
+      className={classNames('vinylBody')}
     >
       {children}
     </div>
