@@ -4,16 +4,12 @@ import { FC, InputHTMLAttributes } from 'react';
 import './style.scss';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  color?: 'black';
-  outline?: boolean;
   value?: string;
   placeHolder?: string;
 }
 
 const Input: FC<InputProps> = ({
   size = 'medium',
-  color = 'black',
-  outline = false,
   onKeyUp,
   onChange,
   value,
@@ -22,7 +18,7 @@ const Input: FC<InputProps> = ({
 }) => {
   return (
     <input
-      className={classNames('Input', size, color, { outline })}
+      className={classNames('Input', size)}
       onKeyUp={onKeyUp}
       onKeyDown={onKeyDown}
       onChange={onChange}
