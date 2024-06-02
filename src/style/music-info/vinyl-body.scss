@@ -1,0 +1,50 @@
+.VinylBody {
+  @keyframes getOut {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: 50%;
+    }
+  }
+  @keyframes spinThat {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  position: absolute;
+  top: 2.5%;
+  left: 2.5%;
+  z-index: 0;
+  width: 95%;
+  height: 95%;
+  display: inline-block;
+  background-blend-mode: overlay;
+  background-size: 106% 106%;
+  background-position: center;
+  box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  max-height: 38vh;
+  max-width: 38vh;
+  content: '';
+  animation:
+    5s linear spinThat infinite,
+    0.5s ease-out getOut 1s forwards;
+  &::before {
+    position: absolute;
+    top: 2.5%;
+    left: 2.5%;
+    z-index: 10;
+    width: 95%;
+    height: 95%;
+    background-image: url('http://www.designresourcebox.com/ths/diverse/blacktextures/82267467.jpg');
+    background-size: 100% 100%;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    opacity: 0.3;
+    content: '';
+  }
+}
