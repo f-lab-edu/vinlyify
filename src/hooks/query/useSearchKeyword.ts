@@ -27,7 +27,7 @@ export const useSearchKeyword = (keyword: string | null) => {
   return res;
 };
 useSearchKeyword.queryKey = (keyword?: string | null) => {
-  const qk = ['search', 'list'];
-  if (keyword == null || keyword === '') return qk;
-  return [...qk, keyword];
+  const default_querykeys = ['search', 'list'];
+  if (keyword == null || keyword === '') return default_querykeys;
+  return [...default_querykeys, keyword];
 };
