@@ -18,7 +18,7 @@ const Input: FC<InputProps> = ({
 }) => {
   return (
     <input
-      className={classNames('Input', size)}
+      className={classNames('input', size)}
       onKeyUp={onKeyUp}
       onKeyDown={onKeyDown}
       onChange={onChange}

@@ -15,7 +15,7 @@ const Container: FC<ContainerProps> = ({
   pd = 'md',
 }) => {
   return (
-    <div className={classNames('Container', { center }, pd)}>{children}</div>
+    <div className={classNames('container', { center }, pd)}>{children}</div>
   );
 };
 export default Container;
