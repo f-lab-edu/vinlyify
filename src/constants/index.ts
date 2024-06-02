@@ -33,3 +33,6 @@ export const PLAYLISTS = 'playlists';
 export const TABS = [ALBUMS, ARTISTS, TRACKS, PLAYLISTS] as const;
 
 export const DEFAULT_TAB = ALBUMS;
+
+export const PLACEHOLDER_IMAGE =
+  'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
