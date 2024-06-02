@@ -29,7 +29,3 @@ export const ALBUMS = 'albums';
 export const ARTISTS = 'artists';
 export const TRACKS = 'tracks';
 export const PLAYLISTS = 'playlists';
-
-export const TABS = [ALBUMS, ARTISTS, TRACKS, PLAYLISTS] as const;
-
-export const DEFAULT_TAB = ALBUMS;
