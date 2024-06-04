@@ -1,12 +1,17 @@
-import { getPlayingTrack } from '@/api/spotify';
-import { useEffect, useState } from 'react';
+import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
 
 export default function MusicInfo() {
-  const [currentPlaying, setCurrentPlaying] = useState<CurrentlyPlaying | null>(
-    null,
+  const { data } = useCurrentPlayingTrack();
+
+  return !data?.item ? (
+    <>nothing to show...</>
+  ) : (
+    <>
+      <h1>
+        {data.item.name}, current progress: {data?.progress_ms}
+      </h1>
+
+      <div>{JSON.stringify(data)}</div>
+    </>
   );
-  useEffect(() => {
-    getPlayingTrack().then(v => setCurrentPlaying(v));
-  }, []);
-  return <>{JSON.stringify(currentPlaying)}</>;
 }

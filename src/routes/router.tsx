@@ -5,7 +5,7 @@ import MainPage from '@/pages/MainPage';
 import MusicInfoPage from '@/pages/MusicInfoPage';
 
 import NotFoundPage from '@/pages/NotFoundPage';
-import SearchPage from '@/pages/Search';
+import SearchPage from '@/pages/SearchPage';
 import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
