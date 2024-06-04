@@ -49,8 +49,9 @@ export interface AlbumSearchResult extends Pagination {
 export interface ArtistSearchResult extends Pagination {
   items: Artist[];
 }
+
 export interface TrackSearchResult extends Pagination {
-  items: Array<TrackItem>;
+  items: TrackItem[];
 }
 
 export interface PlaylistSearchResult extends Pagination {
@@ -58,6 +59,11 @@ export interface PlaylistSearchResult extends Pagination {
 }
 
 export type SearchResult = {
+  [key: string]:
+    | AlbumSearchResult
+    | ArtistSearchResult
+    | TrackSearchResult
+    | PlaylistSearchResult;
   albums: AlbumSearchResult;
   artists: ArtistSearchResult;
   tracks: TrackSearchResult;
