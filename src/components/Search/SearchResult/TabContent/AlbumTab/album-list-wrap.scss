@@ -1,0 +1,30 @@
+@use '@/utils/variables';
+@use '@/utils/mixins';
+
+.album-list-wrap {
+  display: inline-grid;
+  grid-template-columns: subgrid;
+  padding: 0 1rem;
+  margin: 0 auto;
+  column-gap: 1rem;
+  @include mixins.mobile {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include mixins.desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .btn-wrap {
+    display: inline-flex;
+    align-items: center;
+  }
+  .icon-wrap {
+    display: inline-flex;
+    align-items: center;
+  }
+}
