@@ -1,0 +1,51 @@
+@use '../ProfileImage/profile-image';
+@use '@/utils/variables';
+@use '@/utils/mixins';
+$title: 1.2rem;
+
+.card {
+  height: fit-content;
+  min-height: 18rem;
+  text-overflow: ellipsis;
+  .wrap {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .title {
+    height: 30%;
+    font-weight: 1000;
+    font-size: $title;
+    display: inline-block;
+
+    @include mixins.mobile {
+      width: 9rem;
+    }
+
+    @include mixins.tablet {
+      width: 12rem;
+    }
+
+    @include mixins.desktop {
+      width: 18rem;
+    }
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: variables.$tan-black;
+  }
+  ul {
+    padding-left: 0;
+  }
+  li {
+    list-style: none;
+  }
+  .title_tag {
+    display: inline-block;
+    width: 100%;
+    color: variables.$light-grey;
+    padding-bottom: 0.4rem;
+  }
+}
