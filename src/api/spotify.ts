@@ -25,7 +25,7 @@ const api = ky.extend({
         console.log(res?.status);
         if (res?.status === 401) {
           console.log('invalid token');
-          SPOTIFY_WEB_API.setAccessToken('');
+          SPOTIFY_WEB_API.setAccessToken(null);
           localStorage.removeItem(VINYLIFY_TOKEN);
           window.location.replace(API.LOGIN);
         } else if (res?.status === 429) {
