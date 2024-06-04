@@ -1,7 +1,5 @@
-import { useSearchKeyword } from '@/hooks/query/useSearchKeyword';
+import Tab from './Tab';
 
 export default function SearchResult() {
-  const { data } = useSearchKeyword();
-
-  return <>{JSON.stringify(data)}</>;
+  return <Tab />;
 }
