@@ -34,6 +34,7 @@ $lg: 3rem;
     justify-content: center;
   }
   &.md {
-    @include padding-size($md);
+    // @include padding-size($md);
+    margin: $md 0;
   }
 }
