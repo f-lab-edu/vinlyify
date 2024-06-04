@@ -144,7 +144,7 @@ export function searchKeyword(searchWord: string | null) {
     'playlist',
     'track',
   ]);
-  return response as unknown as SearchResult;
+  return response as unknown as Promise<SearchResult>;
 }
 
 /**
