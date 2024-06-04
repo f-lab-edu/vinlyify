@@ -26,7 +26,7 @@ export const BaseLayout = () => {
       </header>
       <Outlet />
 
-      <footer>footer</footer>
+      {/* <footer>footer</footer> */}
     </>
   );
 };
