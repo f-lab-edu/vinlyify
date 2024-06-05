@@ -1,3 +1,4 @@
+import { PLACEHOLDER_IMAGE } from '@/constants';
 import classNames from 'classnames';
 import { FC, ReactNode, SVGProps } from 'react';
 import './profile-image.scss';
@@ -11,7 +12,7 @@ const ProfileImage: FC<ImgUrlProps> = ({ imgUrl, round, link }) => {
   return (
     <>
       <img
-        src={imgUrl}
+        src={imgUrl === undefined ? PLACEHOLDER_IMAGE : imgUrl}
         alt={imgUrl}
         loading="lazy"
         className={classNames('profileImage', { round })}
