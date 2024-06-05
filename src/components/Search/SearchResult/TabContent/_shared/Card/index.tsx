@@ -24,11 +24,11 @@ const Card: FC<CardProps> = ({
 
       <ul>
         <li>
-          <text className="title">{title}</text>
+          <span className="title">{title}</span>
         </li>
 
         <li className="wrap">
-          {playButton} <text className="title_tag">{title_tag}</text>
+          {playButton} <span className="title_tag">{title_tag}</span>
         </li>
         {children}
       </ul>
