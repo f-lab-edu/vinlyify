@@ -3,7 +3,6 @@ import { FC, HtmlHTMLAttributes, ReactNode } from 'react';
 import './card.scss';
 
 export interface CardProps extends HtmlHTMLAttributes<HTMLDivElement> {
-  imgUrl?: string;
   center?: boolean;
   title?: string;
   title_tag?: string;
