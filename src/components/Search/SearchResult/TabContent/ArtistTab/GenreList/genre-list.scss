@@ -8,7 +8,6 @@
 }
 
 .wrap {
-  padding-bottom: 1rem;
   @include mixins.mobile {
     width: 14rem;
   }
