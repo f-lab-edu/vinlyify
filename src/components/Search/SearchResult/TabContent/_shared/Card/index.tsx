@@ -23,13 +23,16 @@ const Card: FC<CardProps> = ({
     <div className={classNames('card', { center })}>
       {left}
 
-      <div>
-        <text className="title">{title}</text>
-        <div className="wrap">
+      <ul>
+        <li>
+          <text className="title">{title}</text>
+        </li>
+
+        <li className="wrap">
           {playButton} <text className="title_tag">{title_tag}</text>
-        </div>
+        </li>
         {children}
-      </div>
+      </ul>
     </div>
   );
 };

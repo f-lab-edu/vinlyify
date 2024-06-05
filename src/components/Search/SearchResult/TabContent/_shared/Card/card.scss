@@ -2,6 +2,7 @@
 @use '@/utils/variables';
 @use '@/utils/mixins';
 $title: 1.2rem;
+$sm-title: 1rem;
 
 .card {
   height: fit-content;
@@ -11,23 +12,28 @@ $title: 1.2rem;
     display: inline-flex;
     align-items: center;
   }
+  li {
+    width: 100%;
+  }
 
   .title {
     height: 30%;
     font-weight: 1000;
     font-size: $title;
     display: inline-block;
+    width: 100%;
 
     @include mixins.mobile {
       width: 9rem;
+      font-size: $sm-title;
     }
 
     @include mixins.tablet {
-      width: 12rem;
+      width: 15rem;
     }
 
     @include mixins.desktop {
-      width: 18rem;
+      width: 21rem;
     }
 
     white-space: nowrap;
