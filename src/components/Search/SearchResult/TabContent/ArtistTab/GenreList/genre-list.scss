@@ -1,0 +1,23 @@
+@use '@/utils/mixins';
+
+.genre-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  width: max-content;
+}
+
+.wrap {
+  padding-bottom: 1rem;
+  @include mixins.mobile {
+    width: 14rem;
+  }
+
+  @include mixins.tablet {
+    width: 15rem;
+  }
+
+  @include mixins.desktop {
+    width: 21rem;
+  }
+}
