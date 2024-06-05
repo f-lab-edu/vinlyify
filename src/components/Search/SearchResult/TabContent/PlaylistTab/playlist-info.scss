@@ -1,0 +1,7 @@
+@use '@/utils/mixins';
+@use '@/utils/variables';
+.playlist-info {
+  font-size: 0.9em;
+  margin-top: 0.3rem;
+  color: variables.$raisin-black;
+}
