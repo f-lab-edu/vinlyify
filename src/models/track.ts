@@ -6,7 +6,7 @@ import { Artist } from '@/models/Profile';
 export interface Track extends MetaInfo {
   album: Album[];
   artists: Artist[];
-  available_markets: Pick<Album, 'available_markets'>;
+  available_markets?: Pick<Album, 'available_markets'>;
   disc_number: number;
   duration_ms: number;
   explicit: boolean;
