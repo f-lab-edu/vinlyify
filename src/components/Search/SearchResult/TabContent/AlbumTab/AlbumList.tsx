@@ -1,6 +1,6 @@
 import { Album } from '@/models/Album';
+import Grid from '../_shared/Grid';
 import AlbumItem from './AlbumItem';
-import AlbumListWrap from './AlbumListWrap';
 
 const AlbumList = ({
   tabItem,
@@ -10,11 +10,11 @@ const AlbumList = ({
   artistImgUrls: Map<string, string>;
 }) => {
   return (
-    <AlbumListWrap>
+    <Grid>
       {tabItem?.map(item => (
         <AlbumItem item={item} key={item.id} artistImgUrls={artistImgUrls} />
       ))}
-    </AlbumListWrap>
+    </Grid>
   );
 };
 
