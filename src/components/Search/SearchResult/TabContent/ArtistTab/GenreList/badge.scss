@@ -1,0 +1,44 @@
+@use '@/utils/variables';
+
+$badge-black: #000000;
+$badge-night: #0e0d0d;
+$badge-eerie-black: #1c1919;
+$badge-raisin-black: #2a2626;
+$badge-jet: #383232;
+
+$badge-silver: #c0c0c0;
+$badge-silver-sand: #8b8c8c;
+$badge-silver-grey: #c6c9cc;
+$badge-neon-silver: #c9ced2;
+$badge-shiny-nickel: #ccd2d7;
+
+.badge {
+  font-size: 0.8em;
+  padding: 0.4rem;
+  border-radius: 0.8rem;
+  text-align: center;
+  text-wrap: nowrap;
+  width: max-content !important;
+  box-shadow: variables.$button-shadow;
+
+  &.badge-1 {
+    background-color: $badge-silver-sand;
+    color: $badge-night;
+  }
+  &.badge-2 {
+    background-color: $badge-eerie-black;
+    color: $badge-silver-grey;
+  }
+  &.badge-3 {
+    background-color: $badge-raisin-black;
+    color: $badge-neon-silver;
+  }
+  &.badge-4 {
+    background-color: $badge-black;
+    color: $badge-shiny-nickel;
+  }
+  &.badge-0 {
+    background-color: $badge-jet;
+    color: $badge-silver;
+  }
+}
