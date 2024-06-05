@@ -1,9 +1,8 @@
 // import Paging from '../_shared/Paging';
 import { getArtists } from '@/api/spotify';
 import { PLACEHOLDER_IMAGE } from '@/constants';
-import { useEffect, useState } from 'react';
-// import { CurrentTabItemType } from '..';
 import { Album } from '@/models/Album';
+import { useEffect, useState } from 'react';
 import AlbumList from './AlbumList';
 
 const AlbumTab = ({
@@ -19,7 +18,7 @@ const AlbumTab = ({
     if (tabItem.length > 0) {
       getArtists([
         ...new Set(
-          tabItem?.map(item => item.artists.map(artist => artist.id)).flat(1),
+          tabItem?.map(item => item?.artists?.map(artist => artist.id)).flat(1),
         ),
       ]).then(v => {
         const res = v.reduce((acc, curr) => {

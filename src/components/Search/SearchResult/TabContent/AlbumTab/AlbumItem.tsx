@@ -25,7 +25,7 @@ const AlbumItem = ({
   }, [item]);
 
   const artistInfo = useMemo(() => {
-    return item.artists.map(v => {
+    return item?.artists?.map(v => {
       const spotifyLink = (v.external_urls?.spotify
         ? v.external_urls?.spotify
         : '/') as unknown as ExternalUrls;

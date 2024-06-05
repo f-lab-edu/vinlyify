@@ -45,7 +45,7 @@ SPOTIFY_WEB_API.setAccessToken(localStorage.getItem(VINYLIFY_TOKEN));
 export function getActiveDevice() {
   return SPOTIFY_WEB_API.getMyDevices().then(
     res =>
-      res.devices.filter(device => {
+      res.devices?.filter(device => {
         return device.is_active;
       })[0]?.id,
   );

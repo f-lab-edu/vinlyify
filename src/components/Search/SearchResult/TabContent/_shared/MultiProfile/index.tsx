@@ -9,7 +9,7 @@ export interface ProfileInfo {
 }
 
 const MultiProfile = ({ artist }: { artist: ProfileInfo[] }) => {
-  const artistProfiles = useMemo(() => artist.filter(v => v.img), [artist]);
+  const artistProfiles = useMemo(() => artist?.filter(v => v.img), [artist]);
 
   return (
     <div className="profile-container">
