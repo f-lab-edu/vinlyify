@@ -11,6 +11,8 @@
   width: 100%;
   padding: 0.6rem 0 0 0 !important;
 
+  box-shadow: inset rgba(0, 0, 0, 0.4) 0px -2px 4px 0px;
+
   .unstyled-button {
     border: none;
     width: 100%;
@@ -45,6 +47,7 @@
   & > li.focused {
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.4) -1px -3px 4px 0px;
   }
   .submenu:first-child {
     margin-left: 1rem;
