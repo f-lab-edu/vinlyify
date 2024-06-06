@@ -6,7 +6,7 @@ import { SCOPE, TAB } from '../../constants';
 import AlbumTab from './AlbumTab';
 import ArtistTab from './ArtistTab';
 import PlaylistsTab from './PlaylistTab';
-import TracksTab from './TrackTab';
+import TrackTab from './TrackTab';
 
 const tab = [
   {
@@ -22,7 +22,7 @@ const tab = [
   {
     tab: TAB.TRACKS,
     label: '트랙',
-    component: TracksTab,
+    component: TrackTab,
   },
   {
     tab: TAB.PLAYLISTS,
