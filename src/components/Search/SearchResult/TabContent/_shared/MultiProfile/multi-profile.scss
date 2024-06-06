@@ -1,5 +1,6 @@
 .profile-container {
   padding-bottom: 1rem;
+  margin-top: 0.3rem;
   img:hover {
     cursor: pointer;
   }
@@ -13,13 +14,6 @@
 
   .product-page .authors-container[data-collaborators='4'] {
     width: 230px;
-  }
-  .authors-container .author {
-    float: left;
-    position: relative;
-    transition: opacity 0.25s;
-    -webkit-transition: opacity 0.25s;
-    z-index: 3;
   }
 
   .authors-container .author:nth-child(1) {
@@ -115,21 +109,5 @@
     overflow: hidden;
     display: block;
     border-radius: 50%;
-  }
-
-  .account-photo .account-type {
-    position: absolute;
-    bottom: -7px;
-    color: #ffffff;
-    right: -10px;
-    width: 3rem;
-    background-color: #999999;
-    height: 3rem;
-    text-align: center;
-    line-height: 26px;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-    font-size: 13px;
-    z-index: 3;
   }
 }
