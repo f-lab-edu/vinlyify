@@ -13,7 +13,9 @@ const Profile = ({ profile }: { profile: ProfileInfo[] }) => {
         >
           <div className="mask">
             <Suspense
-              fallback={<img src={PLACEHOLDER_IMAGE} className="photo" />}
+              fallback={
+                <img alt={v.img} src={PLACEHOLDER_IMAGE} className="photo" />
+              }
             >
               <img src={v.img} className="photo" loading="lazy" alt={v.img} />
             </Suspense>

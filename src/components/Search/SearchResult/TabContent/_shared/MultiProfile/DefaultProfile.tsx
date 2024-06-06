@@ -6,7 +6,7 @@ const DefaultProfile = () => {
     <div className="author">
       <Link className="card-user account-photo" to={'#'}>
         <div className="mask">
-          <img src={PLACEHOLDER_IMAGE} className="photo" />
+          <img alt="not available" src={PLACEHOLDER_IMAGE} className="photo" />
         </div>
       </Link>
     </div>
