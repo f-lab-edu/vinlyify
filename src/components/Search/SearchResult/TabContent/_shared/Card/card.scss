@@ -3,6 +3,7 @@
 @use '@/utils/mixins';
 $title: 1.2rem;
 $sm-title: 1rem;
+$sm-font: 0.9rem;
 
 .card {
   height: fit-content;
@@ -16,6 +17,8 @@ $sm-title: 1rem;
   li {
     width: 100%;
     list-style: none;
+
+    font-size: $sm-font;
   }
 
   .title {
