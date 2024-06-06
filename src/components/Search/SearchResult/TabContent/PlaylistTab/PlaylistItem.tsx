@@ -5,9 +5,9 @@ import Card from '../_shared/Card';
 import Logo from '../_shared/Logo';
 import PlayButton from '../_shared/PlayButton';
 import ProfileImage from '../_shared/ProfileImage';
-import './playlist-info.scss';
+import './playlist-item.scss';
 
-const PlaylistInfo = ({ item }: { item: Playlist }) => {
+const PlaylistItem = ({ item }: { item: Playlist }) => {
   const onPlayCurrentAlbum = () => playTrack({ context_uris: item?.uri });
 
   function createMarkup(text: string) {
@@ -42,4 +42,4 @@ const PlaylistInfo = ({ item }: { item: Playlist }) => {
   );
 };
 
-export default PlaylistInfo;
+export default PlaylistItem;

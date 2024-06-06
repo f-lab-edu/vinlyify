@@ -6,7 +6,7 @@ import Logo from '../_shared/Logo';
 import ProfileImage from '../_shared/ProfileImage';
 import GenreList from './GenreList';
 
-const ArtistInfo = ({ item }: { item: Artist }) => {
+const ArtistItem = ({ item }: { item: Artist }) => {
   const compactFollowerCount = useMemo(() => {
     if (item?.followers?.total) {
       return new Intl.NumberFormat('ko-KR', {
@@ -49,4 +49,4 @@ const ArtistInfo = ({ item }: { item: Artist }) => {
   );
 };
 
-export default ArtistInfo;
+export default ArtistItem;
