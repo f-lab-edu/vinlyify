@@ -4,15 +4,13 @@ import './genre-list.scss';
 
 const GenreList = ({ genres }: { genres: Artist['genres'] }) => {
   return (
-    <div className="wrap">
-      <ul className="genre-list">
-        {genres?.map((genre, i) => (
-          <Badge key={genre} badgeNumber={i + 1}>
-            {genre}
-          </Badge>
-        ))}
-      </ul>
-    </div>
+    <ul className="genre-list">
+      {genres?.map((genre, i) => (
+        <Badge key={genre} badgeNumber={i + 1}>
+          {genre}
+        </Badge>
+      ))}
+    </ul>
   );
 };
 export default GenreList;
