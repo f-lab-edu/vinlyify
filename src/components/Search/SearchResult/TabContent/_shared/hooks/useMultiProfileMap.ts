@@ -12,7 +12,7 @@ export const useMultiProfileMap = ({
   const [artistImgs, setArtistImgs] = useState<Map<string, string>>(new Map());
 
   useEffect(() => {
-    if (tabItem?.length > 0) {
+    if (tabItem !== undefined && tabItem?.length > 0) {
       getArtists([
         ...new Set(
           tabItem?.map(item => item?.artists?.map(artist => artist.id)).flat(1),
