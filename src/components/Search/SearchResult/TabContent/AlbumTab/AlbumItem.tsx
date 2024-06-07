@@ -1,7 +1,6 @@
 import { playTrack } from '@/api/spotify';
 import { PLACEHOLDER_IMAGE } from '@/constants';
 import { Album } from '@/models/Album';
-import { useMemo } from 'react';
 import Card from '../_shared/Card';
 import { useMultiProfileImg } from '../_shared/hooks/useMultiProfileImg';
 import Logo from '../_shared/Logo';
@@ -18,12 +17,6 @@ const AlbumItem = ({
   artistImgUrls: Map<string, string>;
 }) => {
   const onPlayCurrentAlbum = () => playTrack({ context_uris: item?.uri });
-  const validImageUrl = useMemo(() => {
-    if (item?.images === undefined) {
-      return PLACEHOLDER_IMAGE;
-    }
-    return item?.images[0]?.url;
-  }, [item]);
 
   const artistInfo = useMultiProfileImg({ item, artistImgUrls });
 
@@ -34,7 +27,11 @@ const AlbumItem = ({
       left={
         item?.images ? (
           <ProfileImage
-            imgUrl={validImageUrl}
+            imgUrl={
+              item?.images === undefined
+                ? PLACEHOLDER_IMAGE
+                : item?.images[0]?.url
+            }
             link={<Logo url={item?.external_urls?.spotify ?? ''} />}
           />
         ) : (
