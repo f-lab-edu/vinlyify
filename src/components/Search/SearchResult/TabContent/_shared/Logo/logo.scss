@@ -1,0 +1,10 @@
+@use '@/utils/variables';
+@use '@/utils/mixins';
+
+// .logo {
+// color: pink !important; //
+// }
+
+.logo-skeleton {
+  color: variables.$light-grey-white !important;
+}
