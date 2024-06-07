@@ -3,11 +3,12 @@ import { PLACEHOLDER_IMAGE } from '@/constants';
 import { Album } from '@/models/Album';
 import { useMemo } from 'react';
 import Card from '../_shared/Card';
+import { useMultiProfileImg } from '../_shared/hooks/useMultiProfileImg';
 import Logo from '../_shared/Logo';
 import MultiProfile from '../_shared/MultiProfile';
 import PlayButton from '../_shared/PlayButton';
 import ProfileImage from '../_shared/ProfileImage';
-import { useMultiProfileImg } from '../_shared/hooks/useMultiProfileImg';
+import ProfileSkeleton from '../_shared/Skeletons/ProfileSkeleton';
 
 const AlbumItem = ({
   item,
@@ -31,10 +32,14 @@ const AlbumItem = ({
       title={item?.name}
       title_tag={[item?.album_type, item?.release_date].join(' ')}
       left={
-        <ProfileImage
-          imgUrl={validImageUrl}
-          link={<Logo url={item?.external_urls?.spotify || ''} />}
-        />
+        item?.images ? (
+          <ProfileImage
+            imgUrl={validImageUrl}
+            link={<Logo url={item?.external_urls?.spotify ?? ''} />}
+          />
+        ) : (
+          <ProfileSkeleton />
+        )
       }
       playButton={
         item.is_playable ? (

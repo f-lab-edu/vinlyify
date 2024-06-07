@@ -7,6 +7,7 @@ import AlbumTab from './AlbumTab';
 import ArtistTab from './ArtistTab';
 import PlaylistsTab from './PlaylistTab';
 import TrackTab from './TrackTab';
+import GridSkeleton from './_shared/Skeletons/GridSkeleton';
 
 const tab = [
   {
@@ -62,12 +63,12 @@ export default function TabContent() {
   }, [searchParam, data, isFetched]);
 
   if (currentTabItem === null || currentTabPagingInfo === null)
-    return <>loading..</>;
+    return <GridSkeleton />;
 
   return (
     <currentTab.component
       tabItem={currentTabItem}
-      // pagingInfo={currentTabPagingInfo}
+      //     // pagingInfo={currentTabPagingInfo}
     />
   );
 }

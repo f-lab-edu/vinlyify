@@ -2,12 +2,13 @@ import classNames from 'classnames';
 import { FC, HtmlHTMLAttributes, ReactNode } from 'react';
 import './card.scss';
 
-export interface CardProps extends HtmlHTMLAttributes<HTMLDivElement> {
+export interface CardProps extends HtmlHTMLAttributes<HTMLLIElement> {
   center?: boolean;
   title?: string;
   title_tag?: string;
   left: ReactNode;
   playButton?: ReactNode;
+  isSkeleton?: boolean;
 }
 
 const Card: FC<CardProps> = ({
@@ -17,22 +18,34 @@ const Card: FC<CardProps> = ({
   children,
   title,
   left,
+  isSkeleton,
 }) => {
   return (
-    <div className={classNames('card', { center })}>
+    <li className={classNames('card', { center })}>
       {left}
 
       <ul>
         <li>
-          <span className="title">{title}</span>
+          <span className={`title ${isSkeleton ? 'skeleton' : ''}`}>
+            {title}
+          </span>
         </li>
 
         <li className="wrap">
-          {playButton} <span className="title_tag">{title_tag}</span>
+          {playButton}{' '}
+          <span className={`title-tag ${isSkeleton ? 'skeleton' : ''}`}>
+            {title_tag}
+          </span>
         </li>
-        {children}
+        {isSkeleton ? (
+          <li>
+            <span className="content skeleton"></span>
+          </li>
+        ) : (
+          children
+        )}
       </ul>
-    </div>
+    </li>
   );
 };
 

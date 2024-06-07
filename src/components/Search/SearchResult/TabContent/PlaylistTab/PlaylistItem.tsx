@@ -5,6 +5,7 @@ import Card from '../_shared/Card';
 import Logo from '../_shared/Logo';
 import PlayButton from '../_shared/PlayButton';
 import ProfileImage from '../_shared/ProfileImage';
+import ProfileSkeleton from '../_shared/Skeletons/ProfileSkeleton';
 import './playlist-item.scss';
 
 const PlaylistItem = ({ item }: { item: Playlist }) => {
@@ -19,14 +20,18 @@ const PlaylistItem = ({ item }: { item: Playlist }) => {
       title={item?.name}
       title_tag={`by. ${item?.owner?.display_name}`}
       left={
-        <ProfileImage
-          imgUrl={
-            item?.images === undefined
-              ? PLACEHOLDER_IMAGE
-              : item?.images[0]?.url
-          }
-          link={<Logo url={item?.external_urls?.spotify ?? ''} />}
-        />
+        item?.images ? (
+          <ProfileImage
+            imgUrl={
+              item?.images === undefined
+                ? PLACEHOLDER_IMAGE
+                : item?.images[0]?.url
+            }
+            link={<Logo url={item?.external_urls?.spotify ?? ''} />}
+          />
+        ) : (
+          <ProfileSkeleton />
+        )
       }
       playButton={<PlayButton onPlayCurrent={onPlayCurrentAlbum} />}
     >

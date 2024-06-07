@@ -1,11 +1,14 @@
 @use '../ProfileImage/profile-image';
 @use '@/utils/variables';
 @use '@/utils/mixins';
+@use '../Skeletons/skeleton.scss';
+
 $title: 1.2rem;
 $sm-title: 1rem;
 $sm-font: 0.9rem;
 
 .card {
+  list-style: none;
   height: fit-content;
   min-height: 18rem;
   text-overflow: ellipsis;
@@ -17,7 +20,6 @@ $sm-font: 0.9rem;
   li {
     width: 100%;
     list-style: none;
-
     font-size: $sm-font;
   }
 
@@ -51,7 +53,7 @@ $sm-font: 0.9rem;
     padding-left: 0;
   }
 
-  .title_tag {
+  .title-tag {
     display: inline-block;
     width: 100%;
     color: variables.$light-grey;
@@ -61,4 +63,17 @@ $sm-font: 0.9rem;
     text-decoration: none;
     color: variables.$light-grey;
   }
+}
+.title.skeleton {
+  width: 80%;
+  height: 1rem;
+  margin-bottom: 0.4rem;
+}
+.title-tag.skeleton {
+  height: 1rem;
+}
+
+.content.skeleton {
+  height: 3rem;
+  width: 100%;
 }

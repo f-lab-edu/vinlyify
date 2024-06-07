@@ -3,10 +3,11 @@ import { FC, HtmlHTMLAttributes, ReactNode } from 'react';
 import './grid.scss';
 export interface GridProps extends HtmlHTMLAttributes<HTMLUListElement> {
   children: ReactNode;
+  isSkeleton?: boolean;
 }
 
-const Grid: FC<GridProps> = ({ children }) => {
-  return <ul className={classNames('grid')}>{children}</ul>;
+const Grid: FC<GridProps> = ({ children, isSkeleton }) => {
+  return <ul className={classNames('grid', { isSkeleton })}>{children}</ul>;
 };
 
 export default Grid;

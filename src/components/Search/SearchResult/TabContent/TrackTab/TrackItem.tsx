@@ -3,11 +3,12 @@ import { PLACEHOLDER_IMAGE } from '@/constants';
 import { Track } from '@/models/Track';
 import { useMemo } from 'react';
 import Card from '../_shared/Card';
+import { useMultiProfileImg } from '../_shared/hooks/useMultiProfileImg';
 import Logo from '../_shared/Logo';
 import MultiProfile from '../_shared/MultiProfile';
 import PlayButton from '../_shared/PlayButton';
 import ProfileImage from '../_shared/ProfileImage';
-import { useMultiProfileImg } from '../_shared/hooks/useMultiProfileImg';
+import ProfileSkeleton from '../_shared/Skeletons/ProfileSkeleton';
 
 const TrackItem = ({
   item,
@@ -35,14 +36,18 @@ const TrackItem = ({
       title={item?.name}
       title_tag={`${item?.album?.name} #${item?.track_number}`}
       left={
-        <ProfileImage
-          imgUrl={
-            item?.album?.images === undefined
-              ? PLACEHOLDER_IMAGE
-              : item?.album?.images[0]?.url
-          }
-          link={<Logo url={item?.external_urls?.spotify ?? ''} />}
-        />
+        item?.album?.images ? (
+          <ProfileImage
+            imgUrl={
+              item?.album?.images === undefined
+                ? PLACEHOLDER_IMAGE
+                : item?.album?.images[0]?.url
+            }
+            link={<Logo url={item?.external_urls?.spotify ?? ''} />}
+          />
+        ) : (
+          <ProfileSkeleton />
+        )
       }
       playButton={<PlayButton onPlayCurrent={onPlayCurrentAlbum} />}
     >

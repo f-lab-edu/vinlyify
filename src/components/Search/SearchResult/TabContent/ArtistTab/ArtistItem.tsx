@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import Card from '../_shared/Card';
 import Logo from '../_shared/Logo';
 import ProfileImage from '../_shared/ProfileImage';
+import ProfileSkeleton from '../_shared/Skeletons/ProfileSkeleton';
 import GenreList from './GenreList';
 
 const ArtistItem = ({ item }: { item: Artist }) => {
@@ -22,14 +23,18 @@ const ArtistItem = ({ item }: { item: Artist }) => {
       title={item?.name}
       title_tag={`followers : ${compactFollowerCount}`}
       left={
-        <ProfileImage
-          imgUrl={
-            item?.images === undefined
-              ? PLACEHOLDER_IMAGE
-              : item?.images[0]?.url
-          }
-          link={<Logo url={item?.external_urls?.spotify ?? ''} />}
-        />
+        item?.images ? (
+          <ProfileImage
+            imgUrl={
+              item?.images === undefined
+                ? PLACEHOLDER_IMAGE
+                : item?.images[0]?.url
+            }
+            link={<Logo url={item?.external_urls?.spotify ?? ''} />}
+          />
+        ) : (
+          <ProfileSkeleton />
+        )
       }
     >
       {/* <Link to={item?.href ?? ''}>link to artist api</Link> */}
