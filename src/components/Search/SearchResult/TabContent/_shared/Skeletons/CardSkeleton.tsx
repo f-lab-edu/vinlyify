@@ -2,17 +2,18 @@ import Card from '../Card';
 import Logo from '../Logo';
 import ProfileSkeleton from './ProfileSkeleton';
 
-const CardSkeleton = Array.from({ length: 20 }, (_, i) => (
-  <Card
-    left={
-      <>
-        <ProfileSkeleton />
-        <Logo url={''} fill="skeleton" />
-      </>
-    }
-    isSkeleton={true}
-    key={i}
-  ></Card>
-));
+const CardSkeleton = () => {
+  return (
+    <Card
+      left={
+        <>
+          <ProfileSkeleton />
+          <Logo url={''} fill="skeleton" />
+        </>
+      }
+      isSkeleton={true}
+    ></Card>
+  );
+};
 
 export default CardSkeleton;
