@@ -5,45 +5,23 @@ import './card.scss';
 export interface CardProps extends HtmlHTMLAttributes<HTMLLIElement> {
   center?: boolean;
   title?: string;
-  titleTag?: string;
-  topContent: ReactNode;
   playButton?: ReactNode;
-  isSkeleton?: boolean;
+  titleTag?: string;
 }
 
-const Card = ({
-  playButton,
-  titleTag,
-  center,
-  children,
-  title,
-  topContent,
-  isSkeleton,
-}: CardProps) => {
+const Card = ({ playButton, children, title, titleTag }: CardProps) => {
   return (
-    <li className={classNames('card', { center })}>
-      {topContent}
-
+    <li className={classNames('card')}>
       <ul>
         <li>
-          <span className={`title ${isSkeleton ? 'skeleton' : ''}`}>
-            {title}
-          </span>
+          <span className={classNames('title')}>{title}</span>
         </li>
 
         <li className="wrap">
-          {playButton}{' '}
-          <span className={`title-tag ${isSkeleton ? 'skeleton' : ''}`}>
-            {titleTag}
-          </span>
+          {playButton}
+          <span className={classNames('title-tag')}>{titleTag}</span>
         </li>
-        {isSkeleton ? (
-          <li>
-            <span className="content skeleton"></span>
-          </li>
-        ) : (
-          children
-        )}
+        {children}
       </ul>
     </li>
   );

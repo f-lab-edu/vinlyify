@@ -1,7 +1,6 @@
 @use '../CoverImage/cover-image';
 @use '@/utils/variables';
 @use '@/utils/mixins';
-@use '../skeleton.scss';
 
 $title: 1.2rem;
 $sm-title: 1rem;
@@ -63,17 +62,4 @@ $sm-font: 0.9rem;
     text-decoration: none;
     color: variables.$light-grey;
   }
-}
-.title.skeleton {
-  width: 80%;
-  height: 1rem;
-  margin-bottom: 0.4rem;
-}
-.title-tag.skeleton {
-  height: 1rem;
-}
-
-.content.skeleton {
-  height: 3rem;
-  width: 100%;
 }
