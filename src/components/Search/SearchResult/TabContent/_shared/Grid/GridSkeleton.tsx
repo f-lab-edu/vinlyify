@@ -3,7 +3,7 @@ import Grid from '../Grid';
 
 const GridSkeleton = () => {
   return (
-    <Grid isSkeleton={true}>
+    <Grid>
       {Array.from({ length: 20 }, (_, i) => (
         <CardSkeleton key={i} />
       ))}

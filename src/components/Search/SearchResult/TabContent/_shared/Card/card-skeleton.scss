@@ -1,0 +1,21 @@
+@use './card.scss';
+
+.card-skeleton.card {
+  ul {
+    margin-top: 0.9rem;
+  }
+  .title {
+    width: 80%;
+    height: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .title-tag {
+    height: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .content {
+    height: 3rem;
+    width: 100%;
+  }
+}

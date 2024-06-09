@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC, HtmlHTMLAttributes, ReactNode } from 'react';
+import { HtmlHTMLAttributes, ReactNode } from 'react';
 import './card.scss';
 
 export interface CardProps extends HtmlHTMLAttributes<HTMLLIElement> {
@@ -11,39 +11,27 @@ export interface CardProps extends HtmlHTMLAttributes<HTMLLIElement> {
   isSkeleton?: boolean;
 }
 
-const Card: FC<CardProps> = ({
+const Card = ({
   playButton,
   title_tag,
   center,
   children,
   title,
   left,
-  isSkeleton,
-}) => {
+}: CardProps) => {
   return (
     <li className={classNames('card', { center })}>
       {left}
-
       <ul>
         <li>
-          <span className={`title ${isSkeleton ? 'skeleton' : ''}`}>
-            {title}
-          </span>
+          <span className={classNames('title')}>{title}</span>
         </li>
 
         <li className="wrap">
-          {playButton}{' '}
-          <span className={`title-tag ${isSkeleton ? 'skeleton' : ''}`}>
-            {title_tag}
-          </span>
+          {playButton}
+          <span className={classNames('title-tag')}>{title_tag}</span>
         </li>
-        {isSkeleton ? (
-          <li>
-            <span className="content skeleton"></span>
-          </li>
-        ) : (
-          children
-        )}
+        {children}
       </ul>
     </li>
   );
