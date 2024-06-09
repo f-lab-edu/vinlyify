@@ -13,9 +13,7 @@ const Logo = ({ url, fill }: logoProps) => {
   return (
     <Link
       to={url}
-      className={classNames(`logo${fill === 'skeleton' ? '-skeleton' : ''}`, {
-        fill,
-      })}
+      className={classNames({ 'logo-skeleton': fill === 'skeleton' })}
     >
       <Spotify />
     </Link>
