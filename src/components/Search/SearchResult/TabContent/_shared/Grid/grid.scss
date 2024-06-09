@@ -21,13 +21,4 @@
   @include mixins.desktop {
     grid-template-columns: repeat(4, 1fr);
   }
-
-  .btn-wrap {
-    display: inline-flex;
-    align-items: center;
-  }
-  .icon-wrap {
-    display: inline-flex;
-    align-items: center;
-  }
 }
