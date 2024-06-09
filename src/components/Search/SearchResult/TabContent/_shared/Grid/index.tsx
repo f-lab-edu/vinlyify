@@ -1,11 +1,8 @@
 import classNames from 'classnames';
-import { FC, HtmlHTMLAttributes, ReactNode } from 'react';
+import { FC, HtmlHTMLAttributes, PropsWithChildren } from 'react';
 import './grid.scss';
-export interface GridProps extends HtmlHTMLAttributes<HTMLUListElement> {
-  children: ReactNode;
-}
 
-const Grid: FC<GridProps> = ({ children }) => {
+const Grid: FC<HtmlHTMLAttributes<PropsWithChildren>> = ({ children }) => {
   return <ul className={classNames('grid')}>{children}</ul>;
 };
 
