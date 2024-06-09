@@ -8,18 +8,18 @@ export interface ImgUrlProps extends SVGProps<SVGImageElement> {
   link: ReactNode;
 }
 
-const ProfileImage: FC<ImgUrlProps> = ({ imgUrl, round, link }) => {
+const CoverImage: FC<ImgUrlProps> = ({ imgUrl, round, link }) => {
   return (
     <>
       <img
         src={imgUrl === undefined ? PLACEHOLDER_IMAGE : imgUrl}
         alt={imgUrl}
         loading="lazy"
-        className={classNames('profile-image', { round })}
+        className={classNames('cover-image', { round })}
       />
       {link}
     </>
   );
 };
 
-export default ProfileImage;
+export default CoverImage;
