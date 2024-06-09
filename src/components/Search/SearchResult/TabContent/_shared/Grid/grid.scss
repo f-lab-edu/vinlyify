@@ -1,0 +1,33 @@
+@use '@/utils/variables';
+@use '@/utils/mixins';
+
+.grid {
+  display: inline-grid;
+  grid-template-columns: subgrid;
+  padding: 0 1rem;
+  margin: 0 auto;
+  column-gap: 1rem;
+
+  width: -webkit-fill-available;
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include mixins.desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .btn-wrap {
+    display: inline-flex;
+    align-items: center;
+  }
+  .icon-wrap {
+    display: inline-flex;
+    align-items: center;
+  }
+}
