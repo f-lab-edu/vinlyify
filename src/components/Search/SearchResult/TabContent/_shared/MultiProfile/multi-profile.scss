@@ -6,17 +6,6 @@
   img:hover {
     cursor: pointer;
   }
-  .product-page .authors-container[data-collaborators='2'] {
-    width: 130px;
-  }
-
-  .product-page .authors-container[data-collaborators='3'] {
-    width: 175px;
-  }
-
-  .product-page .authors-container[data-collaborators='4'] {
-    width: 230px;
-  }
 
   .authors-container .author:nth-child(1) {
     z-index: 100;
@@ -73,15 +62,6 @@
     clear: both;
     content: ' ';
     display: table;
-  }
-  .product-page .authors-container {
-    margin: 0 auto;
-  }
-
-  .product-page .authors-container > .author > .account-photo {
-    width: 70px;
-    height: 70px;
-    border-width: 3px;
   }
 
   .account-photo .account-type {
