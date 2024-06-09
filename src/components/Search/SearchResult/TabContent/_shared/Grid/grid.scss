@@ -9,6 +9,8 @@
   column-gap: 1rem;
 
   width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
 
   @include mixins.mobile {
     grid-template-columns: repeat(2, 1fr);
