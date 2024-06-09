@@ -1,0 +1,6 @@
+@use '@/utils/variables';
+@use '@/utils/mixins';
+
+.logo-skeleton {
+  color: variables.$light-grey-white !important;
+}
