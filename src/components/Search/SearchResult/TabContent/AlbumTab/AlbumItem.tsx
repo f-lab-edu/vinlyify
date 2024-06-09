@@ -1,10 +1,12 @@
 import { playTrack } from '@/api/spotify';
 import { PLACEHOLDER_IMAGE } from '@/constants';
 import { Album } from '@/models/Album';
+import { useEffect, useState } from 'react';
 import Card from '../_shared/Card';
 import { useMultiProfileImg } from '../_shared/hooks/useMultiProfileImg';
 import Logo from '../_shared/Logo';
 import MultiProfile from '../_shared/MultiProfile';
+import LoadingProfile from '../_shared/MultiProfile/LoadingImage';
 import PlayButton from '../_shared/PlayButton';
 import ProfileImage from '../_shared/ProfileImage';
 import ProfileSkeleton from '../_shared/Skeletons/ProfileSkeleton';
@@ -17,8 +19,18 @@ const AlbumItem = ({
   artistImgUrls: Map<string, string>;
 }) => {
   const onPlayCurrentAlbum = () => playTrack({ context_uris: item?.uri });
-
   const artistInfo = useMultiProfileImg({ item, artistImgUrls });
+  const [validArtistInfo, setValidArtistInfo] = useState(() =>
+    artistInfo?.every(item => item.img !== undefined),
+  );
+
+  useEffect(() => {
+    if (artistInfo?.every(item => item.img !== undefined)) {
+      setValidArtistInfo(true);
+    } else {
+      setValidArtistInfo(false);
+    }
+  }, [artistInfo]);
 
   return (
     <Card
@@ -46,7 +58,11 @@ const AlbumItem = ({
         )
       }
     >
-      <MultiProfile artist={artistInfo} />
+      {validArtistInfo ? (
+        <MultiProfile artist={artistInfo} />
+      ) : (
+        <LoadingProfile />
+      )}
     </Card>
   );
 };

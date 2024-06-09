@@ -27,4 +27,6 @@ export const SPOTIFY_WEB_API = new SpotifyWebApi();
 
 export const PLACEHOLDER_IMAGE = 'https://placehold.co/600x600?text=NO IMAGE';
 
+export const LOADING_IMAGE = 'https://placehold.co/600x600?text=LOADING';
+
 export const ACCESS_TOKEN = 'access_token';

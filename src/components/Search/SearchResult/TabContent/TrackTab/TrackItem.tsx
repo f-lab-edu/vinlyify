@@ -1,10 +1,12 @@
 import { playTrack } from '@/api/spotify';
 import { PLACEHOLDER_IMAGE } from '@/constants';
 import { Track } from '@/models/Track';
+import { useEffect, useState } from 'react';
 import Card from '../_shared/Card';
 import { useMultiProfileImg } from '../_shared/hooks/useMultiProfileImg';
 import Logo from '../_shared/Logo';
 import MultiProfile from '../_shared/MultiProfile';
+import LoadingProfile from '../_shared/MultiProfile/LoadingImage';
 import PlayButton from '../_shared/PlayButton';
 import ProfileImage from '../_shared/ProfileImage';
 import ProfileSkeleton from '../_shared/Skeletons/ProfileSkeleton';
@@ -20,6 +22,17 @@ const TrackItem = ({
     playTrack({ context_uris: item?.album?.uri, offset: { uri: item?.uri } });
 
   const artistInfo = useMultiProfileImg({ item, artistImgUrls });
+  const [validTrackArtistInfo, setValidTrackArtistInfo] = useState(() =>
+    artistInfo?.every(item => item.img !== undefined),
+  );
+
+  useEffect(() => {
+    if (artistInfo?.every(item => item.img !== undefined)) {
+      setValidTrackArtistInfo(true);
+    } else {
+      setValidTrackArtistInfo(false);
+    }
+  }, [artistInfo]);
 
   /**
    * 밀리초로 되어 있는 트랙 재생 시간을 HH:MM:SS 형식으로 변환
@@ -54,7 +67,11 @@ const TrackItem = ({
       playButton={<PlayButton onPlayCurrent={onPlayCurrentAlbum} />}
     >
       <li>재생 시간: {trackDurationToHHMMSS}</li>
-      <MultiProfile artist={artistInfo} />
+      {validTrackArtistInfo ? (
+        <MultiProfile artist={artistInfo} />
+      ) : (
+        <LoadingProfile />
+      )}
     </Card>
   );
 };

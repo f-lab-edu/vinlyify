@@ -1,3 +1,5 @@
+@use '../Skeletons/skeleton.scss';
+
 .profile-container {
   padding-bottom: 1rem;
   margin-top: 0.3rem;
@@ -23,16 +25,25 @@
   .authors-container .author:nth-child(2) {
     z-index: 99;
     margin-left: -20px;
+    animation: slide 1s 1;
   }
 
   .authors-container .author:nth-child(3) {
     z-index: 98;
     margin-left: -20px;
+    animation: slide 1s 1;
   }
 
   .authors-container .author:nth-child(4) {
     z-index: 97;
     margin-left: -20px;
+    animation: slide 1s 1;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateX(-50%);
+    }
   }
 
   .authors-container .author {
