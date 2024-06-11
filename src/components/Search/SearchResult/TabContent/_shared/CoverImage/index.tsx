@@ -1,7 +1,7 @@
 import { PLACEHOLDER_IMAGE } from '@/constants';
 import classNames from 'classnames';
 import { ReactNode, SVGProps } from 'react';
-import './profile-image.scss';
+import './cover-image.scss';
 export interface ImgUrlProps extends SVGProps<SVGImageElement> {
   imgUrl?: string;
   link: ReactNode;
