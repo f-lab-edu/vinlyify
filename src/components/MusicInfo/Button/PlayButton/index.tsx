@@ -1,5 +1,6 @@
 import { playTrack } from '@/api/spotify';
 import PlayIcon from '@/assets/playIcon.svg';
+import { useDebounce } from '@/hooks/useDebounce';
 import { MetaInfo } from '@/models/MetaInfo';
 import { CurrentlyPlayingTrack } from '@/models/track';
 import classNames from 'classnames';
@@ -14,17 +15,18 @@ export interface PlayButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
 }
 
 const PlayButton = ({ context, uri, position_ms }: PlayButtonProps) => {
-  const onPlayHandler = () =>
+  const onPlayDebounceHandler = useDebounce(() => {
     playTrack({
       offset: { uri },
       position_ms,
       context_uris: context,
     });
+  });
 
   return (
     <button
       className={classNames('play-button', 'button')}
-      onClick={onPlayHandler}
+      onClick={onPlayDebounceHandler}
     >
       <PlayIcon />
     </button>
