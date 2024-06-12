@@ -1,6 +1,6 @@
 import { PLACEHOLDER_IMAGE } from '@/constants';
 import { Album } from '@/models/Album';
-import { ExternalUrls, Image, MetaInfo } from '@/models/MetaInfo';
+import { Image, MetaInfo } from '@/models/MetaInfo';
 import { Track } from '@/models/track';
 
 import { useMemo } from 'react';
@@ -20,9 +20,7 @@ export const useMultiProfileImg = ({
 }) => {
   const artistInfo = useMemo(() => {
     return item?.artists?.map(v => {
-      const spotifyLink = (v.external_urls?.spotify
-        ? v.external_urls?.spotify
-        : '/') as unknown as ExternalUrls;
+      const spotifyLink = v.external_urls?.spotify ?? '/';
       if (artistImgUrls) {
         return { img: artistImgUrls.get(v.id) as string, link: spotifyLink };
       } else {
