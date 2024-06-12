@@ -1,5 +1,6 @@
 import { PLACEHOLDER_IMAGE } from '@/constants';
 import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
+import ProgressBar from './ProgressBar';
 import Vinyl from './Vinyl';
 
 export default function MusicInfo() {
@@ -9,9 +10,9 @@ export default function MusicInfo() {
     <>nothing to show...</>
   ) : (
     <>
-      <h1>
+      {/* <h1>
         {data.item.name}, current progress: {data?.progress_ms}
-      </h1>
+      </h1> */}
       <Vinyl
         imgUrl={
           data.item?.album?.images[0].url
@@ -20,6 +21,10 @@ export default function MusicInfo() {
         }
       />
 
+      <ProgressBar
+        progress={data?.progress_ms ?? 0}
+        duration={data?.item?.duration_ms}
+      />
       <div>{JSON.stringify(data)}</div>
     </>
   );
