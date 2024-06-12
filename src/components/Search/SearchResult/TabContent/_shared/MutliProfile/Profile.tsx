@@ -13,15 +13,13 @@ export interface ProfileInfo {
 }
 
 const Profile = ({ profile }: { profile: ProfileInfo }) => {
+  const link = (profile?.link ?? '#') as unknown as ExternalUrls['spotify'];
+
   return (
     <div className={classNames('profile')}>
       <Link
         className={classNames('account-photo')}
-        to={
-          (profile?.link
-            ? profile.link
-            : '#') as unknown as ExternalUrls['spotify']
-        }
+        to={link}
         aria-disabled={profile?.link == null}
       >
         <div className="mask">
