@@ -20,8 +20,7 @@ export default function Image({
       }
     >
       <img
-        src={url}
-        className={classNames('photo')}
+        src={url ?? PLACEHOLDER_IMAGE}
         loading="lazy"
         alt={PLACEHOLDER_IMAGE}
       />
