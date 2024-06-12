@@ -1,10 +1,8 @@
-import { LOADING_IMAGE, PLACEHOLDER_IMAGE } from '@/constants';
-
 import { ExternalUrls } from '@/models/MetaInfo';
 import { Artist } from '@/models/Profile';
 import classNames from 'classnames';
-import { Suspense } from 'react';
 import { Link } from 'react-router-dom';
+import Image from '../Image';
 
 export interface ProfileInfo {
   img: string;
@@ -23,22 +21,7 @@ const Profile = ({ profile }: { profile: ProfileInfo }) => {
         aria-disabled={profile?.link == null}
       >
         <div className="mask">
-          <Suspense
-            fallback={
-              <img
-                alt={profile.img}
-                src={LOADING_IMAGE}
-                className={classNames('photo', 'skeleton')}
-              />
-            }
-          >
-            <img
-              src={profile.img}
-              className={classNames('photo')}
-              loading="lazy"
-              alt={PLACEHOLDER_IMAGE}
-            />
-          </Suspense>
+          <Image url={profile.img} classNameArr={['photo']} />
         </div>
       </Link>
     </div>
