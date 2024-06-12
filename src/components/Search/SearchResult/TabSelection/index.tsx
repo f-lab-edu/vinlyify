@@ -1,25 +1,16 @@
+import classNames from 'classnames/bind';
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { DEFAULT_TAB, SCOPE, TAB } from '../../constants';
-import TabSelectionList from './TabSelectionList';
+import Style from './tab-selection-list.module.scss';
+
+const style = classNames.bind(Style);
 
 const TAB_ITEMS = Object.values(TAB);
 
 export default function TabSelection() {
   const tabs = Object.values(TAB) as Array<keyof typeof TAB>;
   const [searchParams, setSearchParams] = useSearchParams();
-  const otherParams = useMemo(() => {
-    return [...searchParams]
-      .filter(v => v[0] !== SCOPE)
-      .reduce(
-        (acc, curr) => {
-          const [key, val] = curr;
-          acc[key] = val;
-          return acc;
-        },
-        {} as { [key: string]: string },
-      );
-  }, [searchParams]);
 
   const currentTab = useMemo(() => {
     return searchParams.has(SCOPE) &&
@@ -30,24 +21,32 @@ export default function TabSelection() {
 
   const onSelectMenuHandler = useCallback(
     (item: keyof typeof TAB) => {
+      const searchParamKeyValuePair = [...searchParams].reduce(
+        (acc, curr) => {
+          const [key, val] = curr;
+          acc[key] = val;
+          return acc;
+        },
+        {} as { [key: string]: string },
+      );
       setSearchParams({
+        ...searchParamKeyValuePair,
         scope: item,
-        ...otherParams,
       });
     },
-    [setSearchParams, otherParams],
+    [setSearchParams, searchParams],
   );
 
   return (
-    <TabSelectionList>
+    <ul className={style('tab-selection-list')}>
       {tabs.map(tab => {
         return (
           <li
             key={tab}
-            className={tab === currentTab ? 'submenu focused' : 'submenu'}
+            className={style('submenu', tab === currentTab ? 'focused' : '')}
           >
             <button
-              className="unstyled-button"
+              className={style('unstyled-button')}
               onClick={() => onSelectMenuHandler(tab)}
             >
               {tab}
@@ -55,6 +54,6 @@ export default function TabSelection() {
           </li>
         );
       })}
-    </TabSelectionList>
+    </ul>
   );
 }

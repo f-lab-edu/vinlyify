@@ -1,6 +1,6 @@
 @use '@/utils/variables';
 
-.tabSelectionList {
+.tab-selection-list {
   background-color: variables.$light-grey-white;
   color: variables.$light-grey-white;
 
@@ -51,6 +51,13 @@
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.4) -1px -3px 4px 0px;
+  }
+  .submenu {
+    display: inline-flex;
+    width: calc(100% / 3);
+    padding: 10px;
+    font-size: 15px;
+    transition: 0.5s;
   }
   .submenu:first-child {
     margin-left: 1rem;
