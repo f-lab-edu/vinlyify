@@ -1,18 +1,13 @@
 import { pauseTrack } from '@/api/spotify';
 import PauseIcon from '@/assets/pauseIcon.svg';
-import { useDebounce } from '@/hooks/useDebounce';
 import classNames from 'classnames';
 import '../button.scss';
 
 const PauseButton = () => {
-  const pauseHandler = () => pauseTrack({});
-
-  const debouncedPauseHandler = useDebounce(() => {
-    pauseHandler();
-  });
+  const onPauseHandler = () => pauseTrack({});
 
   return (
-    <button className={classNames('button')} onClick={debouncedPauseHandler}>
+    <button className={classNames('button')} onClick={onPauseHandler}>
       <PauseIcon />
     </button>
   );
