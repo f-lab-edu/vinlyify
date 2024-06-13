@@ -1,14 +1,16 @@
 import { LOADING_IMAGE } from '@/constants/image';
-import classNames from 'classnames';
-import './multi-profile.scss';
+import classNames from 'classnames/bind';
+import Style from './multi-profile.module.scss';
 import Profile, { ProfileInfo } from './Profile';
 import ProfileGroup from './ProfileGroup';
+
+const style = classNames.bind(Style);
 
 const MultiProfile = ({ artist }: { artist: ProfileInfo[] }) => {
   if (artist?.length === 0) return null;
   return (
-    <div className={classNames('profile-container')}>
-      <div className={classNames('profiles-container')} data-collaborators="2">
+    <div className={style('profile-container')}>
+      <div className={style('profiles-container')} data-collaborators="2">
         {artist == null ? (
           <Profile profile={{ img: LOADING_IMAGE }} />
         ) : (
