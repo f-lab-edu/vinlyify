@@ -4,7 +4,7 @@ import './top-track-list.scss';
 export default function TopTrackList({
   topTracks,
 }: Readonly<{
-  topTracks: Track[] | null;
+  topTracks?: Track[] | null;
 }>) {
   return (
     <ul className={classNames('top-track-list')}>

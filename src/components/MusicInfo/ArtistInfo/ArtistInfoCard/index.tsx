@@ -1,9 +1,8 @@
-import { getArtistTopTracks } from '@/api/spotify';
 import { PLACEHOLDER_IMAGE } from '@/constants';
+import { useArtistTopTracks } from '@/hooks/query/useArtistTopTracks';
 import { Artist } from '@/models/Profile';
-import { Track } from '@/models/track';
 import classNames from 'classnames';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import TopTrackList from '../TopTrackList';
 import './artist-info-card.scss';
@@ -13,13 +12,7 @@ export default function ArtistInfoCard({
 }: Readonly<{
   artist: Artist;
 }>) {
-  const [topTracks, setTopTracks] = useState<Track[] | null>(null);
-
-  useEffect(() => {
-    getArtistTopTracks({ id: artist.id }).then(v => {
-      setTopTracks(v?.tracks);
-    });
-  }, [artist]);
+  const { data } = useArtistTopTracks({ artistId: artist.id });
 
   return (
     <ul className={classNames('artist-info-wrap')}>
@@ -43,10 +36,12 @@ export default function ArtistInfoCard({
             </span>
           </h2>
         </>
-        <li>genres: {artist?.genres}</li>
+        {artist?.genres && artist?.genres?.length > 0 && (
+          <li>genres: {artist?.genres}</li>
+        )}
 
         <h3>Top tracks</h3>
-        <TopTrackList topTracks={topTracks} />
+        <TopTrackList topTracks={data?.tracks} />
       </ul>
     </ul>
   );
