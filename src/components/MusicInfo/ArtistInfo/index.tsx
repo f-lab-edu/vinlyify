@@ -1,28 +1,23 @@
-import { getArtists } from '@/api/spotify';
-import { Artist } from '@/models/Profile';
+import { useArtist } from '@/hooks/query/useArtist';
 import { CurrentlyPlayingTrack } from '@/models/track';
-import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import classNames from 'classnames/bind';
 import ArtistInfoCard from './ArtistInfoCard';
-import './artist-info.scss';
+import Style from './artist-info.module.scss';
+
+const style = classNames.bind(Style);
 
 export default function ArtistInfo({
   artists,
 }: Readonly<{
   artists: CurrentlyPlayingTrack['item']['artists'];
 }>) {
-  const [artistInfo, setArtistInfo] = useState<Artist[] | null>(null);
-
-  useEffect(() => {
-    const artistIds = artists.map(v => v.id);
-    getArtists(artistIds).then(v => setArtistInfo(v));
-  }, [artists]);
+  const { data } = useArtist({ artists });
 
   return (
-    <ul className={classNames('artist-info')}>
-      <section className={classNames('artist-info-card')}>
-        <h1 className={classNames('about-the-artist')}>About the artist</h1>
-        {artistInfo?.map(artist => (
+    <ul className={style('artist-info')}>
+      <section className={style('artist-info-card')}>
+        <h1 className={style('about-the-artist')}>About the artist</h1>
+        {data?.map(artist => (
           <ArtistInfoCard artist={artist} key={artist.id} />
         ))}
       </section>
