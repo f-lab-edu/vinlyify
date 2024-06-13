@@ -1,4 +1,4 @@
-import { PLACEHOLDER_IMAGE } from '@/constants';
+import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { Album } from '@/models/Album';
 import { Image, MetaInfo } from '@/models/MetaInfo';
 import { Track } from '@/models/track';

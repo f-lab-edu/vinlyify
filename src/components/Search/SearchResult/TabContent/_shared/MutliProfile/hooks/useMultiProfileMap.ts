@@ -1,5 +1,5 @@
 import { getArtists } from '@/api/spotify';
-import { PLACEHOLDER_IMAGE } from '@/constants';
+import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { Album } from '@/models/Album';
 import { Track } from '@/models/track';
 

@@ -1,4 +1,4 @@
-import { LOADING_IMAGE, PLACEHOLDER_IMAGE } from '@/constants';
+import { LOADING_IMAGE, PLACEHOLDER_IMAGE } from '@/constants/image';
 import classNames from 'classnames';
 import { Suspense } from 'react';
 
@@ -23,6 +23,7 @@ export default function Image({
         src={url ?? PLACEHOLDER_IMAGE}
         loading="lazy"
         alt={PLACEHOLDER_IMAGE}
+        className={classNames(...classNameArr)}
       />
     </Suspense>
   );
