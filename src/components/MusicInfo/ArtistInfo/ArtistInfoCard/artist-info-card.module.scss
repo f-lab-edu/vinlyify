@@ -47,7 +47,7 @@
 .artist-info-wrap {
   display: inline-flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 2rem !important;
   padding: 0;
   gap: 1rem;
   width: 100%;
