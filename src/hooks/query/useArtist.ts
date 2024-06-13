@@ -15,6 +15,6 @@ export const useArtist = ({ artists }: { artists: Artist[] }) => {
 useArtist.queryKey = (artistId: Artist['id'][]) => [
   'current',
   'playing',
-  'artistTopTracks',
+  'artistInfo',
   ...artistId,
 ];
