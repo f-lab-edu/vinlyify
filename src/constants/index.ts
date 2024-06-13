@@ -4,7 +4,7 @@ export const VINYLIFY_TOKEN = 'vinylify_token';
 export const TOKEN_VALID_TIME = 'vinylify_token_valid_time';
 
 export const API = {
-  LOGIN: 'http://localhost:8888/',
+  LOGIN: 'https://vinylify-express.vercel.app/',
   SPOTIFY: 'https://api.spotify.com/v1/',
 };
 export const PAGE = {
@@ -38,4 +38,3 @@ export const ACCESS_TOKEN = 'access_token';
 
 export const PLACEHOLDER_IMAGE =
   'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg';
-
