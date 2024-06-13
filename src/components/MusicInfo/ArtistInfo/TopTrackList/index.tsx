@@ -11,9 +11,9 @@ export default function TopTrackList({
 }>) {
   return (
     <ul className={style('top-track-list')}>
-      {topTracks?.map((v, i) => (
-        <li key={v.id}>
-          {i + 1}. {v.name}
+      {topTracks?.map((track, index) => (
+        <li key={track.id}>
+          {index + 1}. {track.name}
         </li>
       ))}
     </ul>
