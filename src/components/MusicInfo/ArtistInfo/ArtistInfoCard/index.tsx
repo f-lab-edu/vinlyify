@@ -38,9 +38,9 @@ export default function ArtistInfoCard({
             </span>
           </h2>
         </>
-        {artist?.genres && artist?.genres?.length > 0 && (
+        {artist?.genres && artist?.genres?.length > 0 ? (
           <li>genres: {artist?.genres}</li>
-        )}
+        ) : null}
 
         <h3>Top tracks</h3>
         <TopTrackList topTracks={data?.tracks} />
