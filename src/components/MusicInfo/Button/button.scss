@@ -1,0 +1,17 @@
+@use '@/utils/variables';
+
+.button {
+  border: none;
+  background-color: inherit;
+  :hover {
+    cursor: pointer;
+    fill: variables.$grey;
+  }
+  display: inline-block;
+  padding: 0;
+  width: 2rem;
+  svg {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+}

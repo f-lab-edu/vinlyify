@@ -1,6 +1,9 @@
 import { PLACEHOLDER_IMAGE } from '@/constants';
 import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
+import { default as PauseButton } from './Button/PauseButton';
+import PlayButton from './Button/PlayButton';
 import ProgressBar from './ProgressBar';
+
 import Vinyl from './Vinyl';
 
 export default function MusicInfo() {
@@ -20,6 +23,15 @@ export default function MusicInfo() {
             : PLACEHOLDER_IMAGE
         }
       />
+      {data?.is_playing ? (
+        <PauseButton />
+      ) : (
+        <PlayButton
+          context={data.item.album.uri}
+          uri={data?.item.uri}
+          position_ms={data?.progress_ms || 0}
+        />
+      )}
 
       <ProgressBar
         progress={data?.progress_ms ?? 0}
