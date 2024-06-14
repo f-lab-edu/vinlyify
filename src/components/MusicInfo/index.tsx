@@ -1,5 +1,8 @@
 import { PLACEHOLDER_IMAGE } from '@/constants';
 import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
+
+import ArtistInfo from './ArtistInfo';
+
 import { default as PauseButton } from './Button/PauseButton';
 import PlayButton from './Button/PlayButton';
 import ProgressBar from './ProgressBar';
@@ -37,7 +40,9 @@ export default function MusicInfo() {
         progress={data?.progress_ms ?? 0}
         duration={data?.item?.duration_ms}
       />
+      <ArtistInfo artists={data.item.artists} />
       <div>{JSON.stringify(data)}</div>
+
     </>
   );
 }

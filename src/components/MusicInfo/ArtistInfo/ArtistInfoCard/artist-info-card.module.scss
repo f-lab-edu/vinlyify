@@ -1,0 +1,77 @@
+@use '@/utils/variables';
+@use '@/utils/mixins';
+
+.artist-info-card {
+  list-style: none;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  background-color: variables.$tan-black;
+  color: variables.$white;
+
+  a {
+    width: 40%;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    flex-wrap: nowrap;
+  }
+
+  li {
+    overflow-wrap: break-word;
+    color: variables.$light-grey-white;
+    margin-bottom: 1rem;
+  }
+
+  img:hover {
+    cursor: pointer;
+  }
+
+  @include mixins.mobile {
+    width: 18rem;
+    ul {
+      width: 100%;
+      flex-wrap: wrap;
+    }
+  }
+  @include mixins.tablet {
+    min-width: 18rem;
+  }
+  @include mixins.desktop {
+    min-width: 24rem;
+    width: 49rem;
+  }
+}
+.artist-info-wrap {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2rem !important;
+  padding: 0;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1.8rem;
+}
+.artist-name {
+  margin-top: 0;
+}
+.followers {
+  font-size: 0.8rem;
+  text-wrap: nowrap;
+  color: variables.$light-grey-white;
+}
+.artist-profile {
+  border-radius: 4px;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+  opacity: 0.8;
+
+  @include mixins.mobile {
+    width: 18rem;
+  }
+  @include mixins.desktop {
+    width: 18rem;
+  }
+}
