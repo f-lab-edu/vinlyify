@@ -1,4 +1,4 @@
-import { PLACEHOLDER_IMAGE } from '@/constants';
+import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { useArtistTopTracks } from '@/hooks/query/useArtistTopTracks';
 import { Artist } from '@/models/Profile';
 import classNames from 'classnames/bind';
