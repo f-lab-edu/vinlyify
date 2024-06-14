@@ -1,4 +1,4 @@
-import { PLACEHOLDER_IMAGE } from '@/constants';
+import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import classNames from 'classnames/bind';
 import { SVGProps } from 'react';
 import Logo from '../Logo';

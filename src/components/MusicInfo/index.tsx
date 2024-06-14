@@ -1,4 +1,4 @@
-import { PLACEHOLDER_IMAGE } from '@/constants';
+import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
 
 import ArtistInfo from './ArtistInfo';
