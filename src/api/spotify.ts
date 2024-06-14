@@ -68,10 +68,12 @@ export async function playTrack({
   context_uris = DEFAULT_PLAY_TRACK,
   active_device,
   offset = { position: 0 },
+  position_ms = 0,
 }: {
   context_uris: string;
   offset?: { uri?: string; position?: number };
   active_device?: string;
+  position_ms?: number;
 }) {
   return api
     .put(
@@ -80,10 +82,27 @@ export async function playTrack({
         json: {
           context_uri: context_uris,
           offset,
-          position_ms: 0,
+          position_ms,
         },
       },
     )
+    .json();
+}
+
+/**
+ * 트랙 중지하기
+ */
+export async function pauseTrack({
+  active_device,
+}: {
+  active_device?: string | null;
+}) {
+  return api
+    .put(`me/player/pause`, {
+      json: {
+        device_id: active_device ?? (await getActiveDevice()),
+      },
+    })
     .json();
 }
 

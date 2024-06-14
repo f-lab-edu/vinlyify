@@ -1,0 +1,23 @@
+@use '../CoverImage/cover-image';
+@use '@/utils/variables';
+
+.play-button {
+  width: 1rem;
+  height: 1rem;
+  overflow: hidden;
+  text-justify: inter-word;
+  display: inline-block;
+  svg {
+    width: 70px !important;
+    height: 70px !important;
+    fill: variables.$tan-black;
+    path {
+      width: 70px;
+      height: 70px;
+    }
+  }
+  :hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+}

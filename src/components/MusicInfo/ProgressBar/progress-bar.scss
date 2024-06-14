@@ -1,0 +1,18 @@
+@use '@/utils/variables';
+
+.progress-bar {
+  height: 0.5rem;
+  width: 60%;
+  background-color: variables.$pale-white-grey;
+  border-radius: 3rem;
+  margin: 1rem auto;
+
+  .filt {
+    height: '100%';
+    background-color: variables.$grey;
+    border-radius: 3rem;
+    text-align: right;
+    transition: width 1s ease-in-out;
+    height: inherit;
+  }
+}
