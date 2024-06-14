@@ -1,10 +1,14 @@
 import { PLACEHOLDER_IMAGE } from '@/constants';
 import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
+import classNames from 'classnames/bind';
 import { default as PauseButton } from './Button/PauseButton';
 import PlayButton from './Button/PlayButton';
 import ProgressBar from './ProgressBar';
+import Style from './music-info.module.scss';
 
 import Vinyl from './Vinyl';
+
+const style = classNames.bind(Style);
 
 export default function MusicInfo() {
   const { data } = useCurrentPlayingTrack();
@@ -23,20 +27,22 @@ export default function MusicInfo() {
             : PLACEHOLDER_IMAGE
         }
       />
-      {data?.is_playing ? (
-        <PauseButton />
-      ) : (
-        <PlayButton
-          context={data.item.album.uri}
-          uri={data?.item.uri}
-          position_ms={data?.progress_ms || 0}
-        />
-      )}
+      <div className={style('music-player-wrap')}>
+        {data?.is_playing ? (
+          <PauseButton />
+        ) : (
+          <PlayButton
+            context={data.item.album.uri}
+            uri={data?.item.uri}
+            position_ms={data?.progress_ms || 0}
+          />
+        )}
 
-      <ProgressBar
-        progress={data?.progress_ms ?? 0}
-        duration={data?.item?.duration_ms}
-      />
+        <ProgressBar
+          progress={data?.progress_ms ?? 0}
+          duration={data?.item?.duration_ms}
+        />
+      </div>
       <div>{JSON.stringify(data)}</div>
     </>
   );
