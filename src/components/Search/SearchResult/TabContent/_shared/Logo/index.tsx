@@ -4,16 +4,17 @@ import { HtmlHTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
 import './logo.scss';
 
-export interface logoProps extends HtmlHTMLAttributes<HTMLDivElement> {
+export interface LogoProps extends HtmlHTMLAttributes<HTMLDivElement> {
   url: string;
   fill?: string;
 }
 
-const Logo = ({ url, fill }: logoProps) => {
+const Logo = ({ url, fill }: LogoProps) => {
   return (
     <Link
       to={url}
-      className={classNames({ 'logo-skeleton': fill === 'skeleton' })}
+      aria-disabled={url == null}
+      className={classNames('logo', { 'logo-skeleton': fill === 'skeleton' })}
     >
       <Spotify />
     </Link>
