@@ -43,7 +43,7 @@ export default function TabSelection() {
         return (
           <li
             key={tab}
-            className={style('submenu', tab === currentTab ? 'focused' : '')}
+            className={style({ submenu: true, focused: tab === currentTab })}
           >
             <button
               className={style('unstyled-button')}
