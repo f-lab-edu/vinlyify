@@ -19,7 +19,7 @@ export default function TabSelection() {
       : DEFAULT_TAB;
   }, [searchParams]);
 
-  const onSelectMenuHandler = useCallback(
+  const handleSelectMenu = useCallback(
     (item: keyof typeof TAB) => {
       const searchParamKeyValuePair = [...searchParams].reduce(
         (acc, curr) => {
@@ -47,7 +47,7 @@ export default function TabSelection() {
           >
             <button
               className={style('unstyled-button')}
-              onClick={() => onSelectMenuHandler(tab)}
+              onClick={() => handleSelectMenu(tab)}
             >
               {tab}
             </button>
