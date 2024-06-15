@@ -1,5 +1,5 @@
 import TabContent from './TabContent';
-import TabSelection from './TabSelection/';
+import TabSelection from './TabSelection';
 
 export default function SearchResult() {
   return (
