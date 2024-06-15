@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+$sm: 1rem;
+$md: 2rem;
+$lg: 3rem;
+
+.input {
+  font-family: 'Jua', sans-serif;
+  vertical-align: middle;
+  padding-left: 0.3rem;
+  &.large {
+    height: 2rem;
+    font-size: 1.25rem;
+    width: 60%;
+  }
+
+  &.medium {
+    height: 1.75rem;
+    font-size: 1rem;
+    width: 60%;
+  }
+
+  &.small {
+    height: 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@mixin padding-size($pd) {
+  padding: $pd;
+}
