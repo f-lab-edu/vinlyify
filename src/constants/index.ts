@@ -25,13 +25,4 @@ export const DEFAULT_PLAY_TRACK = 'spotify:album:5ht7ItJgpBH7W6vJ5BqpPr';
 
 export const SPOTIFY_WEB_API = new SpotifyWebApi();
 
-export const ALBUMS = 'albums';
-export const ARTISTS = 'artists';
-export const TRACKS = 'tracks';
-export const PLAYLISTS = 'playlists';
-
-export const TABS = [ALBUMS, ARTISTS, TRACKS, PLAYLISTS] as const;
-
-export const DEFAULT_TAB = ALBUMS;
-
 export const ACCESS_TOKEN = 'access_token';

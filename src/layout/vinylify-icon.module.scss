@@ -1,0 +1,11 @@
+@use '@/utils/variables';
+
+.vinylify-icon {
+  svg {
+    height: 9rem;
+    width: 9rem;
+  }
+  margin-right: 2rem;
+  box-shadow: variables.$button-shadow;
+  background-color: variables.$pale-white-grey;
+}

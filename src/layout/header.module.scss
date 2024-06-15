@@ -1,0 +1,11 @@
+@use '@/utils/variables';
+.header {
+  width: 100%;
+  padding: 1.5rem 1rem;
+  justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  button {
+    display: inline-block;
+  }
+}
