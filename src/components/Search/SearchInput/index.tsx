@@ -1,7 +1,6 @@
-import Container from '@/components/_shared/Container';
-import Input from '@/components/_shared/Input';
 import { useSearchKeyword } from '@/hooks/query/useSearchKeyword';
 import { useDebounce } from '@/hooks/useDebounce';
+import classNames from 'classnames/bind';
 import {
   ChangeEventHandler,
   KeyboardEventHandler,
@@ -9,6 +8,10 @@ import {
   useState,
 } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import Input from './Input';
+import Style from './search-input.module.scss';
+
+const style = classNames.bind(Style);
 
 export default function SearchInput() {
   const [, setSearchParams] = useSearchParams();
@@ -45,13 +48,13 @@ export default function SearchInput() {
   };
 
   return (
-    <Container>
+    <div className={style('search-input')}>
       <Input
         value={keyword ?? placeHolder}
         placeHolder={placeHolder}
         onChange={onChange}
         onKeyUp={onKeyUp}
       />
-    </Container>
+    </div>
   );
 }
