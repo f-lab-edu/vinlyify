@@ -1,5 +1,7 @@
+// import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { useSearchKeyword } from '@/hooks/query/useSearchKeyword';
 import Card from './_shared/Card';
+// import CoverImage from './_shared/CoverImage';
 import Grid from './_shared/Grid';
 
 export default function SearchResult() {
