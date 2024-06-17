@@ -1,6 +1,11 @@
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import { HtmlHTMLAttributes, ReactNode } from 'react';
-import './card.scss';
+import CoverImageSkeleton from '../CoverImage/CoverImageSkeleton';
+import Logo from '../Logo';
+import PlayButton from '../PlayButton';
+import Style from './card.module.scss';
+
+const style = classNames.bind(Style);
 
 export interface CardProps extends HtmlHTMLAttributes<HTMLLIElement> {
   center?: boolean;
@@ -8,45 +13,54 @@ export interface CardProps extends HtmlHTMLAttributes<HTMLLIElement> {
   title_tag?: string;
   topContent: ReactNode;
   playButton?: ReactNode;
-  isSkeleton?: boolean;
+  isPlayable?: boolean;
+  contextUri: string;
 }
 
+const CardSkeleton = () => {
+  return (
+    <li className={style('card')}>
+      <CoverImageSkeleton />
+      <Logo url="" className={style('loading-logo')} fill="skeleton" />
+      <ul>
+        <li className="wrap">
+          <span className={style('title-tag', 'skeleton')} />
+        </li>
+        <span className={style('content', 'skeleton')} />
+      </ul>
+    </li>
+  );
+};
+
 const Card = ({
-  playButton,
   title_tag,
   center,
   children,
   title,
   topContent,
-  isSkeleton,
+  isPlayable,
+  contextUri,
 }: CardProps) => {
   return (
-    <li className={classNames('card', { center })}>
+    <li className={style('card', { center })}>
       {topContent}
 
       <ul>
         <li>
-          <span className={`title ${isSkeleton ? 'skeleton' : ''}`}>
-            {title}
-          </span>
+          <span className={style('title')}>{title}</span>
         </li>
 
         <li className="wrap">
-          {playButton}{' '}
-          <span className={`title-tag ${isSkeleton ? 'skeleton' : ''}`}>
-            {title_tag}
-          </span>
+          {isPlayable ? <PlayButton context_uris={contextUri} /> : null}
+
+          <span className={style('title-tag')}>{title_tag}</span>
         </li>
-        {isSkeleton ? (
-          <li>
-            <span className="content skeleton"></span>
-          </li>
-        ) : (
-          children
-        )}
+        {children}
       </ul>
     </li>
   );
 };
+
+Card.Skelton = CardSkeleton;
 
 export default Card;
