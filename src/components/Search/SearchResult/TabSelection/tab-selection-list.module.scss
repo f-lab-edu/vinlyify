@@ -13,8 +13,9 @@
   width: fill-available;
 
   padding: 1rem 0 0 0 !important;
+  margin-top: 0;
 
-  box-shadow: inset rgba(0, 0, 0, 0.4) 0px -2px 4px 0px;
+  box-shadow: inset rgba(0, 0, 0, 0.2) 2px -6px 4px 0px;
 
   .unstyled-button {
     border: none;
@@ -55,7 +56,7 @@
   .submenu {
     display: inline-flex;
     width: calc(100% / 3);
-    padding: 10px;
+    padding: 1rem;
     font-size: 15px;
     transition: 0.5s;
   }
