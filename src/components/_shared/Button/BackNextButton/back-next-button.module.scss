@@ -1,0 +1,17 @@
+@use '../top-track.module.scss';
+@use '@/utils/variables';
+.back-next-button {
+  svg {
+    fill: variables.$white-grey;
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 0;
+  }
+  padding: 0;
+  background-color: inherit;
+  border: none;
+
+  :hover {
+    cursor: pointer;
+  }
+}
