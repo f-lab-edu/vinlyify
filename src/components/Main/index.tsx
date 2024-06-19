@@ -1,12 +1,13 @@
-import TopTrack from '@/components/Main/TopTrack';
+import Layout from './Layout';
 import Recommendations from './Recommendations';
+import TopTrack from './TopTrack';
 
 export default function Main() {
   return (
-    <>
+    <Layout>
       <TopTrack />
       <Recommendations />
-    </>
+    </Layout>
   );
 }
 
