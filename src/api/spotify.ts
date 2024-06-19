@@ -6,7 +6,7 @@ import {
 } from '@/constants';
 import { Artist } from '@/models/Profile';
 
-import { SearchResult, TrackSearchResult } from '@/models/Spotify';
+import { SearchResult, TrackItem, TrackSearchResult } from '@/models/Spotify';
 import { Track } from '@/models/track';
 
 import ky, { HTTPError } from 'ky';
@@ -43,13 +43,17 @@ SPOTIFY_WEB_API.setAccessToken(localStorage.getItem(VINYLIFY_TOKEN));
  *  활성화된 기기 ID 찾기
  */
 
-export function getActiveDevice() {
-  return SPOTIFY_WEB_API.getMyDevices().then(
+export async function getActiveDevice() {
+  const currentActiveDevice = await SPOTIFY_WEB_API.getMyDevices().then(
     res =>
       res.devices.filter(device => {
         return device.is_active;
       })[0]?.id,
   );
+  if (currentActiveDevice == null) {
+    return SPOTIFY_WEB_API.getMyDevices().then(res => res?.devices[0]?.id);
+  }
+  return currentActiveDevice;
 }
 
 /**
@@ -114,14 +118,14 @@ export function getPlayingTrack() {
 }
 
 // Top5 기반으로 추천리스트
-export async function getRecommendations() {
+export async function getRecommendations(limit = 20) {
   try {
     const topFiveIds = (await getTopTracks()).items
       .map(item => item.id)
       .join(',');
     const response = await api
-      .get(`recommendations?limit=5&seed_tracks=${topFiveIds}`, {})
-      .json();
+      .get(`recommendations?limit=${limit}&seed_tracks=${topFiveIds}`, {})
+      .json<{ tracks?: TrackItem[] }>();
     return response;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
