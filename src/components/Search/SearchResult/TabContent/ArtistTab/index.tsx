@@ -1,18 +1,14 @@
-import { Pagination } from '@/models/Pagination';
+import { Loading } from '@/components/Main';
 import { Artist } from '@/models/Profile';
+import Grid from '../_shared/Grid';
+import ArtistItem from './ArtistItem';
 
-const ArtistTab = ({
-  tabItem,
-  currentTabPagingInfo,
-}: {
-  tabItem: Artist[];
-  currentTabPagingInfo: Pagination | null;
-}) => {
+const ArtistTab = ({ tabItem }: { tabItem: Artist[] }) => {
+  if (tabItem?.length === 0) return <Loading />;
   return (
-    <>
-      <div>{JSON.stringify(currentTabPagingInfo)}</div>
-      {JSON.stringify(tabItem)}
-    </>
+    <Grid>
+      {tabItem?.map(item => <ArtistItem item={item} key={item.id} />)}
+    </Grid>
   );
 };
 
