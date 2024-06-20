@@ -52,7 +52,7 @@ const AlbumItem = ({
       {validArtistInfo ? (
         <MultiProfile artist={artistInfo} />
       ) : (
-        <Profile.Loading />
+        <Profile.Skeleton />
       )}
     </Card>
   );

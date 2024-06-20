@@ -14,7 +14,7 @@ export interface ProfileInfo {
   link?: Artist['external_urls'];
 }
 
-const LoadingProfile = () => {
+const ProfileSkeleton = () => {
   return (
     <div className={style('profile-container')}>
       <div className={style('single')} data-collaborators="2">
@@ -46,6 +46,6 @@ const Profile = ({ profile }: { profile: ProfileInfo }) => {
   );
 };
 
-Profile.Loading = LoadingProfile;
+Profile.Skeleton = ProfileSkeleton;
 
 export default Profile;
