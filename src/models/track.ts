@@ -4,7 +4,7 @@ import { Pagination } from '@/models/Pagination';
 import { Artist } from '@/models/Profile';
 
 export interface Track extends MetaInfo {
-  album: Album[];
+  album: Album;
   artists: Artist[];
   available_markets: Pick<Album, 'available_markets'>;
   disc_number: number;
@@ -15,6 +15,7 @@ export interface Track extends MetaInfo {
   popularity: number;
   preview_url: string;
   track_number: number;
+  is_playable?: boolean;
 }
 
 export interface Tracks extends Pagination {
