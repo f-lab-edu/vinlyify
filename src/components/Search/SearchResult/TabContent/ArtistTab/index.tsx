@@ -1,15 +1,17 @@
 import { Artist } from '@/models/Profile';
-import Grid from '../_shared/Grid';
-import ArtistItem from './ArtistItem';
 
-const ArtistTab = ({ tabItem }: { tabItem: Artist[] }) => {
-  if (tabItem == null) return null;
+const ArtistTab = ({
+  tabItem,
+  currentTabPagingInfo,
+}: {
+  tabItem: Artist[];
+  currentTabPagingInfo: Pagination | null;
+}) => {
   return (
-    <Grid>
-      {tabItem.map(item => (
-        <ArtistItem item={item} key={item.id} />
-      ))}
-    </Grid>
+    <>
+      <div>{JSON.stringify(currentTabPagingInfo)}</div>
+      {JSON.stringify(tabItem)}
+    </>
   );
 };
 
