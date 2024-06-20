@@ -1,3 +1,4 @@
+import { LOADING_IMAGE } from '@/constants/image';
 import { ExternalUrls } from '@/models/MetaInfo';
 import { Artist } from '@/models/Profile';
 import classNames from 'classnames/bind';
@@ -12,6 +13,20 @@ export interface ProfileInfo {
   key?: string;
   link?: Artist['external_urls'];
 }
+
+const LoadingProfile = () => {
+  return (
+    <div className={style('profile-container')}>
+      <div className={style('single')} data-collaborators="2">
+        <Link className={style('account-photo', 'skeleton')} to={'#'}>
+          <div className={style('mask')}>
+            <img className={style('photo')} src={LOADING_IMAGE} alt="loading" />
+          </div>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 const Profile = ({ profile }: { profile: ProfileInfo }) => {
   const link = (profile?.link ?? '#') as unknown as ExternalUrls['spotify'];
@@ -30,5 +45,7 @@ const Profile = ({ profile }: { profile: ProfileInfo }) => {
     </div>
   );
 };
+
+Profile.Loading = LoadingProfile;
 
 export default Profile;
