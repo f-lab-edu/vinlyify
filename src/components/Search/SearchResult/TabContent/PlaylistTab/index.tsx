@@ -1,5 +1,7 @@
 import { Pagination } from '@/models/Pagination';
 import { Playlist } from '@/models/Playlist';
+import Grid from '../_shared/Grid';
+import PlaylistItem from './PlaylistItem';
 
 const PlaylistTab = ({
   tabItem,
@@ -9,10 +11,9 @@ const PlaylistTab = ({
   currentTabPagingInfo: Pagination | null;
 }) => {
   return (
-    <>
-      <div>{JSON.stringify(currentTabPagingInfo)}</div>
-      {JSON.stringify(tabItem)}
-    </>
+    <Grid>
+      {tabItem?.map(item => <PlaylistItem item={item} key={item.id} />)}
+    </Grid>
   );
 };
 
