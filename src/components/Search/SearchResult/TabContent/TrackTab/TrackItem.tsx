@@ -22,11 +22,7 @@ const TrackItem = ({
   );
 
   useEffect(() => {
-    if (artistInfo?.every(item => item.img !== undefined)) {
-      setValidTrackArtistInfo(true);
-    } else {
-      setValidTrackArtistInfo(false);
-    }
+    setValidTrackArtistInfo(artistInfo?.every(item => item.img !== undefined));
   }, [artistInfo]);
 
   const trackDurationHHMMSS = useMemo(() => UTC2HHMMSS({ item }), [item]);
