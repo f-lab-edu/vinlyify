@@ -1,30 +1,18 @@
 import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { Artist } from '@/models/Profile';
-import { useMemo } from 'react';
 import Card from '../_shared/Card';
 
+import formatCompactFollowerCount from '@/utils';
 import CoverImage from '../_shared/CoverImage';
 import CoverImageSkeleton from '../_shared/CoverImage/CoverImageSkeleton';
 import GenreList from './GenreList';
 
 const ArtistItem = ({ item }: { item: Artist }) => {
-  /**
-   * 팔로워 수를 한국식으로 간략화 (ex. 5650186 => 565만)
-   */
-  const compactFollowerCount = useMemo(() => {
-    if (item?.followers?.total) {
-      return `followers : ${new Intl.NumberFormat('ko-KR', {
-        notation: 'compact',
-        compactDisplay: 'short',
-      }).format(item?.followers.total)}`;
-    }
-  }, [item]);
-
   return (
     <Card
       title={item?.name}
       contextUri={item?.uri}
-      title_tag={compactFollowerCount}
+      title_tag={formatCompactFollowerCount(item)}
       topContent={
         item?.images ? (
           <CoverImage
