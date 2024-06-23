@@ -23,13 +23,9 @@ const Badge = ({ badgeTag, badgeNumber }: BadgeProps) => {
     refetch();
   });
 
-  const handleSearchGenre = () => {
-    debouncedRequest();
-  };
-
   return (
     <li className={style('badge', `badge-${badgeNumber % 5}`)}>
-      <button className={style('badge-button')} onClick={handleSearchGenre}>
+      <button className={style('badge-button')} onClick={debouncedRequest}>
         {badgeTag}
       </button>
     </li>
