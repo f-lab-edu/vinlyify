@@ -14,7 +14,7 @@ import Style from './search-input.module.scss';
 const style = classNames.bind(Style);
 
 export default function SearchInput() {
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [keyword, setKeyword] = useState('');
 
   const { data, refetch } = useSearchKeyword();
@@ -31,7 +31,10 @@ export default function SearchInput() {
   }, [data]);
 
   const debouncedRequest = useDebounce(() => {
-    if (keyword) setSearchParams({ keyword });
+    if (keyword) {
+      searchParams.set('keyword', keyword);
+      setSearchParams(searchParams);
+    }
     refetch();
   });
 
