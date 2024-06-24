@@ -4,8 +4,8 @@ import CoverImage from '@/components/Search/SearchResult/TabContent/_shared/Cove
 import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
 import { TrackSearchResult } from '@/models/Spotify';
 
-import PauseButton from '@/components/_shared/Button/PlayPauseButton/PauseButton';
-import PlayButton from '@/components/_shared/Button/PlayPauseButton/PlayButton';
+import PauseButton from '@/components/_shared/Button/PauseButton';
+import PlayButton from '@/components/_shared/Button/PlayButton';
 import Style from './carousel.module.scss';
 
 const style = classNames.bind(Style);
