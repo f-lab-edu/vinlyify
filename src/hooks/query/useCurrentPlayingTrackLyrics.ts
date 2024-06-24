@@ -1,8 +1,5 @@
-import { getTopTrackLyrics } from '@/api/lyrics';
-// import { getTrackLyrics } from '@/api/lyrics_php';
-
+import { geniusSearch } from '@/api/geniusLyrics';
 import { useQuery } from '@tanstack/react-query';
-
 export interface CurrentlyPlayingTrackLyrics {
   term: string;
   artist: string;
@@ -12,26 +9,22 @@ export const useCurrentPlayingTrackLyrics = ({
   term,
   artist,
 }: CurrentlyPlayingTrackLyrics) => {
-  const res = useQuery({
+  const authRes = useQuery({
     queryKey: useCurrentPlayingTrackLyrics.queryKey({ term, artist }),
     queryFn: () =>
-      getTopTrackLyrics({ term, artist }).then(v => {
-        if (v && 'lyrics' in v) {
-          return v['lyrics'];
-        } else return null;
-      }),
+      geniusSearch(
+        `${artist.replaceAll(' ', '-')}-${term.replaceAll(' ', '-')}`,
+      ),
+    retry(failureCount) {
+      if (failureCount < 3) return true;
+      else return false;
+    },
   });
 
-  return res;
+  return authRes;
 };
 
 useCurrentPlayingTrackLyrics.queryKey = ({
   term,
   artist,
-}: CurrentlyPlayingTrackLyrics) => [
-  'current-playing',
-  'track',
-  'lyrics',
-  term,
-  artist,
-];
+}: CurrentlyPlayingTrackLyrics) => ['genius', 'lyrics', term, artist];
