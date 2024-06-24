@@ -1,9 +1,7 @@
 @use '../top-track.module.scss';
 @use '@/utils/variables';
 
-$animationSpeed: 20s;
-$num-of-slides: 20;
-$slides-in-view: 4;
+$animationSpeed: 30s;
 $carousel-item-width: 12rem;
 
 .wrap {
@@ -18,7 +16,6 @@ $carousel-item-width: 12rem;
 .carousel-group-wrap {
   display: inline-flex;
   gap: 1rem;
-  width: calc(var($slides-in-view) * var($carousel-item-width));
   animation: display $animationSpeed linear infinite;
 }
 .carousel-group-wrap:hover {
