@@ -18,19 +18,5 @@ const config: ViteConfig = {
     globals: true,
     environment: 'jsdom',
   },
-  server: {
-    proxy: {
-      '/music-info/api': {
-        target: 'https://api.musixmatch.com/ws/1.1',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/music-info\/api/, ''),
-      },
-      '/music-info/stands4-api': {
-        target: 'https://www.stands4.com/services/v2',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/music-info\/stands4-api/, ''),
-      },
-    },
-  },
 };
 export default defineConfig(config);
