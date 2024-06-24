@@ -21,11 +21,7 @@ const AlbumItem = ({
   );
 
   useEffect(() => {
-    if (artistInfo?.every(item => item.img !== undefined)) {
-      setValidArtistInfo(true);
-    } else {
-      setValidArtistInfo(false);
-    }
+    setValidArtistInfo(artistInfo?.every(item => item.img !== undefined));
   }, [artistInfo]);
 
   return (
