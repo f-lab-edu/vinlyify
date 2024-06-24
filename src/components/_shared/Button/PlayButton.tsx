@@ -5,7 +5,7 @@ import { MetaInfo } from '@/models/MetaInfo';
 import { CurrentlyPlayingTrack } from '@/models/track';
 import classNames from 'classnames/bind';
 import { HtmlHTMLAttributes } from 'react';
-import Style from '../button.module.scss';
+import Style from './button.module.scss';
 
 const style = classNames.bind(Style);
 
@@ -25,10 +25,7 @@ const PlayButton = ({ context, uri, position_ms }: PlayButtonProps) => {
   });
 
   return (
-    <button
-      className={style('play-button', 'button')}
-      onClick={onPlayDebounceHandler}
-    >
+    <button className={style('button')} onClick={onPlayDebounceHandler}>
       <PlayIcon />
     </button>
   );
