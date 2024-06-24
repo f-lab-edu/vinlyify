@@ -1,6 +1,9 @@
 @use '@/utils/variables';
 .header {
-  width: 100%;
+  border-radius: 4px;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
   padding: 1.5rem 1rem;
   justify-content: center;
   display: inline-flex;
