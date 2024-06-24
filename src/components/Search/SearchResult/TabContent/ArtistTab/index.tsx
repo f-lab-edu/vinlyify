@@ -1,4 +1,7 @@
+import { Pagination } from '@/models/Pagination';
 import { Artist } from '@/models/Profile';
+import Grid from '../_shared/Grid';
+import ArtistItem from './ArtistItem';
 
 const ArtistTab = ({
   tabItem,
@@ -8,10 +11,11 @@ const ArtistTab = ({
   currentTabPagingInfo: Pagination | null;
 }) => {
   return (
-    <>
-      <div>{JSON.stringify(currentTabPagingInfo)}</div>
-      {JSON.stringify(tabItem)}
-    </>
+    <Grid>
+      {tabItem.map(item => (
+        <ArtistItem item={item} key={item.id} />
+      ))}
+    </Grid>
   );
 };
 
