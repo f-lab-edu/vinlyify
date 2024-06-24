@@ -17,8 +17,12 @@ export function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
 /**
  * 밀리초로 되어 있는 UTC 시간을 HH:MM:SS 형식으로 변환
  */
-export function UTC2HHMMSS({ item }: { item: Track }) {
-  const time = new Date(item.duration_ms);
+export function UTC2HHMMSS({
+  duration_ms,
+}: {
+  duration_ms: Track['duration_ms'];
+}) {
+  const time = new Date(duration_ms);
   const MMSS = [
     `${time.getUTCMinutes()}`.padStart(2, '0'),
     `${time.getUTCSeconds()}`.padStart(2, '0'),

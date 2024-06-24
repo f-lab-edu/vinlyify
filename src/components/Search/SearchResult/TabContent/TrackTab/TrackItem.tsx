@@ -25,7 +25,10 @@ const TrackItem = ({
     setValidTrackArtistInfo(artistInfo?.every(item => item.img !== undefined));
   }, [artistInfo]);
 
-  const trackDurationHHMMSS = useMemo(() => UTC2HHMMSS({ item }), [item]);
+  const trackDurationHHMMSS = useMemo(
+    () => UTC2HHMMSS({ duration_ms: item.duration_ms }),
+    [item],
+  );
 
   return (
     <Card
