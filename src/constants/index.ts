@@ -7,8 +7,14 @@ export const UID = import.meta.env.VITE_UID;
 export const TOKEN_ID = import.meta.env.VITE_TOKEN_ID;
 export const API_KEY = import.meta.env.VITE_API_KEY;
 
+export const GENIUS_CLIENT_ID = import.meta.env.VITE_GENIUS_CLIENT_ID;
+export const GENIUS_CLIENT_SECRET = import.meta.env.VITE_GENIUS_CLIENT_SECRET;
+export const GENIUS_CLIENT_ACCESS_TOKEN = import.meta.env
+  .VITE_GENIUS_CLIENT_ACCESS_TOKEN;
+
 export const API = {
   LOGIN: 'https://vinylify-express.vercel.app/',
+  EXPRESS: 'https://vinylify-express.vercel.app/',
   SPOTIFY: 'https://api.spotify.com/v1/',
   STANDS4: `https://www.stands4.com/services/v2/`,
   MUSIX_MATCH: `/music-info/api`,
