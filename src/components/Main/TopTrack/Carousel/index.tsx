@@ -9,17 +9,18 @@ const style = classNames.bind(Style);
 export default function Carousel({
   items,
 }: {
-  items: TrackSearchResult['items'] | undefined;
+  items: TrackSearchResult['items'];
 }) {
   return (
     <div className={style('wrap')}>
       <div className={style('carousel-wrap')}>
         <section className={style('carousel-group-wrap')}>
-          {items?.map((item, index) => (
-            <CarouselItem item={item} key={item.id + index} index={index} />
-          ))}
-          {items?.map((item, index) => (
-            <CarouselItem item={item} key={item.id + index} index={index} />
+          {[...items, ...items].map((item, index) => (
+            <CarouselItem
+              item={item}
+              key={item.id + index}
+              index={index % 20}
+            />
           ))}
         </section>
       </div>
