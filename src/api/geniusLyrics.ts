@@ -1,5 +1,6 @@
 import { API } from '@/constants';
 import ky from 'ky';
+import { geniusSearchUrl } from './geniusLyricsUrl';
 const api = ky.extend({
   prefixUrl: API.EXPRESS,
   hooks: {
@@ -22,12 +23,12 @@ interface LyricsResponse {
   result?: string;
 }
 export async function geniusSearch(searchQ: string) {
-  console.log(searchQ.replaceAll("'", '').replaceAll(' ', '-') + '-lyrics');
+  const url = await geniusSearchUrl(searchQ);
+  if (url == null) return null;
   const res: LyricsResponse = await api
     .get(`lyrics`, {
-      searchParams: { q: searchQ.replaceAll(' ', '-') },
+      searchParams: { q: url },
     })
     .json();
-  console.log(res);
   return res;
 }

@@ -18,6 +18,7 @@ export const API = {
   SPOTIFY: 'https://api.spotify.com/v1/',
   STANDS4: `https://www.stands4.com/services/v2/`,
   MUSIX_MATCH: `/music-info/api`,
+  GENIUS: '/genius/api',
 };
 export const PAGE = {
   MAIN: '/',

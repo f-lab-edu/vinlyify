@@ -18,5 +18,14 @@ const config: ViteConfig = {
     globals: true,
     environment: 'jsdom',
   },
+  server: {
+    proxy: {
+      '/genius/api': {
+        target: 'https://api.genius.com',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/genius\/api/, ''),
+      },
+    },
+  },
 };
 export default defineConfig(config);

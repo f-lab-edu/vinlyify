@@ -11,10 +11,7 @@ export const useCurrentPlayingTrackLyrics = ({
 }: CurrentlyPlayingTrackLyrics) => {
   const authRes = useQuery({
     queryKey: useCurrentPlayingTrackLyrics.queryKey({ term, artist }),
-    queryFn: () =>
-      geniusSearch(
-        `${artist.replaceAll(' ', '-')}-${term.replaceAll(' ', '-')}`,
-      ),
+    queryFn: () => geniusSearch(`${artist} ${term}`),
     retry(failureCount) {
       if (failureCount < 3) return true;
       else return false;
