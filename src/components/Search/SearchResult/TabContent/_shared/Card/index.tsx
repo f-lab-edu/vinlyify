@@ -49,7 +49,7 @@ const Card = ({
           <span className={style('title')}>{title}</span>
         </li>
 
-        <li className="wrap">
+        <li className={style('wrap')}>
           {isPlayable ? <PlayButton context_uris={contextUri} /> : null}
 
           <span className={style('title-tag')}>{title_tag}</span>

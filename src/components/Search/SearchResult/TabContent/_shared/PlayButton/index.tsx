@@ -1,17 +1,22 @@
+import { playTrack } from '@/api/spotify';
 import PlayIcon from '@/assets/playIcon.svg';
+import { MetaInfo } from '@/models/MetaInfo';
 import classNames from 'classnames';
 import { HtmlHTMLAttributes } from 'react';
 import './play-button.scss';
 
 export interface PlayableProps extends HtmlHTMLAttributes<HTMLDivElement> {
-  onPlayCurrent: () => void;
+  context_uris: MetaInfo['uri'];
 }
 
-const PlayButton = ({ onPlayCurrent }: PlayableProps) => {
+const PlayButton = ({ context_uris }: PlayableProps) => {
+  const handlePlayCurrent = () => {
+    playTrack({ context_uris });
+  };
   return (
-    <div className={classNames('play-button')} onClick={onPlayCurrent}>
+    <button className={classNames('play-button')} onClick={handlePlayCurrent}>
       <PlayIcon />
-    </div>
+    </button>
   );
 };
 export default PlayButton;
