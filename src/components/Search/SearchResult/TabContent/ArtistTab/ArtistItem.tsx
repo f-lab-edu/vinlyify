@@ -2,7 +2,7 @@ import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { Artist } from '@/models/Profile';
 import Card from '../_shared/Card';
 
-import formatCompactFollowerCount from '@/utils';
+import compactNumberFormat from '@/utils/string';
 import CoverImage from '../_shared/CoverImage';
 import CoverImageSkeleton from '../_shared/CoverImage/CoverImageSkeleton';
 import GenreList from './GenreList';
@@ -12,7 +12,11 @@ const ArtistItem = ({ item }: { item: Artist }) => {
     <Card
       title={item?.name}
       contextUri={item?.uri}
-      title_tag={formatCompactFollowerCount(item)}
+      title_tag={
+        item?.followers?.total == null
+          ? null
+          : `followers : ${compactNumberFormat(item?.followers?.total)}`
+      }
       topContent={
         item?.images ? (
           <CoverImage
