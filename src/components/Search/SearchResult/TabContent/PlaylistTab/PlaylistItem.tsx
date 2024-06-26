@@ -4,13 +4,12 @@ import classNames from 'classnames/bind';
 import Card from '../_shared/Card';
 import CoverImage from '../_shared/CoverImage';
 import CoverImageSkeleton from '../_shared/CoverImage/CoverImageSkeleton';
-import useParsedDescription from './hooks/useParsedDescription';
+
 import Style from './playlist-item.module.scss';
 
 const style = classNames.bind(Style);
 
 const PlaylistItem = ({ item }: { item: Playlist }) => {
-  const parsedDescription = useParsedDescription(item);
   return (
     <Card
       title={item?.name}
@@ -34,7 +33,9 @@ const PlaylistItem = ({ item }: { item: Playlist }) => {
     >
       <li>total tracks : {item?.tracks?.total}</li>
 
-      <li className={style('playlist-description')}>{parsedDescription}</li>
+      <li className={style('playlist-description')}>
+        <div dangerouslySetInnerHTML={{ __html: item?.description }} />
+      </li>
     </Card>
   );
 };
