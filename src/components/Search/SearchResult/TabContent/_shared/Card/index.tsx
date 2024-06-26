@@ -10,9 +10,8 @@ const style = classNames.bind(Style);
 export interface CardProps extends HtmlHTMLAttributes<HTMLLIElement> {
   center?: boolean;
   title?: string;
-  title_tag?: string;
+  title_tag?: string | null;
   topContent: ReactNode;
-  playButton?: ReactNode;
   isPlayable?: boolean;
   contextUri: string;
 }
