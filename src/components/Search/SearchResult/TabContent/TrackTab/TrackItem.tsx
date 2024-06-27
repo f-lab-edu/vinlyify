@@ -1,4 +1,3 @@
-import { Loading } from '@/components/Main';
 import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { Track } from '@/models/Track';
 import { UTC2HHMMSS } from '@/utils';
@@ -8,6 +7,7 @@ import CoverImage from '../_shared/CoverImage';
 import CoverImageSkeleton from '../_shared/CoverImage/CoverImageSkeleton';
 import MultiProfile from '../_shared/MutliProfile';
 import { useMultiProfileImg } from '../_shared/MutliProfile/hooks/useMultiProfileImg';
+import Profile from '../_shared/MutliProfile/Profile';
 
 const TrackItem = ({
   item,
@@ -55,8 +55,7 @@ const TrackItem = ({
       {validTrackArtistInfo ? (
         <MultiProfile artist={artistInfo} />
       ) : (
-        //!!<Profile.Skeleton /> pr 머지되면 변경해주기
-        <Loading />
+        <Profile.Skeleton />
       )}
     </Card>
   );
