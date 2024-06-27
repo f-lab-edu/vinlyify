@@ -6,11 +6,13 @@ import CarouselItem from './CarouselItem';
 
 const style = classNames.bind(Style);
 
-export default function Carousel({
+const CAROUSEL_ITEM_COUNT = 20;
+
+const Carousel = ({
   items,
-}: {
+}: Readonly<{
   items: TrackSearchResult['items'];
-}) {
+}>) => {
   return (
     <div className={style('wrap')}>
       <div className={style('carousel-wrap')}>
@@ -26,4 +28,23 @@ export default function Carousel({
       </div>
     </div>
   );
-}
+};
+const CarouselSkeleton = () => {
+  return (
+    <div className={style('wrap')}>
+      <div className={style('carousel-wrap')}>
+        <section className={style('carousel-group-wrap')}>
+          {Array.from({ length: CAROUSEL_ITEM_COUNT * 2 }).map((_, index) => (
+            <CarouselItem.Skeleton
+              key={`skeleton-carousel-item-${index + 1}`}
+            />
+          ))}
+        </section>
+      </div>
+    </div>
+  );
+};
+
+Carousel.Skeleton = CarouselSkeleton;
+
+export default Carousel;

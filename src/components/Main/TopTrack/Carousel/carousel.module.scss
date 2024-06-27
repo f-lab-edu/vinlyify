@@ -1,5 +1,6 @@
 @use '../top-track.module.scss';
 @use '@/utils/variables';
+@use '@/utils/skeleton';
 
 $animationSpeed: 30s;
 $carousel-item-width: 12rem;
@@ -20,6 +21,10 @@ $carousel-item-width: 12rem;
 }
 .carousel-group-wrap:hover {
   animation-play-state: paused;
+}
+.title {
+  width: 90%;
+  height: 1.5rem;
 }
 
 @keyframes display {
