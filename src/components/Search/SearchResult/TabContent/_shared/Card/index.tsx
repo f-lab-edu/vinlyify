@@ -10,9 +10,8 @@ const style = classNames.bind(Style);
 export interface CardProps extends HtmlHTMLAttributes<HTMLLIElement> {
   center?: boolean;
   title?: string;
-  title_tag?: string;
+  title_tag?: string | null;
   topContent: ReactNode;
-  playButton?: ReactNode;
   isPlayable?: boolean;
   contextUri: string;
 }
@@ -50,7 +49,7 @@ const Card = ({
           <span className={style('title')}>{title}</span>
         </li>
 
-        <li className="wrap">
+        <li className={style('wrap')}>
           {isPlayable ? <PlayButton context_uris={contextUri} /> : null}
 
           <span className={style('title-tag')}>{title_tag}</span>

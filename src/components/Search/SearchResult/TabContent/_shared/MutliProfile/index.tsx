@@ -6,7 +6,7 @@ import ProfileGroup from './ProfileGroup';
 
 const style = classNames.bind(Style);
 
-const MultiProfile = ({ artist }: { artist: ProfileInfo[] }) => {
+const MultiProfile = ({ artist }: { artist: Omit<ProfileInfo, 'link'>[] }) => {
   if (artist?.length === 0) return null;
   return (
     <div className={style('profile-container')}>

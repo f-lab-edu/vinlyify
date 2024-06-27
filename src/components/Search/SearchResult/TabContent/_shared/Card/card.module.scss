@@ -13,56 +13,58 @@ $sm-font: 0.9rem;
   min-height: 18rem;
   text-overflow: ellipsis;
   margin-bottom: 1rem;
-  .wrap {
-    display: inline-flex;
-    align-items: center;
-  }
+
   li {
     width: 100%;
     list-style: none;
     font-size: $sm-font;
   }
 
-  .title {
-    height: 30%;
-    font-weight: 1000;
-    font-size: $title;
-    display: inline-block;
-    width: 100%;
-
-    @include mixins.mobile {
-      width: 9rem;
-      font-size: $sm-title;
-    }
-
-    @include mixins.tablet {
-      width: 15rem;
-    }
-
-    @include mixins.desktop {
-      width: 21rem;
-    }
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    color: variables.$tan-black;
-  }
   ul {
     padding-left: 0;
   }
 
-  .title-tag {
-    display: inline-block;
-    width: 100%;
-    color: variables.$light-grey;
-    padding-bottom: 0.4rem;
-  }
   a {
     text-decoration: none;
     color: variables.$light-grey;
   }
+}
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.title {
+  height: 30%;
+  font-weight: 1000;
+  font-size: $title;
+  display: inline-block;
+  width: 100%;
+
+  @include mixins.mobile {
+    width: 9rem;
+    font-size: $sm-title;
+  }
+
+  @include mixins.tablet {
+    width: 15rem;
+  }
+
+  @include mixins.desktop {
+    width: 21rem;
+  }
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  color: variables.$tan-black;
+}
+.title-tag {
+  display: inline-block;
+  width: 100%;
+  color: variables.$light-grey;
+  padding-bottom: 0.4rem;
 }
 .title.skeleton {
   width: 80%;
