@@ -19,14 +19,12 @@ export const useMultiProfileMap = ({
 
   useEffect(() => {
     if (tabItem !== undefined && tabItem?.length > 0) {
-      getArtists([
-        ...new Set(
-          tabItem?.map(item => item?.artists?.map(artist => artist.id)).flat(1),
-        ),
-      ]).then(v => {
+      getArtists(
+        tabItem?.map(item => item?.artists?.map(artist => artist.id)).flat(1),
+      ).then(v => {
         const result = v.reduce((acc, curr) => {
           if (curr['images']) {
-            return acc.set(`${curr['id']}`, curr['images'][0].url);
+            return acc.set(`${curr['id']}`, curr['images'][0]?.url);
           }
           return acc.set(`${curr['id']}`, PLACEHOLDER_IMAGE);
         }, new Map()) as Map<string, string>;
