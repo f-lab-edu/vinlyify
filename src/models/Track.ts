@@ -19,7 +19,7 @@ export interface Track extends MetaInfo {
 }
 
 export interface Tracks extends Pagination {
-  items: Album[];
+  items: Track[];
 }
 
 export interface CurrentlyPlayingTrack {
