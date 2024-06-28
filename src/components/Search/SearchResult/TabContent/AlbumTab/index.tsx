@@ -1,6 +1,7 @@
 import { Album } from '@/models/Album';
 import { Pagination } from '@/models/Pagination';
 import { useMultiProfileMap } from '../_shared/MutliProfile/hooks/useMultiProfileMap';
+import Paging from '../_shared/Paging';
 import AlbumList from './AlbumList';
 
 const AlbumTab = ({
@@ -8,13 +9,13 @@ const AlbumTab = ({
   currentTabPagingInfo,
 }: {
   tabItem: Album[];
-  currentTabPagingInfo: Pagination | null;
+  currentTabPagingInfo: Pagination;
 }) => {
   const artistImgs = useMultiProfileMap({ tabItem });
   return (
     <>
       <AlbumList tabItem={tabItem} artistImgUrls={artistImgs} />
-      <div>{JSON.stringify(currentTabPagingInfo)}</div>
+      <Paging currentTabPagingInfo={currentTabPagingInfo} />
     </>
   );
 };

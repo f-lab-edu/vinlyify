@@ -1,3 +1,4 @@
+import { URL_PARAMS } from '@/constants/url';
 import { useSearchKeyword } from '@/hooks/query/useSearchKeyword';
 import { useDebounce } from '@/hooks/useDebounce';
 import classNames from 'classnames/bind';
@@ -17,7 +18,7 @@ const Badge = ({ badgeTag, badgeNumber }: BadgeProps) => {
 
   const debouncedRequest = useDebounce(() => {
     if (badgeTag) {
-      searchParams.set('keyword', badgeTag);
+      searchParams.set(URL_PARAMS.KEYWORD, badgeTag);
       setSearchParams(searchParams);
     }
     refetch();

@@ -1,4 +1,4 @@
-import { PAGE } from '@/constants';
+import { PAGE } from '@/constants/url';
 import { useAuth } from '@/hooks/useAuth';
 
 import HomeIcon from '@/assets/homeIcon.svg';

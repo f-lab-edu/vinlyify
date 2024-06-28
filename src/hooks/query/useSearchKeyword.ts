@@ -1,11 +1,8 @@
 import { searchFromMyTopOne, searchKeyword } from '@/api/spotify';
-import { URL_PARAMS } from '@/constants';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { useSearchParams } from 'react-router-dom';
+import useCurrentKeyword from '../searchParams/useCurrentKeyword';
 
 export const useSearchKeyword = () => {
-  const [searchParams] = useSearchParams();
-
   // 검색어를 입력하지 않은 경우 내 top1 아티스트 기준으로
   const defaultSearch = useQuery({
     queryKey: useSearchKeyword.queryKey(),
@@ -13,7 +10,7 @@ export const useSearchKeyword = () => {
     staleTime: Infinity,
   });
 
-  const keywordParam = searchParams.get(URL_PARAMS.KEYWORD);
+  const keywordParam = useCurrentKeyword();
 
   const res = useQuery({
     queryKey: useSearchKeyword.queryKey(keywordParam),
@@ -22,7 +19,7 @@ export const useSearchKeyword = () => {
     staleTime: 2_000,
     placeholderData: keepPreviousData,
   });
-  if (!searchParams.has(URL_PARAMS.KEYWORD)) return defaultSearch;
+  if (keywordParam == null) return defaultSearch;
 
   return res;
 };

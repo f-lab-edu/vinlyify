@@ -1,4 +1,4 @@
-import { PAGE } from '@/constants';
+import { PAGE } from '@/constants/url';
 import { BaseLayout } from '@/layout/BaseLayout';
 import ErrorPage from '@/pages/ErrorPage';
 import MainPage from '@/pages/MainPage';
