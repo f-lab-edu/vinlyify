@@ -7,7 +7,7 @@ import {
 import { Artist } from '@/models/Profile';
 
 import { SearchResult, TrackItem, TrackSearchResult } from '@/models/Spotify';
-import { Track } from '@/models/track';
+import { Track } from '@/models/Track';
 
 import ky, { HTTPError } from 'ky';
 
