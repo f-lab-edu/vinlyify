@@ -2,7 +2,7 @@ import { playTrack } from '@/api/spotify';
 import PlayIcon from '@/assets/playIcon.svg';
 import { useDebounce } from '@/hooks/useDebounce';
 import { MetaInfo } from '@/models/MetaInfo';
-import { CurrentlyPlayingTrack } from '@/models/track';
+import { CurrentlyPlayingTrack } from '@/models/Track';
 import classNames from 'classnames/bind';
 import { HtmlHTMLAttributes } from 'react';
 import Style from '../button.module.scss';

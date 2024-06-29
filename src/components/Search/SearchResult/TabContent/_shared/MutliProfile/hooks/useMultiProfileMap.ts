@@ -1,7 +1,7 @@
 import { getArtists } from '@/api/spotify';
 import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { Album } from '@/models/Album';
-import { Track } from '@/models/track';
+import { Track } from '@/models/Track';
 
 import { useEffect, useMemo, useState } from 'react';
 

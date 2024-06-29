@@ -1,7 +1,7 @@
 import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { Album } from '@/models/Album';
 import { Image, MetaInfo } from '@/models/MetaInfo';
-import { Track } from '@/models/track';
+import { Track } from '@/models/Track';
 
 import { useMemo } from 'react';
 

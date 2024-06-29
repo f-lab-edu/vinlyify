@@ -3,7 +3,6 @@ import { Playlist } from '@/models/Playlist';
 import classNames from 'classnames/bind';
 import Card from '../_shared/Card';
 import CoverImage from '../_shared/CoverImage';
-import CoverImageSkeleton from '../_shared/CoverImage/CoverImageSkeleton';
 
 import Style from './playlist-item.module.scss';
 
@@ -25,7 +24,7 @@ const PlaylistItem = ({ item }: { item: Playlist }) => {
             url={item?.external_urls?.spotify}
           />
         ) : (
-          <CoverImageSkeleton />
+          <CoverImage.Skeleton />
         )
       }
       contextUri={item?.uri}

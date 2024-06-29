@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { HtmlHTMLAttributes, ReactNode } from 'react';
-import CoverImageSkeleton from '../CoverImage/CoverImageSkeleton';
+import CoverImage from '../CoverImage';
 import Logo from '../Logo';
 import PlayButton from '../PlayButton';
 import Style from './card.module.scss';
@@ -19,7 +19,7 @@ export interface CardProps extends HtmlHTMLAttributes<HTMLLIElement> {
 const CardSkeleton = () => {
   return (
     <li className={style('card')}>
-      <CoverImageSkeleton />
+      <CoverImage.Skeleton />
       <Logo url="" className={style('loading-logo')} fill="skeleton" />
       <ul>
         <li className="wrap">

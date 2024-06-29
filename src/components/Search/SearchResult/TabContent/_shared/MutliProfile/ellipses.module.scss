@@ -1,0 +1,23 @@
+@use './profile.module.scss';
+.ellipses {
+  > span {
+    display: inline-block;
+    height: fit-content;
+    font-size: 2rem;
+  }
+}
+
+@keyframes slide-ellipses {
+  0% {
+    transform: translateX(-80%);
+  }
+}
+
+.wrap {
+  height: 100%;
+  display: inline-flex;
+  padding-left: 0.2rem;
+  align-items: center;
+
+  animation: slide-ellipses 1s 1;
+}

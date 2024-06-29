@@ -4,7 +4,7 @@ import { Artist } from '@/models/Profile';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import Image from '../Image';
-import Style from './profile.module.scss';
+import Style from './ellipses.module.scss';
 
 const style = classNames.bind(Style);
 
