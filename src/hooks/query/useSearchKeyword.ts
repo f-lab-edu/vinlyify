@@ -1,5 +1,5 @@
 import { searchFromMyTopOne, searchKeyword } from '@/api/spotify';
-import { URL_PARAMS } from '@/constants';
+import { URL_PARAMS } from '@/constants/url';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 
