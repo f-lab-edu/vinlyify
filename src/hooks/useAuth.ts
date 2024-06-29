@@ -1,10 +1,5 @@
-import {
-  ACCESS_TOKEN,
-  API,
-  PAGE,
-  SPOTIFY_WEB_API,
-  VINYLIFY_TOKEN,
-} from '@/constants';
+import { ACCESS_TOKEN, SPOTIFY_WEB_API, VINYLIFY_TOKEN } from '@/constants';
+import { API, PAGE } from '@/constants/url';
 import { useCallback, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 

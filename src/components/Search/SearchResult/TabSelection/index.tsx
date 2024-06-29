@@ -1,3 +1,4 @@
+import { URL_PARAMS } from '@/constants/url';
 import classNames from 'classnames/bind';
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -21,6 +22,7 @@ export default function TabSelection() {
 
   const handleSelectMenu = useCallback(
     (item: keyof typeof TAB) => {
+      searchParams.delete(URL_PARAMS.PAGE);
       const searchParamKeyValuePair = [...searchParams].reduce(
         (acc, curr) => {
           const [key, val] = curr;

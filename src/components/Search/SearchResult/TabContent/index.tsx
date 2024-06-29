@@ -1,9 +1,10 @@
+import { usePagination } from '@/hooks/query/usePagination';
 import { useSearchKeyword } from '@/hooks/query/useSearchKeyword';
+import useCurrentPage from '@/hooks/searchParams/useCurrentPage';
+import useCurrentTab from '@/hooks/searchParams/useCurrentTab';
 import { Pagination } from '@/models/Pagination';
-import { SearchResult } from '@/models/Spotify';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { SCOPE, TAB } from '../../constants';
+import { TAB } from '../../constants';
 import AlbumTab from './AlbumTab';
 import ArtistTab from './ArtistTab';
 import PlaylistsTab from './PlaylistTab';
@@ -39,19 +40,30 @@ const tab = [
 
 export default function TabContent() {
   const { data, isFetched, isLoading } = useSearchKeyword();
-  const [searchParam] = useSearchParams();
   const [currentTab, setCurrentTab] = useState<TabType>(tab[0]);
   const [currentTabPagingInfo, setCurrentTabPagingInfo] =
     useState<Pagination | null>(null);
   const [currentTabItem, setCurrentTabItem] = useState<CurrentTabType>(null);
+  const currentTabName = useCurrentTab();
+  const pageData = usePagination();
+
+  const { currentPage } = useCurrentPage();
 
   useEffect(() => {
-    const changedTab = tab.filter(
-      tabItem => searchParam.get(SCOPE) === tabItem.tab,
-    );
-    if (isFetched && data != null) {
-      const { items, ...pageInfo } =
-        data[(searchParam.get(SCOPE) ?? tab[0].tab) as keyof SearchResult];
+    if (currentPage != null && pageData != null) {
+      const currentPageData = pageData.filter(
+        page =>
+          page.data?.[currentTabName]?.offset == (Number(currentPage) - 1) * 20,
+      )?.[0];
+      setCurrentTabItem(currentPageData?.data?.[currentTabName]?.items);
+    }
+  }, [currentPage, pageData]);
+
+  useEffect(() => {
+    const changedTab = tab.filter(tabItem => currentTabName === tabItem.tab);
+
+    if (isFetched && data != null && data[currentTabName] != null) {
+      const { items, ...pageInfo } = data[currentTabName];
       setCurrentTabPagingInfo(pageInfo);
       setCurrentTabItem(items);
     }
@@ -61,9 +73,9 @@ export default function TabContent() {
     } else {
       setCurrentTab(changedTab[0]);
     }
-  }, [searchParam, data, isFetched]);
+  }, [currentTabName, data, isFetched]);
 
-  if (isLoading) {
+  if (isLoading || currentTabPagingInfo == null || currentTabItem == null) {
     return (
       <Grid>
         {Array.from({ length: 20 }, (_, index) => (

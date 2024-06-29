@@ -1,3 +1,4 @@
+import { URL_PARAMS } from '@/constants/url';
 import { useSearchKeyword } from '@/hooks/query/useSearchKeyword';
 import { useDebounce } from '@/hooks/useDebounce';
 import classNames from 'classnames/bind';
@@ -32,7 +33,8 @@ export default function SearchInput() {
 
   const debouncedRequest = useDebounce(() => {
     if (keyword) {
-      searchParams.set('keyword', keyword);
+      searchParams.set(URL_PARAMS.KEYWORD, keyword);
+      searchParams.delete(URL_PARAMS.PAGE);
       setSearchParams(searchParams);
     }
     refetch();
