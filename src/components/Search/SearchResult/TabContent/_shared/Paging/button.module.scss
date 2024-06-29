@@ -11,6 +11,10 @@
   border-radius: 0.2rem;
   border: none;
   box-shadow: variables.$button-shadow;
+
+  &:not(.in_range) {
+    display: none;
+  }
 }
 .button:hover {
   &:not(.active) {

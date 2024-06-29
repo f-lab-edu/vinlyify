@@ -28,7 +28,12 @@ const Paging = ({
     <div className={style('paging')}>
       <div className={style('paging-wrap')}>
         {pageList.map((page, index) => (
-          <Button page={page} index={index} key={page} />
+          <Button
+            page={page}
+            index={index}
+            key={page}
+            totalPageLength={pageList.length}
+          />
         ))}
       </div>
     </div>
