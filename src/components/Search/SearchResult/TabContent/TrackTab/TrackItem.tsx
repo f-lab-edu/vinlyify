@@ -1,6 +1,7 @@
 import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { Track } from '@/models/Track';
-import { UTC2HHMMSS } from '@/utils';
+
+import { HHMMSSFormat } from '@/utils/time';
 import { useEffect, useMemo, useState } from 'react';
 import Card from '../_shared/Card';
 import CoverImage from '../_shared/CoverImage';
@@ -26,7 +27,7 @@ const TrackItem = ({
   }, [artistInfo]);
 
   const trackDurationHHMMSS = useMemo(
-    () => UTC2HHMMSS({ duration_ms: item.duration_ms }),
+    () => HHMMSSFormat({ utcTime: item.duration_ms }),
     [item],
   );
 
