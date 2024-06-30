@@ -46,6 +46,7 @@ const config: ViteConfig = {
         rewrite: path => path.replace(/^\/genius\/api/, ''),
       },
     },
+  },
   build: {
     sourcemap: true, // Source map generation must be turned on
   },
