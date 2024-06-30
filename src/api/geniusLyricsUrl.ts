@@ -1,4 +1,6 @@
-import { API, GENIUS_CLIENT_ACCESS_TOKEN } from '@/constants';
+import { GENIUS_CLIENT_ACCESS_TOKEN } from '@/constants';
+import { API } from '@/constants/url';
+
 import ky from 'ky';
 const api = ky.extend({
   prefixUrl: API.GENIUS,
