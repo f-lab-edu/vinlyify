@@ -3,7 +3,6 @@ import { Album } from '@/models/Album';
 import { useEffect, useState } from 'react';
 import Card from '../_shared/Card';
 import CoverImage from '../_shared/CoverImage';
-import CoverImageSkeleton from '../_shared/CoverImage/CoverImageSkeleton';
 import MultiProfile from '../_shared/MutliProfile';
 import { useMultiProfileImg } from '../_shared/MutliProfile/hooks/useMultiProfileImg';
 import Profile from '../_shared/MutliProfile/Profile';
@@ -40,7 +39,7 @@ const AlbumItem = ({
             url={item?.external_urls?.spotify}
           />
         ) : (
-          <CoverImageSkeleton />
+          <CoverImage.Skeleton />
         )
       }
       isPlayable={item?.is_playable}

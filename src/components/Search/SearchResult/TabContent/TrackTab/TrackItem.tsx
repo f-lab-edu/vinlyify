@@ -1,11 +1,9 @@
 import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { Track } from '@/models/Track';
-
 import { HHMMSSFormat } from '@/utils/time';
 import { useEffect, useMemo, useState } from 'react';
 import Card from '../_shared/Card';
 import CoverImage from '../_shared/CoverImage';
-import CoverImageSkeleton from '../_shared/CoverImage/CoverImageSkeleton';
 import MultiProfile from '../_shared/MutliProfile';
 import { useMultiProfileImg } from '../_shared/MutliProfile/hooks/useMultiProfileImg';
 import Profile from '../_shared/MutliProfile/Profile';
@@ -47,7 +45,7 @@ const TrackItem = ({
             url={item?.external_urls?.spotify}
           />
         ) : (
-          <CoverImageSkeleton />
+          <CoverImage.Skeleton />
         )
       }
       isPlayable={item?.is_playable}

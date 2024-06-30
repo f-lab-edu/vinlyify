@@ -4,7 +4,6 @@ import Card from '../_shared/Card';
 
 import compactNumberFormat from '@/utils/string';
 import CoverImage from '../_shared/CoverImage';
-import CoverImageSkeleton from '../_shared/CoverImage/CoverImageSkeleton';
 import GenreList from './GenreList';
 
 const ArtistItem = ({ item }: { item: Artist }) => {
@@ -28,7 +27,7 @@ const ArtistItem = ({ item }: { item: Artist }) => {
             }
           />
         ) : (
-          <CoverImageSkeleton />
+          <CoverImage.Skeleton />
         )
       }
     >
