@@ -1,0 +1,25 @@
+@use '@/utils/variables';
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+.button {
+  font-family: 'Jua', sans-serif;
+  background-color: variables.$raisin-black;
+  color: variables.$white;
+  aspect-ratio: 1/1;
+  width: 2rem;
+  font-size: 1em;
+  border-radius: 0.2rem;
+  border: none;
+  box-shadow: variables.$button-shadow;
+}
+.button:hover {
+  &:not(.active) {
+    background-color: variables.$pale-white-grey;
+  }
+  cursor: pointer;
+}
+
+.active {
+  background-color: variables.$white;
+  color: variables.$raisin-black;
+}
