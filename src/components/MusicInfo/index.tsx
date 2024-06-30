@@ -1,10 +1,10 @@
 import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
-import Lyrics from './Lyrics';
 import classNames from 'classnames/bind';
 import ArtistInfo from './ArtistInfo';
 import { default as PauseButton } from './Button/PauseButton';
 import PlayButton from './Button/PlayButton';
+import Lyrics from './Lyrics';
 import ProgressBar from './ProgressBar';
 import Style from './music-info.module.scss';
 
@@ -44,8 +44,9 @@ export default function MusicInfo() {
           duration={data?.item?.duration_ms}
         />
       </div>
-      <Lyrics term={data?.item?.name} artist={data?.item?.artists[0].name} />
+
       <ArtistInfo artists={data.item.artists} />
+      <Lyrics term={data?.item?.name} artist={data?.item?.artists[0].name} />
       <div>{JSON.stringify(data)}</div>
     </>
   );
