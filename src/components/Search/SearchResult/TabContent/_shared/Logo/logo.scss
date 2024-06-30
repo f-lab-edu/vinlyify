@@ -1,6 +1,15 @@
 @use '@/utils/variables';
 @use '@/utils/mixins';
 
+.logo {
+  text-decoration: none;
+  color: variables.$grey;
+}
+
 .logo-skeleton {
   color: variables.$light-grey-white !important;
+  text-decoration: none;
+}
+.logo-skeleton:hover {
+  cursor: not-allowed;
 }

@@ -1,0 +1,81 @@
+@use '../CoverImage/cover-image';
+@use '@/utils/variables';
+@use '@/utils/mixins';
+@use '../skeleton.scss';
+
+$title: 1.2rem;
+$sm-title: 1rem;
+$sm-font: 0.9rem;
+
+.card {
+  list-style: none;
+  height: fit-content;
+  min-height: 18rem;
+  text-overflow: ellipsis;
+  margin-bottom: 1rem;
+
+  li {
+    width: 100%;
+    list-style: none;
+    font-size: $sm-font;
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: variables.$light-grey;
+  }
+}
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.title {
+  height: 30%;
+  font-weight: 1000;
+  font-size: $title;
+  display: inline-block;
+  width: 100%;
+
+  @include mixins.mobile {
+    width: 9rem;
+    font-size: $sm-title;
+  }
+
+  @include mixins.tablet {
+    width: 15rem;
+  }
+
+  @include mixins.desktop {
+    width: 21rem;
+  }
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  color: variables.$tan-black;
+}
+.title-tag {
+  display: inline-block;
+  width: 100%;
+  color: variables.$light-grey;
+  padding-bottom: 0.4rem;
+}
+.title.skeleton {
+  width: 80%;
+  height: 1rem;
+  margin-bottom: 0.4rem;
+}
+.title-tag.skeleton {
+  height: 1rem;
+}
+
+.content.skeleton {
+  height: 3rem;
+  width: 100%;
+}

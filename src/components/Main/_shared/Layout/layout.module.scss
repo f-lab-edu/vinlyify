@@ -1,0 +1,7 @@
+@use '@/utils/variables';
+
+.layout {
+  color: variables.$white;
+  background: variables.$raisin-black;
+  padding: 1.2rem;
+}

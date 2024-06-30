@@ -6,7 +6,8 @@ import {
 } from '@/constants';
 import { Artist } from '@/models/Profile';
 
-import { SearchResult, TrackSearchResult } from '@/models/Spotify';
+import { SearchResult, TrackItem, TrackSearchResult } from '@/models/Spotify';
+import { Track } from '@/models/track';
 
 import ky, { HTTPError } from 'ky';
 
@@ -42,13 +43,17 @@ SPOTIFY_WEB_API.setAccessToken(localStorage.getItem(VINYLIFY_TOKEN));
  *  활성화된 기기 ID 찾기
  */
 
-export function getActiveDevice() {
-  return SPOTIFY_WEB_API.getMyDevices().then(
+export async function getActiveDevice() {
+  const currentActiveDevice = await SPOTIFY_WEB_API.getMyDevices().then(
     res =>
       res.devices.filter(device => {
         return device.is_active;
       })[0]?.id,
   );
+  if (currentActiveDevice == null) {
+    return SPOTIFY_WEB_API.getMyDevices().then(res => res?.devices[0]?.id);
+  }
+  return currentActiveDevice;
 }
 
 /**
@@ -67,10 +72,12 @@ export async function playTrack({
   context_uris = DEFAULT_PLAY_TRACK,
   active_device,
   offset = { position: 0 },
+  position_ms = 0,
 }: {
   context_uris: string;
   offset?: { uri?: string; position?: number };
   active_device?: string;
+  position_ms?: number;
 }) {
   return api
     .put(
@@ -79,10 +86,27 @@ export async function playTrack({
         json: {
           context_uri: context_uris,
           offset,
-          position_ms: 0,
+          position_ms,
         },
       },
     )
+    .json();
+}
+
+/**
+ * 트랙 중지하기
+ */
+export async function pauseTrack({
+  active_device,
+}: {
+  active_device?: string | null;
+}) {
+  return api
+    .put(`me/player/pause`, {
+      json: {
+        device_id: active_device ?? (await getActiveDevice()),
+      },
+    })
     .json();
 }
 
@@ -94,14 +118,14 @@ export function getPlayingTrack() {
 }
 
 // Top5 기반으로 추천리스트
-export async function getRecommendations() {
+export async function getRecommendations(limit = 20) {
   try {
     const topFiveIds = (await getTopTracks()).items
       .map(item => item.id)
       .join(',');
     const response = await api
-      .get(`recommendations?limit=5&seed_tracks=${topFiveIds}`, {})
-      .json();
+      .get(`recommendations?limit=${limit}&seed_tracks=${topFiveIds}`, {})
+      .json<{ tracks?: TrackItem[] }>();
     return response;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
@@ -163,4 +187,11 @@ export async function searchFromMyTopOne() {
     const { response } = e as HTTPError;
     throw new Error(`${response.status}`);
   }
+}
+
+/**
+ * artist top tracks : 재생 중인 트랙의 아티스트의 top 10 tracks
+ */
+export async function getArtistTopTracks({ id }: { id: string }) {
+  return api.get(`artists/${id}/top-tracks`, {}).json<{ tracks: Track[] }>();
 }

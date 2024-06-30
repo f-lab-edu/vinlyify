@@ -1,0 +1,10 @@
+.profile-container {
+  padding-bottom: 1rem;
+  margin-top: 0.3rem;
+}
+.profiles-container:hover {
+  :not(:hover) {
+    opacity: 0.8;
+  }
+  opacity: 1;
+}
