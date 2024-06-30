@@ -10,13 +10,13 @@ import Style from './carousel.module.scss';
 
 const style = classNames.bind(Style);
 
-export default function CarouselItem({
+const CarouselItem = ({
   item,
   index,
 }: {
   item: TrackSearchResult['items'][0];
   index: number;
-}) {
+}) => {
   const { data } = useCurrentPlayingTrack();
   return (
     <div className={style('carousel-item')} key={item?.id}>
@@ -40,4 +40,29 @@ export default function CarouselItem({
       </div>
     </div>
   );
-}
+};
+
+const CarouselItemSkelton = () => {
+  return (
+    <div className={style('carousel-item')}>
+      <div className={style('top-track')}>
+        <CoverImage.Skeleton />
+
+        <div className={style('top-track-name')}>
+          <PlayButton
+            aria-disabled={true}
+            context={''}
+            uri={''}
+            position_ms={0}
+          />
+
+          <div className={style('skeleton', 'title')}></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+CarouselItem.Skeleton = CarouselItemSkelton;
+
+export default CarouselItem;

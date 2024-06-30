@@ -1,9 +1,8 @@
 @use '@/utils/variables';
-@use '@/utils/_skeleton';
+@use '@/utils/skeleton';
 
 .lyrics-body {
   white-space: pre-wrap;
-
   width: 60%;
   margin: 3rem auto;
   padding: 1.5rem;
@@ -11,7 +10,7 @@
   color: variables.$white;
   background-color: variables.$white-grey;
   line-height: 1.6;
-  height: 60rem;
+  max-height: 60rem;
   overflow-y: scroll;
 }
 
