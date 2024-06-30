@@ -7,6 +7,8 @@ import { API } from '@/constants/url';
 import { Artist } from '@/models/Profile';
 
 import { SearchResult, TrackItem, TrackSearchResult } from '@/models/Spotify';
+
+import { chunks } from '@/utils/array';
 import { Track } from '@/models/Track';
 
 import ky, { HTTPError } from 'ky';
@@ -147,8 +149,19 @@ export async function getPage(endpoint: string) {
  */
 export async function getArtists(artists: string[]) {
   try {
-    const removedDuplicateArists = [...new Set(artists)];
-    const response = await SPOTIFY_WEB_API.getArtists(removedDuplicateArists);
+    const removedDuplicateArtists = [...new Set(artists)];
+    // 아티스트 id 요청이 너무 많으면 400 에러 => 20 개씩 나눠서 요청
+    if (removedDuplicateArtists.length >= 20) {
+      const artistGroupedBy20 = chunks(20)(removedDuplicateArtists);
+      const res = await Promise.all(
+        artistGroupedBy20.map((artists: string[]) =>
+          SPOTIFY_WEB_API.getArtists(artists),
+        ),
+      ).then(v => v.flat());
+      return res.map(v => v?.artists).flat();
+    }
+
+    const response = await SPOTIFY_WEB_API.getArtists(removedDuplicateArtists);
     if ('artists' in response) return response.artists as unknown as Artist[];
     else throw new Error('something went wrong...');
   } catch (e: unknown) {
