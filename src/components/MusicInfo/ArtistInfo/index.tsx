@@ -1,5 +1,5 @@
 import { useArtist } from '@/hooks/query/useArtist';
-import { CurrentlyPlayingTrack } from '@/models/track';
+import { CurrentlyPlayingTrack } from '@/models/Track';
 import classNames from 'classnames/bind';
 import ArtistInfoCard from './ArtistInfoCard';
 import Style from './artist-info.module.scss';

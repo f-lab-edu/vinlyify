@@ -1,4 +1,4 @@
-import { API } from '@/constants';
+import { API } from '@/constants/url';
 import { useAuth } from '@/hooks/useAuth';
 import classNames from 'classnames/bind';
 import Style from './auth-button.module.scss';
