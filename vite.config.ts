@@ -38,6 +38,14 @@ const config: ViteConfig = {
     globals: true,
     environment: 'jsdom',
   },
+  server: {
+    proxy: {
+      '/genius/api': {
+        target: 'https://api.genius.com',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/genius\/api/, ''),
+      },
+    },
   build: {
     sourcemap: true, // Source map generation must be turned on
   },
