@@ -1,13 +1,13 @@
 import {
-  API,
   DEFAULT_PLAY_TRACK,
   SPOTIFY_WEB_API,
   VINYLIFY_TOKEN,
 } from '@/constants';
+import { API } from '@/constants/url';
 import { Artist } from '@/models/Profile';
 
 import { SearchResult, TrackItem, TrackSearchResult } from '@/models/Spotify';
-import { Track } from '@/models/track';
+import { Track } from '@/models/Track';
 
 import ky, { HTTPError } from 'ky';
 

@@ -1,4 +1,4 @@
-import { API } from '@/constants';
+import { API } from '@/constants/url';
 import ky from 'ky';
 import { geniusSearchUrl } from './geniusLyricsUrl';
 const api = ky.extend({

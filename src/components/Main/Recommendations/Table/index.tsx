@@ -21,7 +21,7 @@ const Table = ({
     <ul className={style('table')}>
       {items.map(item => (
         <li className={style('table-item')} key={item.id}>
-          <li>
+          <div>
             <img
               src={
                 item?.album?.images == null
@@ -30,13 +30,13 @@ const Table = ({
               }
               alt={`${item?.album.name} 앨범 커버 이미지`}
             />
-          </li>
+          </div>
 
-          <li className={style('table-item-description')}>
+          <div className={style('table-item-description')}>
             <div className={style('top-track-name')}>{item?.name} </div>
             <div>
               {item?.artists.map((artist, index) => (
-                <>
+                <span key={artist.id}>
                   <Link
                     to={artist.external_urls?.spotify ?? '#'}
                     className={style('artist-name', 'description', 'link')}
@@ -44,7 +44,7 @@ const Table = ({
                     {artist.name}
                   </Link>
                   {index <= item?.artists.length - 2 ? ', ' : null}
-                </>
+                </span>
               ))}
             </div>
 
@@ -62,7 +62,7 @@ const Table = ({
                 {HHMMSSFormat({ utcTime: item.duration_ms })}
               </div>
             </div>
-          </li>
+          </div>
         </li>
       ))}
     </ul>
@@ -71,22 +71,22 @@ const Table = ({
 
 const TableSkeleton = () => {
   return (
-    <ul className={style('table')}>
+    <div className={style('table')}>
       {Array.from({ length: 20 }).map((_, index) => (
-        <li className={style('table-item')} key={`skeleton-${index + 1}`}>
-          <li className={style('skeleton-image', 'skeleton')}></li>
+        <div className={style('table-item')} key={`skeleton-${index + 1}`}>
+          <div className={style('skeleton-image', 'skeleton')}></div>
 
-          <li className={style('table-item-description')}>
+          <div className={style('table-item-description')}>
             <span className={style('skeleton', 'track-name')}></span>
             <span className={style('skeleton', 'artist-name-skeleton')} />
             <div className={style('bottom-content')}>
               <PlayButton context="" position_ms={0} aria-disabled={true} />
               <span className={style('skeleton', 'description-skeleton')} />
             </div>
-          </li>
-        </li>
+          </div>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 

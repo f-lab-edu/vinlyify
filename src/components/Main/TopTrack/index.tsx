@@ -1,4 +1,4 @@
-import { PAGE } from '@/constants';
+import { PAGE } from '@/constants/url';
 import { useTopTracks } from '@/hooks/query/useTopTracks';
 import AnimatedTitle from '../_shared/AnimatedTitle';
 import NothingToShow from '../_shared/NothingToShow/NothingToShow';

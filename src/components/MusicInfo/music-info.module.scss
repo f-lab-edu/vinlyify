@@ -1,5 +1,18 @@
+@use '@/utils/variables';
+.wrap {
+  color: variables.$white;
+  background: variables.$white-grey;
+  padding: 1.2rem;
+}
+
 .music-player-wrap {
   display: inline-flex;
   width: 100%;
   justify-content: center;
+
+  button {
+    svg {
+      color: variables.$white !important;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import { Image } from '@/models/MetaInfo';
+import FixedWrap from '../_shared/FixedWrap';
 import Album from './Album';
 import Cover from './Cover';
-import FixedWrap from './FixedWrap';
 import Print from './Print';
 import VinylBody from './VinylBody';
 

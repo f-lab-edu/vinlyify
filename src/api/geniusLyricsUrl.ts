@@ -1,4 +1,6 @@
-import { API, GENIUS_CLIENT_ACCESS_TOKEN } from '@/constants';
+import { GENIUS_CLIENT_ACCESS_TOKEN } from '@/constants';
+import { API } from '@/constants/url';
+
 import ky from 'ky';
 const api = ky.extend({
   prefixUrl: API.GENIUS,
@@ -28,18 +30,30 @@ interface HitResponse {
   type: string;
   result: {
     url: string;
+    path: string;
+    lyrics_state: 'complete' | 'incomplete';
+    title: string;
   };
 }
 
 export async function geniusSearchUrl(searchQ: string) {
+  const songName = searchQ.split(' ').at(-1)?.toLowerCase();
   const res: LyricsResponse = await api
     .get(`search`, {
       searchParams: { q: searchQ, access_token: GENIUS_CLIENT_ACCESS_TOKEN },
     })
     .json();
-
-  const urls = res?.response?.hits
-    .map(v => v?.result?.url)
-    .sort((a, b) => a.length - b.length);
+  const resUrlSortedArray = res.response?.hits
+    .filter(
+      v =>
+        v?.result?.lyrics_state === 'complete' &&
+        v?.result?.path.match(/-lyrics$/) &&
+        v?.result?.title.toLowerCase() === songName,
+    )
+    .map(v => v?.result?.url);
+  if (resUrlSortedArray == null) {
+    return null;
+  }
+  const urls = resUrlSortedArray.sort((a, b) => a.length - b.length);
   return urls ? urls[0] : null;
 }
