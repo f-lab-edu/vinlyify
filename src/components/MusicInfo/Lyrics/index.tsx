@@ -1,3 +1,4 @@
+import NothingToShow from '@/components/Main/_shared/NothingToShow/NothingToShow';
 import { useCurrentPlayingTrackLyrics } from '@/hooks/query/useCurrentPlayingTrackLyrics';
 import '@/style/music-info/album.scss';
 import classNames from 'classnames/bind';
@@ -44,12 +45,15 @@ const Lyrics = ({ term, artist }: CurrentlyPlayingTrackLyrics) => {
   });
 
   if (isLoading) return <LyricsSkeleton />;
-  if (!data?.result) return null;
+  if (!data?.result)
+    return <NothingToShow message={`"${term}"에 해당하는 가사가 없습니다.`} />;
   return (
-    <div className={style('lyrics-body')}>
-      {data?.result}
-      <div className={style('lyrics-credit')}>lyrics from Genius</div>
-    </div>
+    <>
+      <div className={style('lyrics-body')}>
+        {data?.result}
+        <div className={style('lyrics-credit')}>lyrics from Genius</div>
+      </div>
+    </>
   );
 };
 export default Lyrics;
