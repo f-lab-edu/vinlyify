@@ -48,7 +48,6 @@ export async function geniusSearchUrl({
       searchParams: { q: searchQ, access_token: GENIUS_CLIENT_ACCESS_TOKEN },
     })
     .json();
-  console.log(artist, term, res?.response?.hits);
   const resUrlSortedArray = res.response?.hits
     .filter(
       v =>
