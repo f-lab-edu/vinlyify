@@ -53,10 +53,11 @@ export async function geniusSearchUrl({
     .filter(
       v =>
         v?.result?.lyrics_state === 'complete' &&
-        v?.result?.path.match(/-lyrics$/) &&
-        v?.result?.primary_artist_names
-          .toLowerCase()
-          .match(artist.toLowerCase()),
+        RegExp(/-lyrics$/).exec(v?.result?.path) &&
+        (RegExp(artist.toLowerCase()).exec(
+          v?.result?.primary_artist_names.toLowerCase(),
+        ) ||
+          RegExp(term.toLowerCase()).exec(v?.result?.title.toLowerCase())),
     )
     .map(v => v?.result?.url);
   if (resUrlSortedArray == null) {
