@@ -8,6 +8,7 @@ const style = classNames.bind(Style);
 
 const CAROUSEL_ITEM_COUNT = 20;
 
+
 const Carousel = ({
   items,
 }: Readonly<{
@@ -29,6 +30,7 @@ const Carousel = ({
     </div>
   );
 };
+
 const CarouselSkeleton = () => {
   return (
     <div className={style('wrap')}>

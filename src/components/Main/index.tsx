@@ -1,6 +1,9 @@
+import Recommendations from '@/components/Main/Recommendations';
 import TopTrack from '@/components/Main/TopTrack';
+
 import Recommendations from './Recommendations';
-import Layout from './_shared/Layout';
+import Layout from '../_shared/Layout';
+
 
 export default function Main() {
   return (

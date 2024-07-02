@@ -2,13 +2,14 @@ import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
 import classNames from 'classnames/bind';
 import ArtistInfo from './ArtistInfo';
-
 import { default as PauseButton } from './Button/PauseButton';
 import PlayButton from './Button/PlayButton';
+import Lyrics from './Lyrics';
 import ProgressBar from './ProgressBar';
 import Style from './music-info.module.scss';
 
-import Vinyl from './Vinyl';
+import AnimatedTitle from '../_shared/AnimatedTitle';
+import Vinyl from './Vinyl/Vinyl';
 
 const style = classNames.bind(Style);
 
@@ -18,10 +19,8 @@ export default function MusicInfo() {
   return !data?.item ? (
     <>nothing to show...</>
   ) : (
-    <>
-      {/* <h1>
-        {data.item.name}, current progress: {data?.progress_ms}
-      </h1> */}
+    <div className={style('wrap')}>
+      <AnimatedTitle>{data.item.name}</AnimatedTitle>
       <Vinyl
         imgUrl={
           data.item?.album?.images[0].url
@@ -44,8 +43,10 @@ export default function MusicInfo() {
           duration={data?.item?.duration_ms}
         />
       </div>
+      <AnimatedTitle>Artists</AnimatedTitle>
       <ArtistInfo artists={data.item.artists} />
-      <div>{JSON.stringify(data)}</div>
-    </>
+      <AnimatedTitle>Lyrics</AnimatedTitle>
+      <Lyrics term={data?.item?.name} artist={data?.item?.artists[0].name} />
+    </div>
   );
 }

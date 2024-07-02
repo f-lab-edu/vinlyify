@@ -7,7 +7,6 @@ import { API } from '@/constants/url';
 import { Artist } from '@/models/Profile';
 
 import { SearchResult, TrackItem, TrackSearchResult } from '@/models/Spotify';
-
 import { chunks } from '@/utils/array';
 import { Track } from '@/models/Track';
 

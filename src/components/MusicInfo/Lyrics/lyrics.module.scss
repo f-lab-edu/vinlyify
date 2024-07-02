@@ -1,0 +1,60 @@
+@use '@/utils/variables';
+@use '@/utils/skeleton';
+
+.lyrics-body {
+  white-space: pre-wrap;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  border-radius: 4px;
+  color: variables.$white;
+  background-color: variables.$tan-black;
+  line-height: 1.6;
+  max-height: 60rem;
+  overflow-y: scroll;
+}
+
+.lyrics-credit {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: variables.$text-skeleton-greyish-white;
+  text-align: right;
+  clear: both;
+}
+.title {
+  width: 50%;
+  height: 1.5rem;
+
+  background-color: variables.$text-skeleton-greyish-white;
+}
+
+.content {
+  width: 80%;
+
+  height: 1rem;
+  background-color: variables.$text-skeleton-greyish-white;
+}
+
+.verse-wrap {
+  margin-bottom: 1rem;
+}
+.short {
+  width: 30%;
+}
+
+.size1 {
+  width: 40%;
+}
+.size2 {
+  width: 54%;
+}
+.size3 {
+  width: 60%;
+}
+
+.size4 {
+  width: 72%;
+}
+.size0 {
+  width: 84%;
+}

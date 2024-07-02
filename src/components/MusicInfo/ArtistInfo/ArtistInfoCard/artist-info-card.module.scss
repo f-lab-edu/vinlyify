@@ -9,10 +9,8 @@
   padding: 1rem 2rem;
   background-color: variables.$tan-black;
   color: variables.$white;
+  justify-content: center;
 
-  a {
-    width: 40%;
-  }
   ul {
     list-style: none;
     padding: 0;
@@ -30,20 +28,21 @@
   }
 
   @include mixins.mobile {
-    width: 18rem;
     ul {
-      width: 100%;
       flex-wrap: wrap;
     }
   }
   @include mixins.tablet {
     min-width: 18rem;
+    a {
+      width: 40%;
+    }
   }
   @include mixins.desktop {
     min-width: 24rem;
-    width: 49rem;
   }
 }
+
 .artist-info-wrap {
   display: inline-flex;
   flex-wrap: wrap;
@@ -52,6 +51,13 @@
   gap: 1rem;
   width: 100%;
   margin-bottom: 1.8rem;
+  justify-content: center;
+
+  @include mixins.desktop {
+    min-width: 24rem;
+
+    justify-content: normal;
+  }
 }
 .artist-name {
   margin-top: 0;

@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
@@ -22,6 +23,11 @@ const config: ViteConfig = {
       },
       include: '**/*.svg',
     }),
+    sentryVitePlugin({
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      org: 'pyotato',
+      project: 'javascript-react',
+    }),
   ],
   resolve: {
     alias: {
@@ -31,6 +37,18 @@ const config: ViteConfig = {
   test: {
     globals: true,
     environment: 'jsdom',
+  },
+  server: {
+    proxy: {
+      '/genius/api': {
+        target: 'https://api.genius.com',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/genius\/api/, ''),
+      },
+    },
+  },
+  build: {
+    sourcemap: true, // Source map generation must be turned on
   },
 };
 export default defineConfig(config);
