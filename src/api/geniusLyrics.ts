@@ -1,6 +1,6 @@
 import { API } from '@/constants/url';
 import ky from 'ky';
-import { geniusSearchUrl } from './geniusLyricsUrl';
+import { CurrentTrackSearchParam, geniusSearchUrl } from './geniusLyricsUrl';
 const api = ky.extend({
   prefixUrl: API.EXPRESS,
   hooks: {
@@ -22,8 +22,12 @@ interface LyricsResponse {
   params: string;
   result?: string;
 }
-export async function geniusSearch(searchQ: string) {
-  const url = await geniusSearchUrl(searchQ);
+export async function geniusSearch({
+  searchQ,
+  artist,
+  term,
+}: CurrentTrackSearchParam) {
+  const url = await geniusSearchUrl({ searchQ, artist, term });
   if (url == null) return null;
   const res: LyricsResponse = await api
     .get(`lyrics`, {

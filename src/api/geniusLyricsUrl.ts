@@ -24,6 +24,12 @@ interface LyricsResponse {
   response?: { hits: HitResponse[] };
 }
 
+export interface CurrentTrackSearchParam {
+  searchQ: string;
+  artist: string;
+  term: string;
+}
+
 interface HitResponse {
   highlights: [];
   index: string;
@@ -33,11 +39,15 @@ interface HitResponse {
     path: string;
     lyrics_state: 'complete' | 'incomplete';
     title: string;
+    primary_artist_names: string;
   };
 }
 
-export async function geniusSearchUrl(searchQ: string) {
-  const songName = searchQ.split(' ').at(-1)?.toLowerCase();
+export async function geniusSearchUrl({
+  searchQ,
+  artist,
+  term,
+}: CurrentTrackSearchParam) {
   const res: LyricsResponse = await api
     .get(`search`, {
       searchParams: { q: searchQ, access_token: GENIUS_CLIENT_ACCESS_TOKEN },
@@ -47,13 +57,17 @@ export async function geniusSearchUrl(searchQ: string) {
     .filter(
       v =>
         v?.result?.lyrics_state === 'complete' &&
-        v?.result?.path.match(/-lyrics$/) &&
-        v?.result?.title.toLowerCase() === songName,
+        RegExp(/-lyrics$/).exec(v?.result?.path) &&
+        (RegExp(artist.toLowerCase()).exec(
+          v?.result?.primary_artist_names.toLowerCase(),
+        ) ||
+          RegExp(term.toLowerCase()).exec(v?.result?.title.toLowerCase())),
     )
     .map(v => v?.result?.url);
   if (resUrlSortedArray == null) {
     return null;
   }
+
   const urls = resUrlSortedArray.sort((a, b) => a.length - b.length);
   return urls ? urls[0] : null;
 }
