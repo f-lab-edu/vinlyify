@@ -4,46 +4,51 @@ import { SearchResult } from '@/models/Spotify';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SCOPE, TAB } from '../../constants';
-import AlbumTab from './AlbumTab';
-import ArtistTab from './ArtistTab';
-import PlaylistsTab from './PlaylistTab';
-import TrackTab from './TrackTab';
 import Card from './_shared/Card';
-import Grid from './_shared/Grid';
 
-export type CurrentTabType = JSX.Element['props'];
-export type TabType = JSX.Element['props'];
+import NothingToShow from '@/components/Main/_shared/NothingToShow/NothingToShow';
+import InfiniteList from './_shared/InfiniteList';
+import AlbumList from './AlbumTab/AlbumList';
+import ArtistList from './ArtistTab/ArtistList';
+import PlaylistList from './PlaylistTab/PlaylistList';
+import TrackList from './TrackTab/TrackList';
+
+export interface TabProps {
+  innerRef?: (node?: Element | null) => void | null;
+}
 
 const tab = [
   {
     tab: TAB.ALBUMS,
     label: '앨범',
-    component: AlbumTab,
+    component: AlbumList,
   },
   {
     tab: TAB.ARTISTS,
     label: '아티스트',
-    component: ArtistTab,
+    component: ArtistList,
   },
   {
     tab: TAB.TRACKS,
     label: '트랙',
-    component: TrackTab,
+    component: TrackList,
   },
   {
     tab: TAB.PLAYLISTS,
     label: '플레이리스트',
-    component: PlaylistsTab,
+    component: PlaylistList,
   },
 ];
 
 export default function TabContent() {
   const { data, isFetched, isLoading } = useSearchKeyword();
   const [searchParam] = useSearchParams();
-  const [currentTab, setCurrentTab] = useState<TabType>(tab[0]);
+  const [currentTab, setCurrentTab] = useState<(typeof tab)[0]>(tab[0]);
   const [currentTabPagingInfo, setCurrentTabPagingInfo] =
     useState<Pagination | null>(null);
-  const [currentTabItem, setCurrentTabItem] = useState<CurrentTabType>(null);
+  const [currentTabItem, setCurrentTabItem] = useState<
+    SearchResult[keyof SearchResult]['items'] | null
+  >(null);
 
   useEffect(() => {
     const changedTab = tab.filter(
@@ -63,20 +68,30 @@ export default function TabContent() {
     }
   }, [searchParam, data, isFetched]);
 
-  if (isLoading) {
+  if (isLoading || currentTabPagingInfo == null) {
+    return Array.from({ length: 20 }, (_, index) => (
+      <Card.Skeleton key={index} />
+    ));
+  }
+
+  if (currentTabItem == null) {
     return (
-      <Grid>
-        {Array.from({ length: 20 }, (_, index) => (
-          <Card.Skelton key={index} />
-        ))}
-      </Grid>
+      <NothingToShow
+        message={
+          searchParam.has('keyword')
+            ? `'${searchParam.get('keyword')}'에 해당하는 검색결과가 없습니다.`
+            : '검색 결과가 없습니다.'
+        }
+      />
     );
   }
 
   return (
-    <currentTab.component
+    <InfiniteList
       tabItem={currentTabItem}
+      currentTab={currentTab.tab as keyof SearchResult}
       currentTabPagingInfo={currentTabPagingInfo}
+      TabList={currentTab.component}
     />
   );
 }
