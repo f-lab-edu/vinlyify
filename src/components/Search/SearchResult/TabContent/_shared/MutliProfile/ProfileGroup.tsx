@@ -1,8 +1,8 @@
 import Profile, { ProfileInfo } from './Profile';
 
 const ProfileGroup = ({ profile }: { profile: ProfileInfo[] }) => {
-  return profile.map(v => {
-    return <Profile key={v.img} profile={v} />;
+  return profile.map((profileInfo, index) => {
+    return <Profile key={profileInfo.img + index} profile={profileInfo} />;
   });
 };
 export default ProfileGroup;
