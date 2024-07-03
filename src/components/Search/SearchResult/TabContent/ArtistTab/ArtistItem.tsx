@@ -3,14 +3,20 @@ import { Artist } from '@/models/Profile';
 import Card from '../_shared/Card';
 
 import compactNumberFormat from '@/utils/string';
+import { TabProps } from '..';
 import CoverImage from '../_shared/CoverImage';
 import GenreList from './GenreList';
 
-const ArtistItem = ({ item }: { item: Artist }) => {
+interface ArtistItemProps extends TabProps {
+  item: Artist;
+}
+
+const ArtistItem = ({ item, innerRef }: ArtistItemProps) => {
   return (
     <Card
       title={item?.name}
       contextUri={item?.uri}
+      innerRef={innerRef}
       title_tag={
         item?.followers?.total == null
           ? null
