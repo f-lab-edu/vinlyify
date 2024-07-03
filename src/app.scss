@@ -1,4 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+$jua-font-eot: import('./fonts/Jua-Regular.eot');
+$jua-font-otf: import('./fonts/Jua-Regular.otf');
+$jua-font-woff: import('./fonts/Jua-Regular.woff');
+$jua-font-woff2: import('./fonts/Jua-Regular.woff2');
+
+@font-face {
+  font-family: 'Jua';
+  src:
+    local('Jua'),
+    url($jua-font-woff2) format('woff2'),
+    url($jua-font-woff) format('woff'),
+    url($jua-font-otf) format('otf'),
+    url($jua-font-eot) format('eot');
+}
+
 html,
 body,
 #root {

@@ -15,6 +15,10 @@
   padding: 1rem 0 0 0 !important;
   margin-top: 0;
 
+  button {
+    font-family: 'Jua', sans-serif;
+  }
+
   box-shadow: inset rgba(0, 0, 0, 0.2) 2px -6px 4px 0px;
 
   .unstyled-button {
@@ -30,14 +34,6 @@
     }
     padding: 0;
     text-transform: uppercase;
-  }
-
-  .submenu {
-    display: inline-flex;
-    width: calc(100% / 3);
-    padding: 10px;
-    font-size: 15px;
-    transition: 0.5s;
   }
 
   .focused {
