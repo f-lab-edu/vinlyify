@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SCOPE, TAB } from '../../constants';
 import AlbumTab from './AlbumTab';
-import ArtistTab from './ArtistTab';
+import ArtistTab from './ArtistTab/ArtistList';
 import PlaylistsTab from './PlaylistTab';
 import TrackTab from './TrackTab';
 import Card from './_shared/Card';
