@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import { HtmlHTMLAttributes, ReactNode } from 'react';
 import CoverImage from '../CoverImage';
-import Logo from '../Logo';
 import PlayButton from '../PlayButton';
 import Style from './card.module.scss';
 
@@ -14,13 +13,13 @@ export interface CardProps extends HtmlHTMLAttributes<HTMLLIElement> {
   topContent: ReactNode;
   isPlayable?: boolean;
   contextUri: string;
+  innerRef?: (node?: Element | null) => void;
 }
 
 const CardSkeleton = () => {
   return (
     <li className={style('card')}>
       <CoverImage.Skeleton />
-      <Logo url="" className={style('loading-logo')} fill="skeleton" />
       <ul>
         <li className="wrap">
           <span className={style('title-tag', 'skeleton')} />
@@ -39,9 +38,10 @@ const Card = ({
   topContent,
   isPlayable,
   contextUri,
+  innerRef,
 }: CardProps) => {
   return (
-    <li className={style('card', { center })}>
+    <li className={style('card', { center })} ref={innerRef}>
       {topContent}
 
       <ul>
@@ -60,6 +60,6 @@ const Card = ({
   );
 };
 
-Card.Skelton = CardSkeleton;
+Card.Skeleton = CardSkeleton;
 
 export default Card;
