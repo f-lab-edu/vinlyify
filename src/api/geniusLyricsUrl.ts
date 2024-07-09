@@ -1,6 +1,8 @@
 import { GENIUS_CLIENT_ACCESS_TOKEN } from '@/constants';
 import { API } from '@/constants/url';
 import { CurrentTrackSearchParam } from '@/hooks/query/useCurrentPlayingTrackLyrics';
+import { LyricsResponse } from '@/models/Lyrics';
+import { isValidLyrics } from '@/utils/lyrics';
 
 import ky from 'ky';
 const api = ky.extend({
@@ -20,24 +22,6 @@ const api = ky.extend({
   },
 });
 
-interface LyricsResponse {
-  meta: { status: number };
-  response?: { hits: HitResponse[] };
-}
-
-interface HitResponse {
-  highlights: [];
-  index: string;
-  type: string;
-  result: {
-    url: string;
-    path: string;
-    lyrics_state: 'complete' | 'incomplete';
-    title: string;
-    primary_artist_names: string;
-  };
-}
-
 export async function geniusSearchUrl({
   search_artist_term,
   artist,
@@ -51,17 +35,12 @@ export async function geniusSearchUrl({
       },
     })
     .json();
+
   const resUrlSortedArray = res.response?.hits
-    .filter(
-      v =>
-        v?.result?.lyrics_state === 'complete' &&
-        RegExp(/-lyrics$/).exec(v?.result?.path) &&
-        (RegExp(artist.toLowerCase()).exec(
-          v?.result?.primary_artist_names.toLowerCase(),
-        ) ||
-          RegExp(term.toLowerCase()).exec(v?.result?.title.toLowerCase())),
+    .filter(searchResult =>
+      isValidLyrics({ searchResult: searchResult?.result, artist, term }),
     )
-    .map(v => v?.result?.url);
+    .map(validLyrics => validLyrics?.result?.url);
   if (resUrlSortedArray == null) {
     return null;
   }

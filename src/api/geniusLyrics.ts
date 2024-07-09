@@ -19,10 +19,11 @@ const api = ky.extend({
   },
 });
 
-interface LyricsResponse {
+interface LyricsSearchResponse {
   params: string;
   result?: string;
 }
+
 export async function geniusSearch({
   search_artist_term,
   artist,
@@ -30,7 +31,7 @@ export async function geniusSearch({
 }: CurrentTrackSearchParam) {
   const url = await geniusSearchUrl({ search_artist_term, artist, term });
   if (url == null) return null;
-  const res: LyricsResponse = await api
+  const res: LyricsSearchResponse = await api
     .get(`lyrics`, {
       searchParams: { q: url },
     })
