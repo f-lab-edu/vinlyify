@@ -4,14 +4,20 @@ import classNames from 'classnames/bind';
 import Card from '../_shared/Card';
 import CoverImage from '../_shared/CoverImage';
 
+import { TabProps } from '..';
 import Style from './playlist-item.module.scss';
 
 const style = classNames.bind(Style);
 
-const PlaylistItem = ({ item }: { item: Playlist }) => {
+interface PlaylistItemProps extends TabProps {
+  item: Playlist;
+}
+
+const PlaylistItem = ({ item, innerRef }: PlaylistItemProps) => {
   return (
     <Card
       title={item?.name}
+      innerRef={innerRef}
       title_tag={`by. ${item?.owner?.display_name}`}
       topContent={
         item?.images ? (
