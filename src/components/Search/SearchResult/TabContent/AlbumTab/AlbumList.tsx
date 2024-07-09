@@ -1,20 +1,25 @@
 import { Album } from '@/models/Album';
-import Grid from '../_shared/Grid';
+import { TabProps } from '..';
+import { useMultiProfileMap } from '../_shared/MutliProfile/hooks/useMultiProfileMap';
 import AlbumItem from './AlbumItem';
 
-const AlbumList = ({
-  tabItem,
-  artistImgUrls,
-}: {
+interface AlbumListProps extends TabProps {
   tabItem: Album[];
-  artistImgUrls: Map<string, string>;
-}) => {
-  return (
-    <Grid>
-      {tabItem?.map(item => (
-        <AlbumItem item={item} key={item.id} artistImgUrls={artistImgUrls} />
-      ))}
-    </Grid>
+}
+
+const AlbumList = ({ tabItem, innerRef }: AlbumListProps) => {
+  const artistImgs = useMultiProfileMap({ tabItem });
+  return tabItem?.map((item, index) =>
+    index === tabItem.length - 1 ? (
+      <AlbumItem
+        item={item}
+        key={item.id}
+        artistImgUrls={artistImgs}
+        innerRef={innerRef}
+      />
+    ) : (
+      <AlbumItem item={item} key={item.id} artistImgUrls={artistImgs} />
+    ),
   );
 };
 
