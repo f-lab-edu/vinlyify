@@ -39,13 +39,16 @@ interface HitResponse {
 }
 
 export async function geniusSearchUrl({
-  searchQ,
+  search_artist_term,
   artist,
   term,
 }: CurrentTrackSearchParam) {
   const res: LyricsResponse = await api
     .get(`search`, {
-      searchParams: { q: searchQ, access_token: GENIUS_CLIENT_ACCESS_TOKEN },
+      searchParams: {
+        q: search_artist_term,
+        access_token: GENIUS_CLIENT_ACCESS_TOKEN,
+      },
     })
     .json();
   const resUrlSortedArray = res.response?.hits

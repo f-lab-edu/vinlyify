@@ -6,7 +6,7 @@ export interface CurrentlyPlayingTrackLyrics {
 }
 
 export interface CurrentTrackSearchParam extends CurrentlyPlayingTrackLyrics {
-  searchQ: string;
+  search_artist_term: string;
 }
 
 export const useCurrentPlayingTrackLyrics = ({
@@ -15,7 +15,8 @@ export const useCurrentPlayingTrackLyrics = ({
 }: CurrentlyPlayingTrackLyrics) => {
   const authRes = useQuery({
     queryKey: useCurrentPlayingTrackLyrics.queryKey({ term, artist }),
-    queryFn: () => geniusSearch({ searchQ: `${artist} ${term}`, artist, term }),
+    queryFn: () =>
+      geniusSearch({ search_artist_term: `${artist} ${term}`, artist, term }),
     retry(failureCount) {
       if (failureCount < 3) return true;
       else return false;

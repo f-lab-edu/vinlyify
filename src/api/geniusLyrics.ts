@@ -24,11 +24,11 @@ interface LyricsResponse {
   result?: string;
 }
 export async function geniusSearch({
-  searchQ,
+  search_artist_term,
   artist,
   term,
 }: CurrentTrackSearchParam) {
-  const url = await geniusSearchUrl({ searchQ, artist, term });
+  const url = await geniusSearchUrl({ search_artist_term, artist, term });
   if (url == null) return null;
   const res: LyricsResponse = await api
     .get(`lyrics`, {
