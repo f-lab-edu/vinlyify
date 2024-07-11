@@ -8,16 +8,38 @@ import Lyrics from './Lyrics';
 import ProgressBar from './ProgressBar';
 import Style from './music-info.module.scss';
 
+import { useRecommendations } from '@/hooks/query/useRecommendations';
+import Table from '../Main/Recommendations/Table';
+import NothingToShow from '../Main/_shared/NothingToShow/NothingToShow';
 import AnimatedTitle from '../_shared/AnimatedTitle';
 import Vinyl from './Vinyl/Vinyl';
 
 const style = classNames.bind(Style);
 
+const NoCurrentMusicInfo = () => {
+  const { data, isLoading } = useRecommendations();
+  return (
+    <div className={style('nothing-wrap')}>
+      <NothingToShow
+        message={'재생중인 트랙이 없습니다 😴'}
+        redirect={{ text: '트랙 검색하러 가기', path: '/search' }}
+      />
+      {isLoading && <Table.Skeleton />}
+      {data?.tracks != null ? (
+        <>
+          <AnimatedTitle>추천 트랙</AnimatedTitle>
+          {data?.tracks != null ? <Table items={data.tracks} /> : null}
+        </>
+      ) : null}
+    </div>
+  );
+};
+
 export default function MusicInfo() {
   const { data } = useCurrentPlayingTrack();
 
   return !data?.item ? (
-    <>nothing to show...</>
+    <NoCurrentMusicInfo />
   ) : (
     <div className={style('wrap')}>
       <AnimatedTitle>{data.item.name}</AnimatedTitle>

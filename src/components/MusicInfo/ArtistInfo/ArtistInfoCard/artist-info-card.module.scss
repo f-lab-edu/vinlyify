@@ -30,6 +30,7 @@
   @include mixins.mobile {
     ul {
       flex-wrap: wrap;
+      min-width: 18rem;
     }
   }
   @include mixins.tablet {

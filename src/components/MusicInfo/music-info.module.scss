@@ -1,7 +1,7 @@
 @use '@/utils/variables';
 .wrap {
   color: variables.$white;
-  background: variables.$white-grey;
+  background-color: variables.$white-grey;
   padding: 1.2rem;
 }
 
@@ -15,4 +15,9 @@
       color: variables.$white !important;
     }
   }
+}
+.nothing-wrap {
+  color: variables.$white;
+  background-color: variables.$raisin-black;
+  padding: 1rem;
 }
