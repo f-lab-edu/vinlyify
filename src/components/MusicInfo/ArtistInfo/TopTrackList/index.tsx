@@ -1,4 +1,4 @@
-import { Track } from '@/models/track';
+import { Track } from '@/models/Track';
 import classNames from 'classnames/bind';
 import Style from './top-track-list.module.scss';
 

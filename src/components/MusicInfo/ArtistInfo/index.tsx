@@ -1,5 +1,5 @@
 import { useArtist } from '@/hooks/query/useArtist';
-import { CurrentlyPlayingTrack } from '@/models/Track';
+import { Artist } from '@/models/Profile';
 import classNames from 'classnames/bind';
 import ArtistInfoCard from './ArtistInfoCard';
 import Style from './artist-info.module.scss';
@@ -9,7 +9,7 @@ const style = classNames.bind(Style);
 export default function ArtistInfo({
   artists,
 }: Readonly<{
-  artists: CurrentlyPlayingTrack['item']['artists'];
+  artists: Artist[];
 }>) {
   const { data } = useArtist({ artists });
 

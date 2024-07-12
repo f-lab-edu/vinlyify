@@ -1,17 +1,36 @@
-import { Loading } from '@/components/Main';
 import { Artist } from '@/models/Profile';
-import Grid from '../_shared/Grid';
-import ArtistItem from './ArtistItem';
+import Card from '../_shared/Card';
+
+import compactNumberFormat from '@/utils/string';
+import GenreList from './GenreList';
+
+const ArtistItem = ({ item }: { item: Artist }) => {
+  if (item?.name == null) {
+    return <Card.Skeleton />;
+  }
+  return (
+    <Card
+      title={item.name}
+      contextUri={item.uri}
+      titleTag={
+        item?.followers?.total == null
+          ? null
+          : `followers : ${compactNumberFormat(item?.followers?.total)}`
+      }
+      coverImage={item?.images?.[0]?.url}
+      externalUrls={item?.external_urls?.spotify}
+    >
+      {item?.genres && item.genres?.length > 0 ? (
+        <GenreList genres={item?.genres} />
+      ) : null}
+    </Card>
+  );
+};
 
 const ArtistTab = ({ tabItem }: { tabItem: Artist[] }) => {
-  if (tabItem?.length === 0) return <Loading />;
-  return (
-    <Grid>
-      {tabItem.map(item => (
-        <ArtistItem item={item} key={item.id} />
-      ))}
-    </Grid>
-  );
+  return tabItem?.map((item, index) => (
+    <ArtistItem item={item} key={item.id + index} />
+  ));
 };
 
 export default ArtistTab;
