@@ -1,11 +1,14 @@
 import {
-  API,
   DEFAULT_PLAY_TRACK,
   SPOTIFY_WEB_API,
   VINYLIFY_TOKEN,
 } from '@/constants';
+import { API } from '@/constants/url';
+import { Artist } from '@/models/Profile';
 
 import { SearchResult, TrackSearchResult } from '@/models/Spotify';
+import { Track } from '@/models/Track';
+import { chunks } from '@/utils/array';
 
 import ky, { HTTPError } from 'ky';
 
@@ -24,7 +27,7 @@ const api = ky.extend({
         console.log(res?.status);
         if (res?.status === 401) {
           console.log('invalid token');
-          SPOTIFY_WEB_API.setAccessToken('');
+          SPOTIFY_WEB_API.setAccessToken(null);
           localStorage.removeItem(VINYLIFY_TOKEN);
           window.location.replace(API.LOGIN);
         } else if (res?.status === 429) {
@@ -41,13 +44,17 @@ SPOTIFY_WEB_API.setAccessToken(localStorage.getItem(VINYLIFY_TOKEN));
  *  활성화된 기기 ID 찾기
  */
 
-export function getActiveDevice() {
-  return SPOTIFY_WEB_API.getMyDevices().then(
+export async function getActiveDevice() {
+  const currentActiveDevice = await SPOTIFY_WEB_API.getMyDevices().then(
     res =>
       res.devices.filter(device => {
         return device.is_active;
       })[0]?.id,
   );
+  if (currentActiveDevice == null) {
+    return SPOTIFY_WEB_API.getMyDevices().then(res => res?.devices[0]?.id);
+  }
+  return currentActiveDevice;
 }
 
 /**
@@ -66,10 +73,12 @@ export async function playTrack({
   context_uris = DEFAULT_PLAY_TRACK,
   active_device,
   offset = { position: 0 },
+  position_ms = 0,
 }: {
   context_uris: string;
   offset?: { uri?: string; position?: number };
   active_device?: string;
+  position_ms?: number;
 }) {
   return api
     .put(
@@ -78,10 +87,27 @@ export async function playTrack({
         json: {
           context_uri: context_uris,
           offset,
-          position_ms: 0,
+          position_ms,
         },
       },
     )
+    .json();
+}
+
+/**
+ * 트랙 중지하기
+ */
+export async function pauseTrack({
+  active_device,
+}: {
+  active_device?: string | null;
+}) {
+  return api
+    .put(`me/player/pause`, {
+      json: {
+        device_id: active_device ?? (await getActiveDevice()),
+      },
+    })
     .json();
 }
 
@@ -93,14 +119,14 @@ export function getPlayingTrack() {
 }
 
 // Top5 기반으로 추천리스트
-export async function getRecommendations() {
+export async function getRecommendations(limit = 20) {
   try {
     const topFiveIds = (await getTopTracks()).items
       .map(item => item.id)
       .join(',');
     const response = await api
-      .get(`recommendations?limit=5&seed_tracks=${topFiveIds}`, {})
-      .json();
+      .get(`recommendations?limit=${limit}&seed_tracks=${topFiveIds}`, {})
+      .json<{ tracks?: Track[] }>();
     return response;
   } catch (e: unknown) {
     const { response } = e as HTTPError;
@@ -122,8 +148,19 @@ export async function getPage(endpoint: string) {
  */
 export async function getArtists(artists: string[]) {
   try {
-    const removedDuplicateArists = [...new Set(artists)];
-    const response = await SPOTIFY_WEB_API.getArtists(removedDuplicateArists);
+    const removedDuplicateArtists = [...new Set(artists)];
+    // 아티스트 id 요청이 너무 많으면 400 에러 => 20 개씩 나눠서 요청
+    if (removedDuplicateArtists.length >= 20) {
+      const artistGroupedBy20 = chunks(20)(removedDuplicateArtists);
+      const res = await Promise.all(
+        artistGroupedBy20.map((artists: string[]) =>
+          SPOTIFY_WEB_API.getArtists(artists),
+        ),
+      ).then(v => v.flat());
+      return res.map(v => v?.artists).flat();
+    }
+
+    const response = await SPOTIFY_WEB_API.getArtists(removedDuplicateArtists);
     if ('artists' in response) return response.artists as unknown as Artist[];
     else throw new Error('something went wrong...');
   } catch (e: unknown) {
@@ -162,4 +199,11 @@ export async function searchFromMyTopOne() {
     const { response } = e as HTTPError;
     throw new Error(`${response.status}`);
   }
+}
+
+/**
+ * artist top tracks : 재생 중인 트랙의 아티스트의 top 10 tracks
+ */
+export async function getArtistTopTracks({ id }: { id: string }) {
+  return api.get(`artists/${id}/top-tracks`, {}).json<{ tracks: Track[] }>();
 }

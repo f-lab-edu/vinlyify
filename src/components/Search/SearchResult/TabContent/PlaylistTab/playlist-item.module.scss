@@ -1,0 +1,12 @@
+@use '@/utils/mixins';
+@use '@/utils/variables';
+
+.playlist-description {
+  font-size: 0.86rem !important;
+  margin-top: 0.3rem;
+  word-break: break-all;
+
+  a:hover {
+    color: variables.$raisin-black;
+  }
+}

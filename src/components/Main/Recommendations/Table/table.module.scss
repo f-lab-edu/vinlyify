@@ -1,0 +1,89 @@
+@use '@/utils/mixins';
+@use '@/utils/variables';
+@use '@/utils/skeleton';
+
+.table {
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  margin-top: 0;
+  @include mixins.tablet {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include mixins.desktop {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.table-item {
+  display: inline-flex;
+  width: 100%;
+  gap: 1rem;
+  img {
+    width: 6rem;
+    aspect-ratio: 1/1;
+    border-radius: variables.$border-radius-main;
+  }
+  margin-bottom: 1rem;
+}
+.table-item-description {
+  width: 90%;
+  color: variables.$light-grey-white;
+}
+
+.skeleton-image {
+  width: 6rem;
+  aspect-ratio: 1/1;
+  border-radius: variables.$border-radius-main;
+}
+
+.top-track-name {
+  font-size: 1rem;
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.track-name {
+  width: 9rem;
+  height: 1rem;
+}
+
+.description {
+  display: inline-block;
+  color: variables.$white;
+  font-size: 0.8rem;
+}
+
+.description-skeleton {
+  width: 3rem;
+  height: 1rem;
+}
+
+.link {
+  color: variables.$white-grey;
+}
+
+.artist-name {
+  margin: 0.4rem 0;
+  text-decoration: none;
+  &:hover {
+    color: variables.$pale-white-grey;
+  }
+}
+
+.artist-name-skeleton {
+  width: 70%;
+  display: block;
+  margin: 0.4rem 0 0.6rem;
+  height: 1rem;
+}
+
+.bottom-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}

@@ -1,0 +1,11 @@
+@use '@/utils/variables';
+@use './button.module.scss';
+
+.icon {
+  text-decoration: none;
+  svg {
+    height: 1rem;
+    width: 1rem;
+  }
+  margin: 0.3rem;
+}

@@ -1,0 +1,19 @@
+@use '@/utils/variables';
+@use '@/utils/mixins';
+
+.top-track-list {
+  padding: 0;
+  display: grid;
+  width: 100% !important;
+  @include mixins.mobile {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mixins.desktop {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

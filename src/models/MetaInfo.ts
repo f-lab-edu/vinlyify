@@ -1,7 +1,7 @@
 export interface Image {
   url: string;
-  height: number | null;
-  width: number | null;
+  height?: number | null;
+  width?: number | null;
 }
 
 export interface ExternalUrls {

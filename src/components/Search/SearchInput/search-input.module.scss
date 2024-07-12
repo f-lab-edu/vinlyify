@@ -1,0 +1,11 @@
+@use '@/utils/variables';
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+.search-input {
+  padding: 1.5rem 1rem;
+  display: inline-flex;
+  justify-content: center;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+  background-color: variables.$light-grey-white;
+}
