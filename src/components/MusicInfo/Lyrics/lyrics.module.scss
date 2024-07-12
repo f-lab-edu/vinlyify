@@ -3,13 +3,14 @@
 
 .lyrics-body {
   white-space: pre-wrap;
-  margin: 3rem auto;
+  margin: 3rem 1rem;
   padding: 1.5rem;
   border-radius: 4px;
   color: variables.$white;
   background-color: variables.$tan-black;
   line-height: 1.6;
   max-height: 60rem;
+  margin-left: 1rem;
   overflow-y: scroll;
 }
 
