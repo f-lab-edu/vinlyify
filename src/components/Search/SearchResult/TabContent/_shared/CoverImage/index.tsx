@@ -28,12 +28,7 @@ const CoverImage = ({ imgUrl, url }: ImgUrlProps) => {
 };
 
 const CoverImageSkeleton = () => {
-  return (
-    <>
-      <span className={style('cover-image', 'skeleton')} />
-      <Logo url={'#'} className={style({ 'logo-skeleton': 'skeleton' })} />
-    </>
-  );
+  return <span className={style('cover-image', 'skeleton')} />;
 };
 
 CoverImage.Skeleton = CoverImageSkeleton;
