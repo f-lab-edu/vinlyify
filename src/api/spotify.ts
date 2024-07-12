@@ -6,7 +6,7 @@ import {
 import { API } from '@/constants/url';
 import { Artist } from '@/models/Profile';
 
-import { SearchResult, TrackItem, TrackSearchResult } from '@/models/Spotify';
+import { SearchResult, TrackSearchResult } from '@/models/Spotify';
 import { Track } from '@/models/Track';
 import { chunks } from '@/utils/array';
 
@@ -126,7 +126,7 @@ export async function getRecommendations(limit = 20) {
       .join(',');
     const response = await api
       .get(`recommendations?limit=${limit}&seed_tracks=${topFiveIds}`, {})
-      .json<{ tracks?: TrackItem[] }>();
+      .json<{ tracks?: Track[] }>();
     return response;
   } catch (e: unknown) {
     const { response } = e as HTTPError;

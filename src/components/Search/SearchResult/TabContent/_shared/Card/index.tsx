@@ -60,6 +60,6 @@ const Card = ({
   );
 };
 
-Card.Skelton = CardSkeleton;
+Card.Skeleton = CardSkeleton;
 
 export default Card;
