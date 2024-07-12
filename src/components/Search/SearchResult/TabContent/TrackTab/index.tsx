@@ -1,9 +1,7 @@
-import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { Track } from '@/models/Track';
 import { HHMMSSFormat } from '@/utils/time';
 import { useEffect, useMemo, useState } from 'react';
 import Card from '../_shared/Card';
-import CoverImage from '../_shared/CoverImage';
 import MultiProfile from '../_shared/MutliProfile';
 import { useMultiProfileImg } from '../_shared/MutliProfile/hooks/useMultiProfileImg';
 import { useMultiProfileMap } from '../_shared/MutliProfile/hooks/useMultiProfileMap';
@@ -32,24 +30,12 @@ const TrackItem = ({
 
   return (
     <Card
-      title={item?.name}
-      contextUri={item?.uri}
-      title_tag={`${item?.album?.name} #${item?.track_number}`}
-      topContent={
-        item?.album?.images ? (
-          <CoverImage
-            imgUrl={
-              item?.album?.images === undefined
-                ? PLACEHOLDER_IMAGE
-                : item?.album?.images[0]?.url
-            }
-            url={item?.external_urls?.spotify}
-          />
-        ) : (
-          <CoverImage.Skeleton />
-        )
-      }
-      isPlayable={item?.is_playable}
+      title={item.name}
+      contextUri={item.uri}
+      titleTag={`${item.album.name} #${item.track_number}`}
+      coverImage={item.album.images?.[0]?.url}
+      externalUrls={item.external_urls?.spotify}
+      isPlayable={item.is_playable}
     >
       <li>재생 시간: {trackDurationHHMMSS}</li>
       {validTrackArtistInfo ? (
