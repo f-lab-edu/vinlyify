@@ -1,8 +1,6 @@
 @use '@/utils/variables';
-@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
 .button {
-  font-family: 'Jua', sans-serif;
   background-color: variables.$raisin-black;
   color: variables.$white;
   padding: 0.4rem;
