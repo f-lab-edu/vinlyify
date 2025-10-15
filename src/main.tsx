@@ -5,7 +5,11 @@ import App from './App.tsx';
 import * as Sentry from '@sentry/react';
 
 Sentry.init({
-  dsn: 'https://eca5db58ce49f449f514711ad97da51a@o4507496262860800.ingest.us.sentry.io/4507496266661888',
+  dsn: undefined,
+  enabled: false,
+  // dsn: __DEV__
+  //   ? undefined
+  //   :  'https://eca5db58ce49f449f514711ad97da51a@o4507496262860800.ingest.us.sentry.io/4507496266661888',
   integrations: [
     Sentry.browserTracingIntegration(),
     Sentry.replayIntegration(),

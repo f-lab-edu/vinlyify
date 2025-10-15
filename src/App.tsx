@@ -1,5 +1,6 @@
-import './app.scss';
 import Providers from './providers';
+import './style/global.css';
+
 function App() {
   return <Providers></Providers>;
 }

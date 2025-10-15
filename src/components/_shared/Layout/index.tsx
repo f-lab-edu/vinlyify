@@ -1,9 +1,11 @@
-import classNames from 'classnames/bind';
 import { ReactNode } from 'react';
-import Style from './layout.module.scss';
-const style = classNames.bind(Style);
+
 export default function Layout({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  return <section className={style('layout')}>{children}</section>;
+  return (
+    <section className="text-(--light-grey-200) bg-(--grey-500) p-[1.2rem]">
+      {children}
+    </section>
+  );
 }

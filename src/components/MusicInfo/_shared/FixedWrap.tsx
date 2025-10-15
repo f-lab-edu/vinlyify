@@ -1,11 +1,11 @@
-import '@/style/music-info/fixed-wrap.scss';
-import classNames from 'classnames';
-import { FC, HtmlHTMLAttributes } from 'react';
+import { ReactNode } from 'react';
 
-const FixedWrap: FC<HtmlHTMLAttributes<HTMLDivElement>> = ({ children }) => {
+const FixedWrap = ({ children }: { children: ReactNode }) => {
   return (
-    <div className={classNames('fixedWrap')}>
-      <div className="wrap">{children}</div>
+    <div className={'w-full relative inline-flex flex-col align-middle '}>
+      <div className="text-(--color-white) bg-(--light-grey-400) p-(--p-fluid-s) h-full inline-flex w-(length:--vinyl-album-fluid) align-middle justify-center-safe">
+        {children}
+      </div>
     </div>
   );
 };

@@ -1,9 +1,10 @@
-import { sentryVitePlugin } from '@sentry/vite-plugin';
+// import { sentryVitePlugin } from '@sentry/vite-plugin';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
+import tailwindcss from '@tailwindcss/vite';
 import type { UserConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import type { InlineConfig } from 'vitest';
@@ -13,6 +14,7 @@ const config: ViteConfig = {
   plugins: [
     react(),
     tsconfigPaths(),
+    tailwindcss(),
     svgr({
       // svgr options: https://react-svgr.com/docs/options/
       svgrOptions: {
@@ -23,11 +25,12 @@ const config: ViteConfig = {
       },
       include: '**/*.svg',
     }),
-    sentryVitePlugin({
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-      org: 'pyotato',
-      project: 'javascript-react',
-    }),
+    // sentryVitePlugin({
+    //   authToken: process.env.SENTRY_AUTH_TOKEN,
+    //   org: 'pyotato',
+    //   project: 'javascript-react',
+    //   disable: true, //disable
+    // }),
   ],
   resolve: {
     alias: {

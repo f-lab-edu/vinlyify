@@ -1,35 +1,43 @@
-import { PAGE } from '@/constants/url';
 import { useTopTracks } from '@/hooks/query/useTopTracks';
-import AnimatedTitle from '../_shared/AnimatedTitle';
-import NothingToShow from '../_shared/NothingToShow/NothingToShow';
-import Carousel from './Carousel';
+
+import AnimatedTitle from '@/components/_shared/AnimatedTitle';
+import Carousel from '@/components/_shared/Carousel';
+import CoverImage from '@/components/_shared/CoverImage';
+import PlayIcon from '@/components/_shared/Icons/Play';
+import TopTrackCard from './TopTrackCard';
 
 export default function TopTrack() {
   const { data, isLoading } = useTopTracks(20);
 
-  if (isLoading) {
-    return (
-      <>
-        <AnimatedTitle>My top 20</AnimatedTitle>
-        <Carousel.Skeleton />
-      </>
-    );
-  } else if (data?.items == null) {
-    return (
-      <>
-        <AnimatedTitle>Recommendations</AnimatedTitle>
-        <NothingToShow
-          message={'Top20 트랙이 없습니다😢'}
-          redirect={{ text: '검색하러 가기', path: PAGE.SEARCH }}
-        />
-      </>
-    );
-  }
-
   return (
     <>
       <AnimatedTitle>My top 20</AnimatedTitle>
-      <Carousel items={data.items} />
+      <Carousel>
+        {isLoading ? (
+          <>
+            {Array.from({ length: 20 }, (_, i) => (
+              <div
+                key={i + '-skeleton'}
+                className="text-(length:--text-fluid-s) flex-col inline-flex w-full align-middle gap-2"
+              >
+                <div className="w-44">
+                  <CoverImage.Skeleton />
+                </div>
+                <div className="inline-flex align-middle gap-2 w-full">
+                  <PlayIcon />
+                  <span className="animate-pulse w-full inline-block h-(length:--text-fluid-s) bg-(--grey-600)" />
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            {data?.items.map((item, index) => (
+              <TopTrackCard key={item.id} item={item} index={index} />
+            ))}
+          </>
+        )}
+      </Carousel>
     </>
   );
 }

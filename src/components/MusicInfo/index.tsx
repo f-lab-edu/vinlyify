@@ -1,74 +1,125 @@
 import { PLACEHOLDER_IMAGE } from '@/constants/image';
 import { useCurrentPlayingTrack } from '@/hooks/query/useCurrentPlayingTrack';
-import classNames from 'classnames/bind';
-import ArtistInfo from './ArtistInfo';
-import { default as PauseButton } from './Button/PauseButton';
-import PlayButton from './Button/PlayButton';
-import Lyrics from './Lyrics';
-import ProgressBar from './ProgressBar';
-import Style from './music-info.module.scss';
+import { useMyTopArtists } from '@/hooks/query/useMyTopArtists';
+import FullBackground from '@/layout/FullBackground';
 
-import { useRecommendations } from '@/hooks/query/useRecommendations';
-import Table from '../Main/Recommendations/Table';
-import NothingToShow from '../Main/_shared/NothingToShow/NothingToShow';
+import { useMemo } from 'react';
 import AnimatedTitle from '../_shared/AnimatedTitle';
-import Vinyl from './Vinyl/Vinyl';
-
-const style = classNames.bind(Style);
-
-const NoCurrentMusicInfo = () => {
-  const { data, isLoading } = useRecommendations();
-  return (
-    <div className={style('nothing-wrap')}>
-      <NothingToShow
-        message={'재생중인 트랙이 없습니다 😴'}
-        redirect={{ text: '트랙 검색하러 가기', path: '/search' }}
-      />
-      {isLoading && <Table.Skeleton />}
-      {data?.tracks != null ? (
-        <>
-          <AnimatedTitle>추천 트랙</AnimatedTitle>
-          {data?.tracks != null ? <Table items={data.tracks} /> : null}
-        </>
-      ) : null}
-    </div>
-  );
-};
+import Badge, { VARIANTS } from '../_shared/Badge';
+import PauseButton from '../_shared/Button/PlayPauseButton/PauseButton';
+import PlayButton from '../_shared/Button/PlayPauseButton/PlayButton';
+import Card from '../_shared/Card';
+import Grid from '../_shared/Grid';
+import Vinyl from '../_shared/Vinyl/Vinyl';
+import ArtistInfo from './ArtistInfo';
+import ArtistInfoSection from './ArtistInfoSection';
+import NavigateSearch from './NavigateSearch';
+import ProgressBar from './ProgressBar';
 
 export default function MusicInfo() {
-  const { data } = useCurrentPlayingTrack();
+  const { data, isLoading } = useCurrentPlayingTrack({ enabled: true });
+  const { data: myTopArtists, isFetched } = useMyTopArtists();
+  const artistId = useMemo(() => {
+    return data?.item?.artists.map(artist => artist?.id);
+  }, [data]);
 
-  return !data?.item ? (
-    <NoCurrentMusicInfo />
-  ) : (
-    <div className={style('wrap')}>
-      <AnimatedTitle>{data.item.name}</AnimatedTitle>
-      <Vinyl
-        imgUrl={
-          data.item?.album?.images[0].url
-            ? data.item?.album?.images[0].url
-            : PLACEHOLDER_IMAGE
-        }
-      />
-      <div className={style('music-player-wrap')}>
-        {data?.is_playing ? (
-          <PauseButton />
-        ) : (
-          <PlayButton
-            context={data.item.album.uri}
-            uri={data?.item.uri}
-            position_ms={data?.progress_ms || 0}
-          />
-        )}
-        <ProgressBar
-          progress={data?.progress_ms ?? 0}
-          duration={data?.item?.duration_ms}
-        />
+  if (isLoading) {
+    return <>loading...</>;
+  }
+
+  if (!data?.item) {
+    return (
+      <FullBackground className="p-8">
+        <h1 className="text-(length:--text-fluid-lg) text-(--light-grey-100)">
+          재생중인 음악이 없네요 😑
+        </h1>
+        <h2 className="text-(length:--text-fluid-md) text-(--light-grey-300)">
+          최근에 들은 아티스트들이에요. 듣고 싶은 노래를 검색해 보세요!
+        </h2>
+        <NavigateSearch />
+
+        <div className="w-full h-[80vh] overflow-scroll scrollbar-hide">
+          {isFetched && (
+            <Grid>
+              {(myTopArtists as SpotifyApi.UsersTopArtistsResponse)?.items.map(
+                item => (
+                  <Card
+                    className="bg-(--light-grey-200) rounded-[4px] p-4 mb-4 m-1 shadow-(--shadow-basic)"
+                    titleTag={`팔로워 : ${item?.followers.total}`}
+                    key={item.id}
+                    contextUri={item.uri}
+                    title={item.name}
+                    coverImage={item.images[0]?.url}
+                  >
+                    <div className="inline-flex gap-4 pb-4">
+                      {item.genres.map((genre, index) => (
+                        <Badge
+                          disabled={true}
+                          key={genre}
+                          className="w-fit"
+                          variant={
+                            Object.keys(VARIANTS)[
+                              index % Object.keys(VARIANTS).length
+                            ] as keyof typeof VARIANTS
+                          }
+                        >
+                          {genre}
+                        </Badge>
+                      ))}
+                    </div>
+                  </Card>
+                ),
+              )}
+            </Grid>
+          )}
+        </div>
+      </FullBackground>
+    );
+  }
+
+  return (
+    <div
+      className={
+        'w-full h-full -ms-overflow-style:none scrollbar-hide overflow-scroll text-(--color-white) bg-(--light-grey-400) p-5 inline-flex justify-center-safe'
+      }
+    >
+      <div className="w-full mb-8 h-fit lg:w-[60%] inline-flex flex-col gap-4">
+        <AnimatedTitle>{data.item.name}</AnimatedTitle>
+        <div className="w-full">
+          <div className="inline-flex justify-center align-middle w-full">
+            <div className="relative">
+              <Vinyl
+                imgUrl={
+                  data.item?.album?.images[0].url
+                    ? data.item?.album?.images[0].url
+                    : PLACEHOLDER_IMAGE
+                }
+              />
+            </div>
+          </div>
+          <div className="inline-flex w-full relative justify-center-safe align-middle">
+            {data?.is_playing ? (
+              <PauseButton />
+            ) : (
+              <PlayButton
+                context={data.item.album.uri}
+                uri={{ uri: data?.item.uri }}
+                position_ms={data?.progress_ms || 0}
+              />
+            )}
+            <ProgressBar
+              progress={data?.progress_ms ?? 0}
+              duration={data?.item?.duration_ms}
+            />
+            <div className="ml-2 py-1.5">
+              {(data?.item?.duration_ms / 60_000).toFixed(2).replace('.', ':')}
+            </div>
+          </div>
+        </div>
+        <ArtistInfo>
+          <ArtistInfoSection artistId={artistId} />
+        </ArtistInfo>
       </div>
-      <AnimatedTitle>Artists</AnimatedTitle>
-      <ArtistInfo artists={data.item.artists} />
-      <AnimatedTitle>Lyrics</AnimatedTitle>
-      <Lyrics term={data?.item?.name} artist={data?.item?.artists[0].name} />
     </div>
   );
 }

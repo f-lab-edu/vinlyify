@@ -1,11 +1,12 @@
-import { getRecommendations } from '@/api/spotify';
-import { useQuery } from '@tanstack/react-query';
+// !!DEPRECATED
+// import { getRecommendations } from '@/services/spotify';
+// import { useQuery } from '@tanstack/react-query';
 
-export const useRecommendations = () => {
-  return useQuery({
-    queryKey: useRecommendations.queryKey(),
-    queryFn: () => getRecommendations(),
-  });
-};
+// export const useRecommendations = () => {
+//   return useQuery({
+//     queryKey: useRecommendations.queryKey(),
+//     queryFn: () => getRecommendations(),
+//   });
+// };
 
-useRecommendations.queryKey = () => ['recommendations'];
+// useRecommendations.queryKey = () => ['recommendations'];

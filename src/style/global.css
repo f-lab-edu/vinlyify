@@ -1,0 +1,185 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Jua';
+  font-style: normal;
+  font-display: swap;
+  src:
+    local('Jua'),
+    url('../fonts/Jua-Regular.eot') format('woff2'),
+    url('../fonts/Jua-Regular.woff') format('woff'),
+    url('../fonts/Jua-Regular.otf') format('opentype');
+}
+
+@theme {
+  /* custom fonts */
+  --font-jua: 'Jua', sans-serif;
+
+  /* custom colors */
+  --color-white: oklch(1 0 0);
+  --light-grey-100: oklch(0.8945 0 0); /* $light-grey-white */
+  --light-grey-200: oklch(1 0 0); /* $white */
+  --light-grey-300: oklch(0.6879 0.0023 17.21); /* $pale-white-grey */
+  --light-grey-400: oklch(0.5417 0 0); /* $white-grey */
+  --light-grey-500: oklch(0.5278 0 0); /* $light-grey */
+  --grey-100: oklch(0.4459 0 0); /* $grey */
+  --grey-200: oklch(0.3523 0 0); /* $grey-black */
+  --grey-300: oklch(0.2891 0 0); /* $tan-black */
+  --grey-400: oklch(0.1924 0.0016 17.3); /* $dark-black */
+  --grey-500: oklch(0.273 0.006 17.52); /* $raisin-black */
+  --grey-600: oklch(0.7858 0 0); /* $text-skeleton-greyish-white */
+  --grey-700: oklch(0.8452 0 0); /* border */
+  --grey-transparent-200: oklch(0 0 0 / 20%);
+  --grey-transparent-240: oklch(0 0 0 / 24%);
+  --grey-transparent-300: oklch(0 0 0 / 30%);
+  --grey-transparent-400: oklch(0 0 0 / 40%);
+  --grey-transparent-600: oklch(0 0 0 / 60%);
+
+  --badge-black: oklch(0 0 0);
+  --badge-night: oklch(0.1603 0.0017 17.33);
+  --badge-eerie-black: oklch(0.2169 0.0047 17.52);
+  --badge-raisin-black: oklch(0.273 0.006 17.52);
+  --badge-jet: oklch(0.3235 0.0086 17.61);
+
+  --badge-silver: oklch(0.8078 0 0);
+  --badge-silver-sand: oklch(0.6392 0.0012 197.13);
+  --badge-silver-grey: oklch(0.8344 0.0053 247.89);
+  --badge-neon-silver: oklch(0.8487 0.0078 241.68);
+  --badge-shiny-nickel: oklch(0.8606 0.0095 242.86);
+
+  --shadow-neon:
+    0 0 2px var(--color-white), 0 0 18px var(--color-white),
+    0 0 40px var(--color-white);
+  --shadow-basic: 0px 3px 8px var(--grey-transparent-240); /* $basic-shadow */
+  --shadow-button: /* $button-shadow */
+    0px 2px 4px var(--grey-transparent-400),
+    0px 7px 13px -3px var(--grey-transparent-300),
+    inset 0px -3px 0px var(--grey-transparent-200);
+  --shadow-tab: inset 2px -6px 4px 0px var(--grey-transparent-200);
+  --shadow-tab-focused: var(--grey-transparent-400) -1px -3px 4px 0px;
+  --shadow-print: inset 0 0 0 5px oklch(0.6731 0 0 / 50%);
+  --shadow-cover:
+    5px 0 20px 0 var(--grey-transparent-600),
+    inset 0 0 10px 5px oklch(1 0 0 / 20%),
+    inset 0 0 4px 2px var(--grey-transparent-200);
+
+  /* animations */
+  --animate-neon-lights: neon-lights 10s linear infinite;
+  --animate-carousel: carousel 30s linear infinite;
+  --animate-vinyl:
+    5s linear vinylSpin infinite, 0.5s ease-out vinylOut 1s forwards;
+  --animate-slide: slide 1s 1;
+  --animate-slide-ellipses: slide-ellipses 1s 1;
+
+  /* fluid typography */
+  --text-fluid-xl: clamp(var(--text-base), 5vw, var(--text-4xl));
+  --text-fluid-l: clamp(var(--text-base), 4vw, var(--text-3xl));
+  --text-fluid-lg: clamp(var(--text-base), 4vw, var(--text-2xl));
+  --text-fluid-m: clamp(var(--text-sm), 2vw, var(--text-base));
+  --text-fluid-s: clamp(var(--text-xs), 1vw, var(--text-sm));
+  --text-fluid-xs: clamp(0.3rem, 3vw, var(--text-xs));
+
+  /* fluid image*/
+
+  --width-fluid-l: clamp(1rem, 4vw, inherit);
+  --width-fluid-m: clamp(6rem, 12vh, 20rem);
+  --width-fluid-xl: clamp(6rem, 30vh, 26rem);
+
+  /* skeleton widths*/
+  --skeleton-l: 12rem;
+
+  --p-fluid-s: clamp(0.2rem, 1vw, 1rem);
+
+  /* fluid radius*/
+  --rounded-fluid-s: clamp(0.2rem, 1vw, var(--radius-2xl));
+
+  /*fluid vinyl*/
+  --vinyl-body-fluid: max(95%, 1rem);
+  --vinyl-album-fluid: clamp(9rem, 26rem, 28vw);
+
+  /* custom break point */
+  --breakpoint-xs: 36rem; /* 576px */
+}
+
+/* animation - neon light */
+@keyframes neon-lights {
+  from {
+    color: var(--color-white);
+    text-shadow: var(--shadow-neon);
+  }
+  to {
+    text-shadow:
+      0 0 4px var(--color-white),
+      0 0 20px var(--color-white),
+      0 0 40px var(--color-white);
+  }
+}
+/* animation - carousel */
+@keyframes carousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}
+
+/* animation - vinyl out */
+@keyframes vinylOut {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 50%;
+  }
+}
+
+/* animation - vinyl spin */
+@keyframes vinylSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* animation - slide left */
+@keyframes slide {
+  0% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slide-ellipses {
+  0% {
+    transform: translateX(-80%);
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: var(--font-jua);
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+img.loaded {
+  opacity: 1;
+}
+
+/* Hide scrollbar but keep scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
